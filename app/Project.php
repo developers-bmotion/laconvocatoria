@@ -74,9 +74,11 @@ class Project extends Model
     const REVISION = 1;
     const PREAPPROVAL = 2;
     const APPROVAL = 3;
-    const PUBLISHED = 4;
+    // const PUBLISHED = 4;
+    const PENDING = 4;
     const REJECTED = 5;
-    const NOPUBLISHED = 6;
+    const REVISON_UPDATE=6;
+    // const NOPUBLISHED = 6;
 
     const PERCENTAGE_APPROVAL = 3;
 
@@ -172,11 +174,11 @@ class Project extends Model
     /*
      * Consultas
      */
-    public static function countbycategories($id){
-        return DB::table('projects')
-            ->where([['category_id',$id],['status',\App\Project::PUBLISHED]])
-            ->count('id');
-    }
+    // public static function countbycategories($id){
+    //     return DB::table('projects')
+    //         ->where([['category_id',$id],['status',\App\Project::PUBLISHED]])
+    //         ->count('id');
+    // }
 
     public function levelArtist($id){
         return DB::table('levels')

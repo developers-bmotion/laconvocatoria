@@ -25,15 +25,19 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeCategoriesTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(LevelTableSeeder::class);
-        $this->call(CountryTableSeeder::class);
-        $this->call(LocationTableSeeder::class);
-        $this->call(SurveyTableSeeder::class);
+        $this->call(ArtistTypeSeeder::class);
+        $this->call(PersonTypeSeeder::class);
+        // $this->call(CountryTableSeeder::class);
+        // $this->call(LocationTableSeeder::class);
+        // $this->call(SurveyTableSeeder::class);
+        DB::unprepared(file_get_contents('database/seeds/departamento.sql'));
+        DB::unprepared(file_get_contents('database/seeds/ciudad.sql'));
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 
 
 }
-        
+
     //     /*=============================================
     //     INICIALIZANDO LAS IMAGENES
     //     =============================================*/

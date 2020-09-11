@@ -19,57 +19,96 @@ class UserTableSeeder extends Seeder
          Artist::truncate();
         $admin = User::create([
 
-            'name'=>'John Jairo',
-            'last_name'=>'Llorente',
+            'name'=>'Admin',
+            'last_name'=>'Admin',
             'picture'=>'/backend/assets/app/media/img/users/perfil.jpg',
             'front_picture'=>'/backend/assets/app/media/img/users/perfil.jpg',
             'phone_1'=>'333333333',
             'phone_2'=>'333333333',
             'state'=>'1',
-            'slug'=>'john-llorente',
+            'slug'=>'admin',
             'email'=>'admin@gmail.com',
             'password'=>bcrypt('secret')
 
         ]);
 
         $admin->roles()->attach(['1']);
-        $manage = User::create([
 
-            'name'=>'Omar',
-            'last_name'=>'Sanchez',
+        $curador = User::create([
+
+            'name'=>'Curador',
+            'last_name'=>'curador',
             'picture'=>'/backend/assets/app/media/img/users/perfil.jpg',
             'phone_1'=>'333333333',
             'phone_2'=>'333333333',
             'state'=>'1',
-            'slug'=>'omar-sanchez',
-            'email'=>'odsanchez@gmail.com',
+            'slug'=>'curador',
+            'email'=>'curador@gmail.com',
             'password'=>bcrypt('secret')
 
         ]);
-        $manage->roles()->attach(['4']);
+
+        $curador->roles()->attach(['3']);
         $add_management = Management::create([
-            'user_id' => $manage->id,
+            'user_id' => $curador->id,
             'country_id' => '1'
         ]);
 
         $add_management->categories()->attach(['2','3']);
 
-        $artist = User::create([
+        $aspirante = User::create([
 
-            'name'=>'Cristian Salazar',
-            'last_name'=>'Salazar',
+            'name'=>'Aspirante',
+            'last_name'=>'aspirante',
             'picture'=>'/backend/assets/app/media/img/users/perfil.jpg',
             'phone_1'=>'333333333',
             'phone_2'=>'333333333',
             'state'=>'1',
-            'slug'=>'cristian-salazar',
-            'email'=>'casalazar@gmail.com',
+            'slug'=>'aspirante',
+            'email'=>'aspirante@gmail.com',
             'password'=>bcrypt('secret')
         ]);
 
-        $artist->roles()->attach(['2','3']);
-        $artista = new Artist;
-        $artista->user_id = $artist->id;
-        $artista->save();
+        $aspirante->roles()->attach(['2','3']);
+        $aspirant = new Artist;
+        $aspirant->user_id = $aspirante->id;
+        $aspirant->save();
+
+
+        $subsanador = User::create([
+
+            'name'=>'Subsanador',
+            'last_name'=>'subsanador',
+            'picture'=>'/backend/assets/app/media/img/users/perfil.jpg',
+            'front_picture'=>'/backend/assets/app/media/img/users/perfil.jpg',
+            'phone_1'=>'333333333',
+            'phone_2'=>'333333333',
+            'state'=>'1',
+            'slug'=>'subsanador',
+            'email'=>'subsanador@gmail.com',
+            'password'=>bcrypt('secret')
+
+        ]);
+
+        $subsanador->roles()->attach(['4']);
+
+        $curadorP = User::create([
+
+            'name'=>'Curador',
+            'last_name'=>'principal',
+            'picture'=>'/backend/assets/app/media/img/users/perfil.jpg',
+            'front_picture'=>'/backend/assets/app/media/img/users/perfil.jpg',
+            'phone_1'=>'333333333',
+            'phone_2'=>'333333333',
+            'state'=>'1',
+            'slug'=>'curador_principal',
+            'email'=>'curador_principal@gmail.com',
+            'password'=>bcrypt('secret')
+
+        ]);
+
+        $curadorP->roles()->attach(['5']);
+
+
     }
 }

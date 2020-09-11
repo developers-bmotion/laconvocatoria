@@ -18,24 +18,23 @@ class CreateProjectsTable extends Migration
             $table->string('title');
             $table->longText('short_description');
             $table->longText('description')->nullable();
-            $table->string('project_picture')->nullable();
             $table->enum('status',[
                 \App\Project::REVISION,
                 \App\Project::PREAPPROVAL,
                 \App\Project::APPROVAL,
-                \App\Project::PUBLISHED,
-                \App\Project::REJECTED
+                \App\Project::PENDING,
+                \App\Project::REJECTED,
+                \App\Project::REVISON_UPDATE,
             ])->default(\App\Project::REVISION);
-            $table->mediumText('iframe_video')->nullable();
+            $table->mediumText('audio')->nullable();
             $table->timestamp('end_time')->nullable();
-            $table->double('price');
             $table->string('slug'); //ES LA URL AMIGABLE
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedInteger('type_categories_id')->nullable();
             $table->foreign('type_categories_id')->references('id')->on('type_categories');
-            $table->integer('quantity')->default(1);
             $table->string('group_name')->default(null);
+            $table->string('author');
             $table->boolean('previous_approved')->default(false);
             $table->boolean('previous_rejected')->default(false);
             $table->timestamps();

@@ -20,18 +20,22 @@ class RoleTableSeeder extends Seeder
         ]);
 
         Role::create([
-            'rol'=>'Artist',
-            'description'=>'rol del artista'
+            'rol'=>'Aspirante',
+            'description'=>'Ver sus datos, editarlos y subir sus piezas para el concurso '
         ]);
 
         Role::create([
-            'rol'=>'Backer',
-            'description'=>'rol de patrocinador'
+            'rol'=>'Curador',
+            'description'=>'Revisar las piezas musicales y calificarlas'
         ]);
 
         Role::create([
-            'rol'=>'Manage',
-            'description'=>'rol de patrocinador'
+            'rol'=>'Subsanador',
+            'description'=>'Revisar que los datos del aspirante esten en orden y asignar las piezas a los curadores'
+        ]);
+        Role::create([
+            'rol'=>'Curador Principal',
+            'description'=>'Encargado de elegir los ganadores'
         ]);
 
     }

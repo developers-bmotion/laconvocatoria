@@ -16,7 +16,14 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('identification')->nullable();
+            $table->timestamp('birthday')->nullable();
+            $table->string('email')->nullable();
+            $table->string('addres')->nullable();
+            $table->string('cellphone')->nullable();
             $table->string('role')->nullable();
+
             $table->timestamps();
         });
     }
