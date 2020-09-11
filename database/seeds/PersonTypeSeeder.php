@@ -23,8 +23,8 @@ class PersonTypeSeeder extends Seeder
         $personType->name = "Grupo constituido";
         $personType->save();
 
-        $personType = new PersonType();
-        $personType->name = "Persona jurídica";
-        $personType->save();
+        // $personType = new PersonType();
+        // $personType->name = "Persona jurídica";
+        // $personType->save();
     }
 }

@@ -19,9 +19,9 @@ class ArtistTypeSeeder extends Seeder
         $artistType->save();
 
 
-        $artistType = new ArtistType();
-        $artistType->name = "Compositor";
-        $artistType->save();
+        // $artistType = new ArtistType();
+        // $artistType->name = "Compositor";
+        // $artistType->save();
 
         $artistType = new ArtistType();
         $artistType->name = "Agrupación musical";
