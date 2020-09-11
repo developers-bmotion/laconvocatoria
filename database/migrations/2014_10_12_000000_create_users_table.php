@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('last_name')->nullable();
+            $table->string('second_last_name')->nullable();
             $table->string('picture')->nullable();
             $table->string('front_picture')->nullable();
             $table->string('phone_1')->nullable();

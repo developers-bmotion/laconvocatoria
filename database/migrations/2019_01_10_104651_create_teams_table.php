@@ -17,11 +17,15 @@ class CreateTeamsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('last_name')->nullable();
+            $table->enum('document_type',['TI','CC'])->nullable();
             $table->string('identification')->nullable();
+            $table->string('expedition_place')->nullable();
             $table->timestamp('birthday')->nullable();
             $table->string('email')->nullable();
             $table->string('addres')->nullable();
-            $table->string('cellphone')->nullable();
+            $table->string('phone1')->nullable();
+            $table->string('phone2')->nullable();
+            $table->string('permission')->nullable();
             $table->string('role')->nullable();
 
             $table->timestamps();
