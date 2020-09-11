@@ -66,7 +66,7 @@ Route::get('/managements/{id}',function ($id){
 
     return datatables()->of($project)->toJson();*/
 
-    $projects = \App\Artist::where('user_id',$id)->with(
+  /*   $projects = \App\Artist::where('user_id',$id)->with(
             [   'users',
                 'countries',
                 'projects' => function ($q){
@@ -77,19 +77,20 @@ Route::get('/managements/{id}',function ($id){
             ])->latest()
             ->first();
 
-        return $projects;
+        return $projects; */
 });
 /*=============================================
 SELECCIONAR IDIOMAS
 =============================================*/
 Route::get('/set_language/{lang}','Controller@setLanguage')->name('set_language');
 
+Route::get('/','Auth\LoginController@index')->name('home');
 /*=============================================
 FRONTEND
 =============================================*/
 Route::group(['namespace'=>'Frontend'],function (){
     //Rutas para el modulo HOME
-    Route::get('/','HomeController@index')->name('home');
+    /* Route::get('/','HomeController@index')->name('home')->middleware('home'); ; */
 
     //Rutas para el modulo PROJECTS
     Route::get('/projects','ProjectsController@index')->name('projects');

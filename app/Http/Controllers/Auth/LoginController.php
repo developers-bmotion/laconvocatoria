@@ -51,6 +51,10 @@ class LoginController extends Controller
         return redirect('/');
     }
 
+    public function index(){
+        return redirect('/login');
+    }
+
     public function authenticated(Request $request)
     {
 
