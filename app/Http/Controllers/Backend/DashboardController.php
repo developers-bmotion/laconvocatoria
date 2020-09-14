@@ -13,7 +13,7 @@ class DashboardController extends Controller
 
         //ULTIMO PROYECTOS SEGUN SU ESTADO
         $last_approved = Project::where('status',Project::APPROVAL)->with('artists')->take(2)->get();
-        $last_published = Project::where('status',Project::PUBLISHED)->with('artists')->take(2)->get();
+        $last_published = Project::where('status',Project::PENDING)->with('artists')->take(2)->get();
         $last_rejected = Project::where('status',Project::REJECTED)->with('artists')->take(2)->get();
         $last_revisions = Project::where('status',Project::REVISION)->with('artists')->take(2)->get();
         $last_pre_approved = Project::where('status',Project::PREAPPROVAL)->with('artists')->take(2)->get();
@@ -24,11 +24,13 @@ class DashboardController extends Controller
         $pre_approved = Project::where('status', 2)->with('artists')->count();
 
         //ULTIMOS ARTISTAS REGISTRADOS
-        $last_artists = Artist::with('users','location','countries')->latest()->take(5)->get();
+        $last_artists = Artist::with('users')->latest()->take(5)->get();
+        // $last_artists = Artist::with('users','location','countries')->latest()->take(5)->get();
 
         return view('backend.dashboard.dashboard',compact(
             'last_published','last_rejected','last_approved',
-            'last_revisions','last_pre_approved','last_artists', 
+            'last_revisions','last_pre_approved','last_artists',
             'published', 'rejected','approved', 'pre_approved'));
+
     }
 }

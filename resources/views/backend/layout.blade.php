@@ -102,12 +102,14 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- end::Head -->
 
 <!-- begin::Body -->
+
 <body
     class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
 <!-- begin:: Page -->
 <div class="m-grid m-grid--hor m-grid--root m-page" id="app">
 
     <!-- BEGIN: Header -->
+
     <header id="m_header" class="m-grid__item    m-header " m-minimize-offset="200" m-minimize-mobile-offset="200">
         <div class="m-container m-container--fluid m-container--full-height">
             <div class="m-stack m-stack--ver m-stack--desktop">
@@ -116,7 +118,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="m-stack__item m-brand  m-brand--skin-dark ">
                     <div class="m-stack m-stack--ver m-stack--general">
                         <div class="m-stack__item m-stack__item--middle m-brand__logo">
-                            <a href="https://crowdfundig-test.tech/" class="m-brand__logo-wrapper">
+                            <a href="#" class="m-brand__logo-wrapper">
                                 {{--<h4 style="color: white">{{ config('app.name') }}</h4>--}}
                                 <h4 style="color: white;width: 170px;">Caza talentos</h4>
                             </a>
@@ -164,6 +166,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </header>
 
+
     <!-- END: Header -->
 
     <!-- begin::Body -->
@@ -177,7 +180,9 @@ License: You must have a valid license purchased only from themeforest(the above
             <!--=====================================
 		  NAVEGACION
             ======================================-->
+            @if(\App\User::navigation() !== "Subsanador" )
             @include('backend.partials.menu_navigation')
+            @endif
 
         </div>
         <div class="m-grid__item m-grid__item--fluid m-wrapper">

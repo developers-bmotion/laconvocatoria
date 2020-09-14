@@ -18,37 +18,43 @@ class ShowProjectController extends Controller
 {
     public function index(Project $project)
     {
+
+
         $users = User::where('id', \Auth::user()->id)->with(['roles'])->first();
         $rol = array_pluck($users->roles, 'rol');
         $end_time = EndProject::where('project_id',$project->id)->first();
         $artist= Project::where('id',$project->id)->with('artists.users')->first();
-        $country = Country::where('id',$artist->artists[0]->country_id)->first();
-        $location = Location::where('id',$artist->artists[0]->location_id)->first();
+        // $country = Country::where('id',$artist->artists[0]->country_id)->first();
+        // $location = Location::where('id',$artist->artists[0]->location_id)->first();
         $team = Project::where('id',$project->id)->with('teams')->first();
-        if (in_array('Admin', $rol)) {
+        if (in_array('Admin', $rol)||in_array('Subsanador', $rol)) {
             $review = Review::where("project_id","=", $project->id)->get();
             $asignado = count($review);
-            $currentRaing = $review->avg("rating");
-            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','country', "currentRaing",'location','team'));
+            // dd($asignado);
+            // $currentRaing = $review->avg("rating");
+            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team'));
+            // return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','country', "currentRaing",'location','team'));
         } else if (in_array('Manage', $rol)){
             $review = Review::where("project_id","=", $project->id)
                 ->where("user_id","=", auth()->user()->id)->first();
-            return view('backend.projects.show-project', compact('project','end_time','artist','country', 'review','location','team'));
+            return view('backend.projects.show-project', compact('project','end_time','artist', 'review','team'));
+            // return view('backend.projects.show-project', compact('project','end_time','artist','country', 'review','location','team'));
         }else {
 
-            $verify = Artist::where('user_id', auth()->user()->id)->with([
+            $verify = Artist::where('user_id',$artist->artists[0]->user_id)->with([
                 'projects' => function ($q) {
                     $q->select('slug');
                 },
             ])->first();
-
             $seacharSlug = $project->slug;
+            // dd($artist->artists[0]->user_id);
             $projectsSlug = json_decode($verify->projects);
             $array = array_pluck($projectsSlug, 'slug');
             $project->first();
 
             if (in_array($seacharSlug, $array)) {
-                return view('backend.projects.show-project', compact('project','end_time','artist','country','location','team'));
+                return view('backend.projects.show-project', compact('project','end_time','artist','team'));
+                // return view('backend.projects.show-project', compact('project','end_time','artist','country','location','team'));
             } else {
                 return response('No puedes continuar', 404);
             }
@@ -62,7 +68,7 @@ class ShowProjectController extends Controller
         $managers->map(function ($manager) use ($request){
             $review = Review::where("project_id","=", $request->get('id_project'))
                 ->where("user_id","=", $manager->user_id)->first();
-            $manager->rating = $review->rating;
+            // $manager->rating = $review->rating;
             $manager->comment = $review->comment;
            return  $manager;
         });

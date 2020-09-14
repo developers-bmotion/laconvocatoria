@@ -104,7 +104,7 @@
                                     @include('backend.partials.rating.' .\App\User::rating_proyect())
 
                                 <!-- ------------------------- CALIFICACION DEL PROYECTO CUANDO ESTA PUBLICADO Y APROBADO----------------------------- -->
-                                    @if($project->status == 3 || $project->status == 4 || $project->status == 5)
+                                    {{-- @if($project->status == 3 || $project->status == 4 || $project->status == 5)
                                         <div class="form-group">
                                             <h5 style="font-weight: bold">{{ __('valoracion') }}:</h5>
                                         </div>
@@ -128,7 +128,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                         </div>
@@ -216,7 +216,7 @@
                                                style="margin-left: -15px; width: 80%; word-wrap: break-word;">{{ $artist->artists[0]->users->email }}</a>
 
                                         </div>
-                                        @if($country->flag !== null)
+                                        {{-- @if($country->flag !== null)
                                             <div class="form-group m-form__group row">
                                                 <label for="example-text-input"
                                                        class="col-2 col-form-label">{{ __('Origen') }}:</label>
@@ -226,8 +226,8 @@
                                                          style="margin-left: 80px;margin-top: 7px">
                                                 </div>
                                             </div>
-                                        @endif
-                                        @if($location->flag !== null)
+                                        @endif --}}
+                                        {{-- @if($location->flag !== null)
                                             <div class="form-group m-form__group row">
                                                 <label for="example-text-input"
                                                        class="col-2 col-form-label">{{ __('localizacion') }}:</label>
@@ -237,7 +237,7 @@
                                                          style="margin-left: 80px;margin-top: 7px">
                                                 </div>
                                             </div>
-                                        @endif
+                                        @endif --}}
 
                                     </div>
                                 </div>

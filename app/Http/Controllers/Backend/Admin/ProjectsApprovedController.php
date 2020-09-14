@@ -17,8 +17,11 @@ class ProjectsApprovedController extends Controller
         $id = $request->input('id', null);
         if ($id) {
             $project = Project::findOrFail($id);
-            if ($project->status == Project::APPROVAL || $project->status == Project::NOPUBLISHED){
-                $project->status = Project::PUBLISHED;
+            // if ($project->status == Project::APPROVAL || $project->status == Project::NOPUBLISHED){
+            //     $project->status = Project::PUBLISHED;
+            // } else {
+            if ($project->status == Project::APPROVAL){
+                $project->status = Project::PENDING;
             } else {
                 $project->status = Project::APPROVAL;
             }

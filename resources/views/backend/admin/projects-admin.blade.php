@@ -130,7 +130,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                     <span class="changeType w-100 btn btn-outline-success m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::APPROVAL}}">{{ __('aprovado') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-info m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PUBLISHED}}">{{ __('publicado') }}</span>
+                                                    <span class="changeType w-100 btn btn-outline-info m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PENDING}}">{{ __('pendiente') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
                                                     <span class="changeType w-100 btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REJECTED}}">{{ __('rechazados') }}</span>
@@ -287,6 +287,6 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
         loadTable();
     </script>
 
-    
+
 
 @endpush

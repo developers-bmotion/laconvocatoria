@@ -165,7 +165,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     {"width": "15%",
                         data: 'status',
                         render:function (data,type, JsonResultRow,meta) {
-                        checked = parseInt(data) === {{\App\Project::PUBLISHED}} ? 'checked="checked"': '';
+                        checked = parseInt(data) === {{\App\Project::PENDING}} ? 'checked="checked"': '';
                             return `
     <!--<span class="m-list-settings__item-label">Audit Logs</span>-->
     <span class="m-list-settings__item-control">

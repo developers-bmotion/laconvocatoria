@@ -121,7 +121,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 <form method="post" action="{{ route('add.management.admin') }}">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group m-form__group {{$errors->has('country_id')? 'has-danger':''}}">
+                        {{-- <div class="form-group m-form__group {{$errors->has('country_id')? 'has-danger':''}}">
                             <label for="m_select2_add_management">{{ __('pais') }}</label>
                             <select name="country_id" class="form-control m-bootstrap-select m_selectpicker required">
                                 @foreach($countries as $country)
@@ -129,7 +129,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                 @endforeach
                                 {!! $errors->first('country_id','<div class="form-control-feedback">*:message</div>')!!}
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="form-group m-form__group {{$errors->has('name')? 'has-danger':''}}">
                             <label for="exampleInputEmail1">{{ __('nombre') }}</label>
                             <input type="text" class="form-control m-input" id="" name="name"
