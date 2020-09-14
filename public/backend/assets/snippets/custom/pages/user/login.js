@@ -94,10 +94,10 @@ var SnippetLogin = function() {
             form.ajaxSubmit({
                 url: '',
                 success: function(response, status, xhr, $form) {
-                	// similate 2s delay
-                	setTimeout(function() {
-	                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
-	                    showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
+                    // similate 2s delay
+                    setTimeout(function() {
+                        btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                        showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
                     }, 2000);
                 }
             });
@@ -136,9 +136,9 @@ var SnippetLogin = function() {
                 return;
             }
 
-            btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
+            /* btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true); */
 
-            form.ajaxSubmit({
+            /* form.ajaxSubmit({
                 url: '',
                 success: function(response, status, xhr, $form) {
                 	// similate 2s delay
@@ -156,7 +156,7 @@ var SnippetLogin = function() {
 	                    showErrorMsg(signInForm, 'success', 'Thank you. To complete your registration please check your email.');
 	                }, 2000);
                 }
-            });
+            }); */
         });
     }
 
@@ -184,21 +184,21 @@ var SnippetLogin = function() {
 
             form.ajaxSubmit({
                 url: '',
-                success: function(response, status, xhr, $form) { 
-                	// similate 2s delay
-                	setTimeout(function() {
-                		btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false); // remove 
-	                    form.clearForm(); // clear form
-	                    form.validate().resetForm(); // reset validation states
+                success: function(response, status, xhr, $form) {
+                    // similate 2s delay
+                    setTimeout(function() {
+                        btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false); // remove
+                        form.clearForm(); // clear form
+                        form.validate().resetForm(); // reset validation states
 
-	                    // display signup form
-	                    displaySignInForm();
-	                    var signInForm = login.find('.m-login__signin form');
-	                    signInForm.clearForm();
-	                    signInForm.validate().resetForm();
+                        // display signup form
+                        displaySignInForm();
+                        var signInForm = login.find('.m-login__signin form');
+                        signInForm.clearForm();
+                        signInForm.validate().resetForm();
 
-	                    showErrorMsg(signInForm, 'success', 'Cool! Password recovery instruction has been sent to your email.');
-                	}, 2000);
+                        showErrorMsg(signInForm, 'success', 'Cool! Password recovery instruction has been sent to your email.');
+                    }, 2000);
                 }
             });
         });

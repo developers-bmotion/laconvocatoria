@@ -48,26 +48,21 @@ License: You must have a valid license purchased only from themeforest(the above
         type="text/css" />
     <link href="/backend/vendors/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet"
         type="text/css" />
-    <link href="/backend/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"
-        type="text/css" />
+    <link href="/backend/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css" rel="stylesheet"
         type="text/css" />
     <link href="/backend/vendors/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" rel="stylesheet"
         type="text/css" />
-    <link href="/backend/vendors/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet"
-        type="text/css" />
+    <link href="/backend/vendors/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/nouislider/distribute/nouislider.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/owl.carousel/dist/assets/owl.carousel.css" rel="stylesheet" type="text/css" />
-    <link href="/backend/vendors/owl.carousel/dist/assets/owl.theme.default.css" rel="stylesheet"
-        type="text/css" />
+    <link href="/backend/vendors/owl.carousel/dist/assets/owl.theme.default.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/ion-rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css" />
-    <link href="/backend/vendors/ion-rangeslider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet"
-        type="text/css" />
+    <link href="/backend/vendors/ion-rangeslider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/summernote/dist/summernote.css" rel="stylesheet" type="text/css" />
-    <link href="/backend/vendors/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet"
-        type="text/css" />
+    <link href="/backend/vendors/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/animate.css/animate.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/toastr/build/toastr.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/jstree/dist/themes/default/style.css" rel="stylesheet" type="text/css" />
@@ -125,14 +120,28 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="m-login__head">
                                     <h3 class="m-login__title">Iniciar sesión</h3>
                                 </div>
-                                <form class="m-login__form m-form" action="">
+                                <form method="POST" action="{{ route('login') }}" class="m-login__form m-form">
+                                    @csrf
                                     <div class="form-group m-form__group">
-                                        <input class="form-control m-input" type="text" placeholder="Correo eléctronico" name="email"
+                                        <input value="{{ old('email') }}"
+                                            class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }} m-input"
+                                            type="text" placeholder="Correo eléctronico" name="email"
                                             autocomplete="off">
+                                        @if ($errors->has('email'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                        @endif
                                     </div>
                                     <div class="form-group m-form__group">
-                                        <input class="form-control m-input m-login__form-input--last" type="password"
-                                            placeholder="Contraseña" name="password">
+                                        <input
+                                            class="form-control m-input m-login__form-input--last {{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                            type="password" placeholder="Contraseña" name="password">
+                                        @if ($errors->has('password'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                        @endif
                                     </div>
                                     <div class="row m-login__form-sub">
                                         {{-- <div class="col m--align-left">
@@ -142,83 +151,27 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </label>
                                         </div> --}}
                                         <div class="col m--align-right">
-                                            <a href="javascript:;" id="m_login_forget_password" class="m-link">¿Olvidaste tu contraseña?</a>
+                                            <a href="{{ route('password.request') }}"
+                                                class="m-link">¿Olvidaste tu contraseña?</a>
                                         </div>
                                     </div>
                                     <div class="m-login__form-action">
-                                        <button id="m_login_signin_submit"
-                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Iniciar a tu perfil</button>
+                                        <button type="submit"
+                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Iniciar a
+                                            tu perfil</button>
                                     </div>
                                 </form>
                             </div>
-                            <div class="m-login__signup">
-                                <div class="m-login__head">
-                                    <h3 class="m-login__title">Sign Up</h3>
-                                    <div class="m-login__desc">Enter your details to create your account:</div>
-                                </div>
-                                <form class="m-login__form m-form" action="">
-                                    <div class="form-group m-form__group">
-                                        <input class="form-control m-input" type="text" placeholder="Fullname"
-                                            name="fullname">
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        <input class="form-control m-input" type="text" placeholder="Email" name="email"
-                                            autocomplete="off">
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        <input class="form-control m-input" type="password" placeholder="Password"
-                                            name="password">
-                                    </div>
-                                    <div class="form-group m-form__group">
-                                        <input class="form-control m-input m-login__form-input--last" type="password"
-                                            placeholder="Confirm Password" name="rpassword">
-                                    </div>
-                                    <div class="row form-group m-form__group m-login__form-sub">
-                                        <div class="col m--align-left">
-                                            <label class="m-checkbox m-checkbox--focus">
-                                                <input type="checkbox" name="agree"> I Agree the <a href="#"
-                                                    class="m-link m-link--focus">terms and conditions</a>.
-                                                <span></span>
-                                            </label>
-                                            <span class="m-form__help"></span>
-                                        </div>
-                                    </div>
-                                    <div class="m-login__form-action">
-                                        <button id="m_login_signup_submit"
-                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Sign
-                                            Up</button>
-                                        <button id="m_login_signup_cancel"
-                                            class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="m-login__forget-password">
-                                <div class="m-login__head">
-                                    <h3 class="m-login__title">Forgotten Password ?</h3>
-                                    <div class="m-login__desc">Enter your email to reset your password:</div>
-                                </div>
-                                <form class="m-login__form m-form" action="">
-                                    <div class="form-group m-form__group">
-                                        <input class="form-control m-input" type="text" placeholder="Email" name="email"
-                                            id="m_email" autocomplete="off">
-                                    </div>
-                                    <div class="m-login__form-action">
-                                        <button id="m_login_forget_password_submit"
-                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Request</button>
-                                        <button id="m_login_forget_password_cancel"
-                                            class="btn btn-outline-focus m-btn m-btn--pill m-btn--custom">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
+
+
                         </div>
                     </div>
                     <div class="m-stack__item m-stack__item--center">
                         <div class="m-login__account">
                             <span class="m-login__account-msg">
-                                Don't have an account yet ?
+                                Para registrarte como aspirante al concurso
                             </span>&nbsp;&nbsp;
-                            <a href="javascript:;" id="m_login_signup"
-                                class="m-link m-link--focus m-login__account-link">Sign Up</a>
+                            <a href="/register" class="m-link m-link--focus m-login__account-link">Clic a aquí</a>
                         </div>
                     </div>
                 </div>
@@ -255,12 +208,12 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="/backend/vendors/jquery.repeater/src/repeater.js" type="text/javascript"></script>
     <script src="/backend/vendors/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>
     <script src="/backend/vendors/block-ui/jquery.blockUI.js" type="text/javascript"></script>
-    <script src="/backend/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
-        type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript">
+    </script>
     <script src="/backend/vendors/js/framework/components/plugins/forms/bootstrap-datepicker.init.js"
         type="text/javascript"></script>
-    <script src="/backend/vendors/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js"
-        type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js" type="text/javascript">
+    </script>
     <script src="/backend/vendors/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript">
     </script>
     <script src="/backend/vendors/js/framework/components/plugins/forms/bootstrap-timepicker.init.js"
@@ -283,8 +236,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="/backend/vendors/inputmask/dist/jquery.inputmask.bundle.js" type="text/javascript"></script>
     <script src="/backend/vendors/inputmask/dist/inputmask/inputmask.date.extensions.js" type="text/javascript">
     </script>
-    <script src="/backend/vendors/inputmask/dist/inputmask/inputmask.numeric.extensions.js"
-        type="text/javascript"></script>
+    <script src="/backend/vendors/inputmask/dist/inputmask/inputmask.numeric.extensions.js" type="text/javascript">
+    </script>
     <script src="/backend/vendors/inputmask/dist/inputmask/inputmask.phone.extensions.js" type="text/javascript">
     </script>
     <script src="/backend/vendors/nouislider/distribute/nouislider.js" type="text/javascript"></script>
@@ -303,8 +256,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="/backend/vendors/js/framework/components/plugins/forms/jquery-validation.init.js"
         type="text/javascript"></script>
     <script src="/backend/vendors/bootstrap-notify/bootstrap-notify.min.js" type="text/javascript"></script>
-    <script src="/backend/vendors/js/framework/components/plugins/base/bootstrap-notify.init.js"
-        type="text/javascript"></script>
+    <script src="/backend/vendors/js/framework/components/plugins/base/bootstrap-notify.init.js" type="text/javascript">
+    </script>
     <script src="/backend/vendors/toastr/build/toastr.min.js" type="text/javascript"></script>
     <script src="/backend/vendors/jstree/dist/jstree.js" type="text/javascript"></script>
     <script src="/backend/vendors/raphael/raphael.js" type="text/javascript"></script>
@@ -320,8 +273,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="/backend/vendors/counterup/jquery.counterup.js" type="text/javascript"></script>
     <script src="/backend/vendors/es6-promise-polyfill/promise.min.js" type="text/javascript"></script>
     <script src="/backend/vendors/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>
-    <script src="/backend/vendors/js/framework/components/plugins/base/sweetalert2.init.js"
-        type="text/javascript"></script>
+    <script src="/backend/vendors/js/framework/components/plugins/base/sweetalert2.init.js" type="text/javascript">
+    </script>
 
     <!--end:: Global Optional Vendors -->
 
@@ -339,4 +292,3 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- end::Body -->
 
 </html>
-

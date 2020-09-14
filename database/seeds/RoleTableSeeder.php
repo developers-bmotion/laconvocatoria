@@ -20,7 +20,7 @@ class RoleTableSeeder extends Seeder
         ]);
 
         Role::create([
-            'rol'=>'Aspirante',
+            'rol'=>'Artist',
             'description'=>'Ver sus datos, editarlos y subir sus piezas para el concurso '
         ]);
 

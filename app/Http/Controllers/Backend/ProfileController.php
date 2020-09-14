@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
     public function index_artist(){
-        $countries = Country::all();
-        $locactions = Location::all();
+        /* $countries = Country::all(); */
+        /* $locactions = Location::all(); */
         $levels = Level::all();
-        $artist = Artist::where('user_id',auth()->user()->id)->with('users.socialAcounts','countries','location')->first();
-        return view('backend.profile.profile-artist',compact('countries','levels','artist','locactions'));
+        $artist = Artist::where('user_id',auth()->user()->id)->with('users.socialAcounts')->first();
+        return view('backend.profile.profile-artist',compact('levels','artist'));
     }
 
     public function profile_update_artist(Request $request, $id_artis){

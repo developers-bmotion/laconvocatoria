@@ -196,6 +196,13 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
 
 });
 
+
+/*=============================================
+RUTA PARA CREAR CUENTA
+=============================================*/
+
+Route::post('register-artist', 'Auth\RegisterController@create')->name('register.artist');
+
 /*=============================================
 RUTAS PARA LOGIN REDES SOCIALES
 =============================================*/
@@ -214,7 +221,10 @@ Route::get('/images/{path}/{attachment}', function ($path, $attachment){
 });
 
 Route::post("registrar","Auth\RegisterController@registrar")->name("registrar");
-
+/* Route::get('/crear-cuenta', function(){
+ return view('auth.register');
+});
+ */
 
 /*=============================================
 AUTH RUTAS DE SEGURIDAD

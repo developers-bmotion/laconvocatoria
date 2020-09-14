@@ -1,240 +1,337 @@
-<html class="no-js" lang="{{ session("applocale") }}">
+<!DOCTYPE html>
+
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<html lang="en">
+
+<!-- begin::Head -->
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> {{config('app.name')}} </title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CPoppins:200,400,500,600,700%7CPlayfair+Display:400,700i"
-        rel="stylesheet">
-    <link rel="icon" type="image/png" href="favicon.ico">
-    <!-- Place favicon.ico in the root directory -->
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta charset="utf-8" />
+    <title>Metronic | Login Page - 1</title>
+    <meta name="description" content="Latest updates and statistic charts">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
-    <!-- Icon foont list -->
-    <link rel="stylesheet" href="/frontend/css/iconfont.css">
-    <link rel="stylesheet" href="/frontend/css/font-awesome.min.css">
+    <!--begin::Web font -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+          });
+    </script>
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="/frontend/css/bootstrap.min.css">
-    <!-- isotope -->
-    <link rel="stylesheet" href="/frontend/css/isotope.css">
-    <!-- magnific -->
-    <link rel="stylesheet" href="/frontend/css/magnific-popup.css">
-    <!-- owl carousel -->
-    <link rel="stylesheet" href="/frontend/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/frontend/css/owl.theme.default.min.css">
-    <!-- woocommerce -->
-    <link rel="stylesheet" href="/frontend/css/woocommerce.css">
+    <!--end::Web font -->
 
+    <!--begin:: Global Mandatory Vendors -->
+    <link href="/backend/vendors/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
 
-    <!--For Plugins external css-->
-    <link rel="stylesheet" href="/frontend/css/plugins.css"/>
+    <!--end:: Global Mandatory Vendors -->
 
-    <!--Theme custom css -->
-    <link rel="stylesheet" href="/frontend/css/style.css">
+    <!--begin:: Global Optional Vendors -->
+    <link href="/backend/vendors/tether/dist/css/tether.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/backend/vendors/bootstrap-datetime-picker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/backend/vendors/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/backend/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/backend/vendors/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" rel="stylesheet"
+        type="text/css" />
+    <link href="/backend/vendors/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/nouislider/distribute/nouislider.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/owl.carousel/dist/assets/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/owl.carousel/dist/assets/owl.theme.default.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/ion-rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/ion-rangeslider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/summernote/dist/summernote.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/animate.css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/toastr/build/toastr.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/jstree/dist/themes/default/style.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/morris.js/morris.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/chartist/dist/chartist.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/socicon/css/socicon.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/vendors/line-awesome/css/line-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/vendors/flaticon/css/flaticon.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/vendors/metronic/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/vendors/vendors/fontawesome5/css/all.min.css" rel="stylesheet" type="text/css" />
 
-    <!--Theme Responsive css-->
-    <link rel="stylesheet" href="/frontend/css/responsive.css"/>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"/>
+    <!--end:: Global Optional Vendors -->
 
-    <script src="/frontend/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    <link rel="stylesheet" href="/css/ajax.css"/>
-    <link rel="stylesheet" href="/frontend/css/card.css">
-    @stack('css')
+    <!--begin::Global Theme Styles -->
+    <link href="/backend/assets/demo/base/style.bundle.css" rel="stylesheet" type="text/css" />
+
+    <!--RTL version:<link href="/backend/assets/demo/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
+
+    <!--end::Global Theme Styles -->
+    <link rel="shortcut icon" href="/backend/assets/demo/media/img/logo/favicon.ico" />
 </head>
-<body class="woocommerce">
-<!--[if lt IE 10]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
 
-<div id="preloader">
-    <div class="spinner">
-        <div class="double-bounce1"></div>
-        <div class="double-bounce2"></div>
-    </div>
-</div><!-- #preloader -->
+<!-- end::Head -->
 
-<main class="xs-all-content-wrapper">
-    <div class="container">
-        <div class="row justify-content-center p-5">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('olvido_contraseña') }}</div>
+<!-- begin::Body -->
 
-                    <div class="card-body">
-                        <form style="display: block" method="POST" id="frmLogin" action="{{ route('password.update') }}"
-                              aria-label="{{ __('Login') }} ">
-                            @csrf
+<body
+    class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 
-                            <input type="hidden" name="token" value="{{ $token }}">
-                            <div class="xs-input-group-v2">
-                                <i class="icon icon-profile-male"></i>
-                                <input type="email" name="email" id="xs_user_login_name"
-                                       class="xs-input-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                       placeholder="{{ __('PlaceHolder_email') }}" value="{{ $email ?? old('email') }}"
-                                       required autofocus>
+    <!-- begin:: Page -->
+    <div class="m-grid m-grid--hor m-grid--root m-page">
+        <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--signin"
+            id="m_login">
+            <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
+                <div class="m-stack m-stack--hor m-stack--desktop">
+                    <div class="m-stack__item m-stack__item--fluid">
+                        <div class="m-login__wrapper">
+                            <div class="m-login__logo">
+                                <a href="#">
+                                    <img src="/backend/assets/app/media/img/logos/logo-2.png">
+                                </a>
                             </div>
-                            @if ($errors->has('email'))
-                                <span class="invalid-feedback mesajesError d-block" role="alert">
-                                        <strong id="error-email">{{ $errors->first('email') }}</strong>
-                                    </span>
+                            @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
                             @endif
+                            {{-- <div class="m-login__signin">
+                                <div class="m-login__head">
+                                    <h3 class="m-login__title">Sign In To Admin</h3>
+                                </div>
+                                <form class="m-login__form m-form" action="">
+                                    <div class="form-group m-form__group">
+                                        <input class="form-control m-input" type="text" placeholder="Email" name="email"
+                                            autocomplete="off">
+                                    </div>
+                                    <div class="form-group m-form__group">
+                                        <input class="form-control m-input m-login__form-input--last" type="password"
+                                            placeholder="Password" name="password">
+                                    </div>
+                                    <div class="row m-login__form-sub">
+                                        <div class="col m--align-left">
+                                            <label class="m-checkbox m-checkbox--focus">
+                                                <input type="checkbox" name="remember"> Remember me
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="col m--align-right">
+                                            <a href="javascript:;" id="m_login_forget_password" class="m-link">Forget
+                                                Password ?</a>
+                                        </div>
+                                    </div>
+                                    <div class="m-login__form-action">
+                                        <button id="m_login_signin_submit"
+                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Sign
+                                            In</button>
+                                    </div>
+                                </form>
+                            </div> --}}
 
-                        </span>
-                            <div class="xs-input-group-v2">
-                                <i class="icon icon-key2"></i>
-                                <input type="password" name="password" id="password"
-                                       class="xs-input-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                       placeholder="{{ __('PlaceHolder_password') }}" required>
-                            </div>
-                            @if ($errors->has('password'))
-                                <span class="invalid-feedback mesajesError d-block" role="alert">
-                                        <strong id="error-password">{{ $errors->first('password') }}</strong>
-                                    </span>
-                            @endif
+                            <div class="m-login__signin">
+                                <div class="m-login__head">
+                                    <h3 class="m-login__title">Crear Cuenta</h3>
+                                    <div class="m-login__desc">Ingrese por favor los siguientes datos:</div>
+                                </div>
+                                <form class="m-login__form m-form" method="POST"
+                                    action="{{ route('password.request') }}">
+                                    @csrf
+                                    {{--  <div class="form-group m-form__group">
+                                        <input class="form-control m-input" type="text" placeholder="Fullname"
+                                            name="fullname">
+                                    </div> --}}
+                                    <input type="hidden" name="token" value="{{ $token }}">
 
-                                <div class="xs-input-group-v2">
-                                <i class="icon icon-key2"></i>
-                                <input type="password" name="password_confirmation" id="password-confirm"
-                                       class="xs-input-control" placeholder="{{ __('PlaceHolder_password_confirmation') }}" required>
+                                    <div class="form-group m-form__group pb-3">
+                                        <input
+                                            class="form-control m-input {{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                            type="text" placeholder="Correo eléctronico" name="email" autocomplete="off"
+                                            value="{{ $email or old('email') }}" required autofocus>
+
+                                        @if ($errors->has('email'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group m-form__group pb-3">
+                                        <input
+                                            class="form-control m-input {{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                            type="password" placeholder="Contraseña" name="password">
+                                        @if ($errors->has('password'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group m-form__group pb-3">
+                                        <input class="form-control m-input" type="password"
+                                            placeholder="Confirmar contraseña" name="password_confirmation">
+                                        @if ($errors->has('password_confirmation'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+
+
+                                   {{--  <div class="row form-group m-form__group m-login__form-sub">
+                                        <div class="col m--align-left">
+                                            <label class="m-checkbox m-checkbox--focus">
+                                                <input type="checkbox" name="agree"> Acepto los <a href="#"
+                                                    class="m-link m-link--focus">términos y condiciones.</a>.
+                                                <span></span>
+                                            </label>
+                                            <span class="m-form__help"></span>
+                                        </div>
+                                    </div> --}}
+
+                                    <div class="m-login__form-action">
+                                        <button type="submit"
+                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Cambiar
+                                            contraseña</button>
+                                        {{--  <button id="m_login_signup_cancel"
+                                            class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom" style="display: none">Cancel</button> --}}
+                                    </div>
+                                </form>
                             </div>
-                            <span class="invalid-feedback mesajesError d-block" role="alert">
-                            <strong id="error-password"></strong>
-                        </span>
-                            <div class="xs-submit-wraper xs-mb-20">
-                                <input type="submit" name="submit" value="{{ __('olvido_contraseña') }}"
-                                       id="xs_contact_get_action" class="btn btn-warning btn-block">
-                            </div>
-                            </span>
-                        </form>
+
+
+
+
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center"
+                style="background-image: url(/backend/assets/app/media/img//bg/bg-4.jpg)">
+                <div class="m-grid__item">
+                    <h3 class="m-login__welcome">CREA SONIDOS PACIFICO</h3>
+                    <p class="m-login__msg">
+                        Una oportunidad para mostrar tu talento
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-</main>
 
+    <!-- end:: Page -->
 
-<footer class="xs-footer-section xs-fixed-footer fundpress-footer-section">
-    <div class="fundpress-footer-top-layer">
-        <div class="container">
-            <div class="row">
-                {{--<div class="col-md-5">
-                    <div class="fundpress-single-footer">
-                        <div class="xs-footer-logo">
-                            <a href="index.html">
-                                <img src="/images/footer_logo.png" alt="">
-                            </a>
-                        </div>
-                        <div class="fundpress-footer-content">
-                            <p>FundPress online and raise money for charity and causes you’re passionate about. FundPress is an innovative, cost-effective online fundraising website for personal fundraising pages.</p>
-                        </div><!-- . END -->
-                        <ul class="xs-social-list fundpress-social-list">
-                            <li><a href="" class="color-facebook full-round"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="" class="color-twitter full-round"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="" class="color-dribbble full-round"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="" class="color-pinterest full-round"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="" class="color-instagram full-round"><i class="fa fa-instagram"></i></a></li>
-                        </ul><!-- .xs-social-list .fundpress-social-list END -->
-                    </div><!-- .fundpress-single-footer END -->
-                </div>
-                <div class="col-md-3">
-                    <div class="fundpress-single-footer">
-                        <div class="xs-footer-title">
-                            <h4 class="color-white">Explore Campaigns</h4>
-                        </div><!-- .xs-footer-title END -->
-                        <nav class="xs-footer-menu">
-                            <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="#">Gadgets</a></li>
-                                <li><a href="#">Monuments</a></li>
-                                <li><a href="#">Travels</a></li>
-                                <li><a href="#">Accessoriers</a></li>
-                                <li><a href="#">Books</a></li>
-                                <li><a href="#">Community Programs</a></li>
-                                <li><a href="#">Design</a></li>
-                            </ul>
-                        </nav><!-- .xs-footer-menu .xs-block-menu END -->
-                    </div><!-- .fundpress-single-footer END -->
-                </div>
-                <div class="col-md-2">
-                    <div class="fundpress-single-footer">
-                        <div class="xs-footer-title">
-                            <h4 class="color-white">About</h4>
-                        </div><!-- .xs-footer-title END -->
-                        <nav class="xs-footer-menu">
-                            <ul>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="#">How It Works</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Press</a></li>
-                                <li><a href="news-feed.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </nav><!-- .xs-footer-menu .xs-block-menu END -->
-                    </div><!-- .fundpress-single-footer END -->
-                </div>
-                <div class="col-md-2">
-                    <div class="fundpress-single-footer">
-                        <div class="xs-footer-title">
-                            <h4 class="color-white">Help</h4>
-                        </div><!-- .xs-footer-title END -->
-                        <nav class="xs-footer-menu">
-                            <ul>
-                                <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="#">Our Rules</a></li>
-                                <li><a href="#">Trust & Safety</a></li>
-                                <li><a href="#">Support</a></li>
-                                <li><a href="#">Terms of Use</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                            </ul>
-                        </nav><!-- .xs-footer-menu .xs-block-menu END -->
-                    </div><!-- .fundpress-single-footer END -->
-                </div>--}}
-            </div>
-        </div>
-    </div><!-- .xs-footer-wraper .fundpress-footer-top-layer END -->
-    <div class="xs-footer-bottom-layer fundpress-footer-bottom">
-        <div class="container">
-            <div class="xs-footer-bottom-wraper">
-                <div class="xs-copyright-text fundpress-copyright-text">
-                    <p><i class="fa fa-heart"></i> by <a href="https://xpeedstudio.com/">Apuesto por ti</a></p>
-                </div>
-                <div class="xs-back-to-top-wraper">
-                    <a href="#" class="xs-back-to-top full-round green-btn xs-back-to-top-btn show-last-pos">
-                        <i class="fa fa-angle-up"></i>
-                    </a>
-                </div><!-- .xs-back-to-top-wraper END -->
-            </div>
-        </div>
-    </div><!-- .xs-footer-bottom-layer .fundpress-footer-bottom END -->
-</footer>
+    <!--begin:: Global Mandatory Vendors -->
+    <script src="/backend/vendors/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script src="/backend/vendors/popper.js/dist/umd/popper.js" type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/js-cookie/src/js.cookie.js" type="text/javascript"></script>
+    <script src="/backend/vendors/moment/min/moment.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/tooltip.js/dist/umd/tooltip.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/perfect-scrollbar/dist/perfect-scrollbar.js" type="text/javascript"></script>
+    <script src="/backend/vendors/wnumb/wNumb.js" type="text/javascript"></script>
 
-<script>
-    const lang = "{{ session("applocale") }}";
-</script>
-<script src="/frontend/js/jquery-3.2.1.min.js"></script>
-<script src="/frontend/js/plugins.js"></script>
-<script src="/frontend/js/Popper.js"></script>
-<script src="/frontend/js/bootstrap.min.js"></script>
-<script src="/frontend/js/isotope.pkgd.min.js"></script>
-<script src="/frontend/js/jquery.easing.1.3.js"></script>
-<script src="/frontend/js/jquery.countdown.min.js"></script>
-<script src="/frontend/js/jquery.magnific-popup.min.js"></script>
-<script src="/frontend/js/owl.carousel.min.js"></script>
-<script src="/frontend/js/parallax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCy7becgYuLwns3uumNm6WdBYkBpLfy44k"></script>
-<script src="/frontend/js/jquery.easypiechart.min.js"></script>
-<script src="/frontend/js/spectragram.min.js"></script>
-<script src="/frontend/js/jquery.waypoints.min.js"></script>
-<script src="/frontend/js/scrollax.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="/backend/vendors/block-ui/jquery.blockUI.js" type="text/javascript"></script>
+    <!--end:: Global Mandatory Vendors -->
 
-<script src="/frontend/js/main.js"></script>
+    <!--begin:: Global Optional Vendors -->
+    <script src="/backend/vendors/jquery.repeater/src/lib.js" type="text/javascript"></script>
+    <script src="/backend/vendors/jquery.repeater/src/jquery.input.js" type="text/javascript"></script>
+    <script src="/backend/vendors/jquery.repeater/src/repeater.js" type="text/javascript"></script>
+    <script src="/backend/vendors/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/block-ui/jquery.blockUI.js" type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript">
+    </script>
+    <script src="/backend/vendors/js/framework/components/plugins/forms/bootstrap-datepicker.init.js"
+        type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js" type="text/javascript">
+    </script>
+    <script src="/backend/vendors/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript">
+    </script>
+    <script src="/backend/vendors/js/framework/components/plugins/forms/bootstrap-timepicker.init.js"
+        type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <script src="/backend/vendors/js/framework/components/plugins/forms/bootstrap-daterangepicker.init.js"
+        type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript">
+    </script>
+    <script src="/backend/vendors/bootstrap-maxlength/src/bootstrap-maxlength.js" type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap-switch/dist/js/bootstrap-switch.js" type="text/javascript"></script>
+    <script src="/backend/vendors/js/framework/components/plugins/forms/bootstrap-switch.init.js"
+        type="text/javascript"></script>
+    <script src="/backend/vendors/vendors/bootstrap-multiselectsplitter/bootstrap-multiselectsplitter.min.js"
+        type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap-select/dist/js/bootstrap-select.js" type="text/javascript"></script>
+    <script src="/backend/vendors/select2/dist/js/select2.full.js" type="text/javascript"></script>
+    <script src="/backend/vendors/typeahead.js/dist/typeahead.bundle.js" type="text/javascript"></script>
+    <script src="/backend/vendors/handlebars/dist/handlebars.js" type="text/javascript"></script>
+    <script src="/backend/vendors/inputmask/dist/jquery.inputmask.bundle.js" type="text/javascript"></script>
+    <script src="/backend/vendors/inputmask/dist/inputmask/inputmask.date.extensions.js" type="text/javascript">
+    </script>
+    <script src="/backend/vendors/inputmask/dist/inputmask/inputmask.numeric.extensions.js" type="text/javascript">
+    </script>
+    <script src="/backend/vendors/inputmask/dist/inputmask/inputmask.phone.extensions.js" type="text/javascript">
+    </script>
+    <script src="/backend/vendors/nouislider/distribute/nouislider.js" type="text/javascript"></script>
+    <script src="/backend/vendors/owl.carousel/dist/owl.carousel.js" type="text/javascript"></script>
+    <script src="/backend/vendors/autosize/dist/autosize.js" type="text/javascript"></script>
+    <script src="/backend/vendors/clipboard/dist/clipboard.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/ion-rangeslider/js/ion.rangeSlider.js" type="text/javascript"></script>
+    <script src="/backend/vendors/dropzone/dist/dropzone.js" type="text/javascript"></script>
+    <script src="/backend/vendors/summernote/dist/summernote.js" type="text/javascript"></script>
+    <script src="/backend/vendors/markdown/lib/markdown.js" type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap-markdown/js/bootstrap-markdown.js" type="text/javascript"></script>
+    <script src="/backend/vendors/js/framework/components/plugins/forms/bootstrap-markdown.init.js"
+        type="text/javascript"></script>
+    <script src="/backend/vendors/jquery-validation/dist/jquery.validate.js" type="text/javascript"></script>
+    <script src="/backend/vendors/jquery-validation/dist/additional-methods.js" type="text/javascript"></script>
+    <script src="/backend/vendors/js/framework/components/plugins/forms/jquery-validation.init.js"
+        type="text/javascript"></script>
+    <script src="/backend/vendors/bootstrap-notify/bootstrap-notify.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/js/framework/components/plugins/base/bootstrap-notify.init.js" type="text/javascript">
+    </script>
+    <script src="/backend/vendors/toastr/build/toastr.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/jstree/dist/jstree.js" type="text/javascript"></script>
+    <script src="/backend/vendors/raphael/raphael.js" type="text/javascript"></script>
+    <script src="/backend/vendors/morris.js/morris.js" type="text/javascript"></script>
+    <script src="/backend/vendors/chartist/dist/chartist.js" type="text/javascript"></script>
+    <script src="/backend/vendors/chart.js/dist/Chart.bundle.js" type="text/javascript"></script>
+    <script src="/backend/vendors/js/framework/components/plugins/charts/chart.init.js" type="text/javascript">
+    </script>
+    <script src="/backend/vendors/vendors/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js"
+        type="text/javascript"></script>
+    <script src="/backend/vendors/vendors/jquery-idletimer/idle-timer.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/waypoints/lib/jquery.waypoints.js" type="text/javascript"></script>
+    <script src="/backend/vendors/counterup/jquery.counterup.js" type="text/javascript"></script>
+    <script src="/backend/vendors/es6-promise-polyfill/promise.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/js/framework/components/plugins/base/sweetalert2.init.js" type="text/javascript">
+    </script>
 
+    <!--end:: Global Optional Vendors -->
+
+    <!--begin::Global Theme Bundle -->
+    <script src="/backend/assets/demo/base/scripts.bundle.js" type="text/javascript"></script>
+
+    <!--end::Global Theme Bundle -->
+
+    <!--begin::Page Scripts -->
+    <script src="/backend/assets/snippets/custom/pages/user/login.js" type="text/javascript"></script>
+
+    <!--end::Page Scripts -->
 </body>
+
+<!-- end::Body -->
+
 </html>

@@ -63,18 +63,58 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
+    {
+         /* $data = $this->validator($request)->validate(); */
+
+         $this->validate($request,[
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user =  User::create([
+
+            'email' => $request->get('email'),
+            'picture' => '/backend/assets/app/media/img/users/perfil.jpg',
+            'password' => Hash::make($request->get('password')),
+        ]);
+        $user->roles()->attach(['2']);
+
+        $artist = new Artist;
+        $artist->user_id = $user->id;
+        $artist->save();
+
+
+        auth()->loginUsingId($user->id);
+        // return json_encode($data);
+
+        return redirect('/dashboard/profile')->with('welcome_register', 'Bienvenido, has creado tu cuenta, continua con tu registro');
+    }
+
+   /*  protected function create(array $data)
     {
         $data = $this->validator($data)->validate();
-        return User::create([
-            'name' => ucwords($data['name']),
+
+        $user =  User::create([
+
             'email' => $data['email'],
             'picture' => '/backend/assets/app/media/img/users/perfil.jpg',
             'password' => Hash::make($data['password']),
         ]);
-    }
+        $user->roles()->attach(['2']);
 
-    protected function registered(Request $request, $user)
+        $artist = new Artist;
+        $artist->user_id = $user->id;
+        $artist->save();
+
+
+        auth()->loginUsingId($user->id);
+        // return json_encode($data);
+
+        return redirect('/dashboard/profile')->with('welcome_register', 'Bienvenido, has creado tu cuenta, continua con tu registro.');
+    } */
+
+    /* protected function registered(Request $request, $user)
     {
         Artist::create([
            'user_id' => $user->id
@@ -86,5 +126,5 @@ class RegisterController extends Controller
         // return json_encode($data);
         return redirect('/dashboard/profile');
         //return redirect('/dashboard/profile');
-    }
+    } */
 }
