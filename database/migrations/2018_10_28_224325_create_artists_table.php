@@ -41,9 +41,17 @@ class CreateArtistsTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('documenttypes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('document')->nullable();
+            $table->text('description')->nullable();
+            $table->timestamps();
+        });
         Schema::create('artists', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('document_type',['TI','CC'])->nullable();
+            $table->unsignedInteger('document_type')->nullable();
+            $table->foreign('document_type')->references('id')->on('documenttypes');
             $table->string('identification')->nullable();
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

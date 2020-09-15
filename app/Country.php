@@ -29,6 +29,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Country extends Model
 {
+
+    protected $table = "departamento";
+
     public function cities(){
         return $this->belongsTo(City::class)->select('city');
     }

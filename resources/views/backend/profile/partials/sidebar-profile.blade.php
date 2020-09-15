@@ -61,7 +61,7 @@
                 <span class="m-nav__link-title">
                     <span class="m-nav__link-wrap">
                         <span class="m-nav__link-text" {!! request()->is('dashboard/profile') ? 'style="color:#716aca
-                            !important"' : '' !!}>{{ ( __('perfil')) }}</span>
+                            !important"' : '' !!}>Perfil del Aspirtante</span>
 
                     </span>
                 </span>
@@ -76,14 +76,14 @@
                     !important"' : '' !!}>{{ __('mis_proyectos') }}</span>
             </a>
         </li>
-        <li class="m-nav__item" {!! request()->is('dashboard/backings-made') ? 'style="background-color:#f2f4f9"' : ''
+        {{-- <li class="m-nav__item" {!! request()->is('dashboard/backings-made') ? 'style="background-color:#f2f4f9"' : ''
             !!}>
             <a href="{{ route('backings.made.artist') }}" class="m-nav__link">
                 <i class="m-nav__link-icon la la-hand-o-right"></i>
                 <span class="m-nav__link-text" {!! request()->is('dashboard/backings-made') ? 'style="color:#716aca
                     !important"' : '' !!}>{{ __('apoyos_hechos') }}</span>
             </a>
-        </li>
+        </li> --}}
         {{--<li class="m-nav__item">
                 <a href="../header/profile&amp;demo=default.html" class="m-nav__link">
                     <i class="m-nav__link-icon flaticon-graphic-2"></i>
@@ -103,8 +103,7 @@
                 </a>
             </li>--}}
     </ul>
-    <div class="m-portlet__body-separator"></div>
-    <div class="m-widget1 m-widget1--paddingless">
+    {{-- <div class="m-widget1 m-widget1--paddingless">
         <div class="m-widget1__item">
             <div class="row m-row--no-padding align-items-center">
                 <div class="col">
@@ -135,6 +134,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 </div>
