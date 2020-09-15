@@ -1,5 +1,5 @@
 //== Class definition
-var Wizard = function () {
+var Wizard = function() {
     //== Base elements
     var wizardEl = $('#wizard_project_add');
     var formEl = $('#form_add_project');
@@ -7,33 +7,33 @@ var Wizard = function () {
     var wizard;
 
     //== Private functions
-    var initWizard = function () {
+    var initWizard = function() {
         //== Initialize form wizard
         wizard = new mWizard('wizard_project_add', {
             startStep: 1
         });
 
         //== Validation before going to next page
-        wizard.on('beforeNext', function (wizardObj) {
+        wizard.on('beforeNext', function(wizardObj) {
             if (validator.form() !== true) {
-                wizardObj.stop();  // don't go to the next step
+                wizardObj.stop(); // don't go to the next step
             }
         })
 
         //== Change event
-        wizard.on('change', function (wizard) {
+        wizard.on('change', function(wizard) {
             mUtil.scrollTop();
         });
 
         //== Change event
-        wizard.on('change', function (wizard) {
+        wizard.on('change', function(wizard) {
             if (wizard.getStep() === 1) {
 
             }
         });
     };
 
-    var initValidation = function () {
+    var initValidation = function() {
         validator = formEl.validate({
             //== Validate only visible fields
             ignore: ":hidden",
@@ -174,7 +174,7 @@ var Wizard = function () {
             },
 
             //== Display error
-            invalidHandler: function (event, validator) {
+            invalidHandler: function(event, validator) {
                 mUtil.scrollTop();
 
                 swal({
@@ -189,14 +189,14 @@ var Wizard = function () {
         });
     };
 
-    var initSubmit = function () {
+    var initSubmit = function() {
         var btn = formEl.find('[data-wizard-action="submit"]');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         });
-        btn.on('click', function (e) {
+        btn.on('click', function(e) {
             e.preventDefault();
             if (validator.form()) {
 
@@ -208,7 +208,7 @@ var Wizard = function () {
 
     return {
         // public functions
-        init: function () {
+        init: function() {
             wizardEl = $('#wizard_project_add');
             formEl = $('#form_add_project');
 
@@ -223,15 +223,15 @@ var Wizard = function () {
 CAMBIAR EL VALOR INGRESADO POR EL VALOR A GUARDAR EN LA DB
 =============================================*/
 
-jQuery(document).ready(function () {
+jQuery(document).ready(function() {
     Wizard.init();
 });
 
-$(document).ready(function () {
+$(document).ready(function() {
     $('.valor_add_proyecto').number(true, 2);
     $('.costo_proyecto_confirmacion').number(true, 2);
 });
-$(".valor_add_proyecto").keyup(function () {
+$(".valor_add_proyecto").keyup(function() {
 
     valorIngresado = $(this).val();
     var total = valorIngresado;
@@ -243,8 +243,8 @@ $(".valor_add_proyecto").keyup(function () {
 AYUDA VIDEO YOUTUBE
 =============================================*/
 
-$(function () {
-    $('#btn_help_youtube').click(function (e) {
+$(function() {
+    $('#btn_help_youtube').click(function(e) {
         e.preventDefault();
         $('video_help_add_project_youtube').stop();
         $('video_help_add_project_youtube').play()
@@ -255,27 +255,27 @@ $(function () {
 AGREGAR VIDEO AL CONFIRMACION
 =============================================*/
 
-$(".title_add_proyecto").keyup(function () {
+$(".title_add_proyecto").keyup(function() {
 
     valorIngresado = $(this).val();
     $('.nombre_project_confirmacion').text(valorIngresado);
 
 });
 
-$(".corta_descr_add_proyecto").keyup(function () {
+$(".corta_descr_add_proyecto").keyup(function() {
 
     valorIngresado = $(this).val();
     $('.descripcion_corta_confirmacion').text(valorIngresado);
 
 });
 
-$("#genero_add_proyecto").change(function () {
+$("#genero_add_proyecto").change(function() {
     var texto = $(this).find('option:selected').text(); // Capturamos el texto del option seleccionado
 
     $(".genero_musical_confirmacion").text(texto);
 });
 
-$(".valor_add_proyecto").keyup(function () {
+$(".valor_add_proyecto").keyup(function() {
 
     valorIngresado = $(this).val();
     $('.costo_proyecto_confirmacion').val(valorIngresado);
@@ -286,7 +286,7 @@ function getIdYoutube(url) {
     let paramsString = url.replace(/.+\?{1}/g, '');
     let params = paramsString.split("&");
     let idYoutube = "";
-    params.forEach(function (param) {
+    params.forEach(function(param) {
         if (param[0] === "v" && param[1] === "=") {
             idYoutube = param.substr(2);
         }
@@ -294,7 +294,7 @@ function getIdYoutube(url) {
     return idYoutube;
 }
 
-$("#txtFrame").change(function () {
+$("#txtFrame").change(function() {
     let id = getIdYoutube($(this).val());
     $("#txtIdVideo").val(id);
     let video = $("#videoYoutube");
@@ -302,7 +302,7 @@ $("#txtFrame").change(function () {
     video.attr("src", url + id);
 });
 
-$("#category_add_proyecto").change(function () {
+$("#category_add_proyecto").change(function() {
 
     if ($(this).val() === "1") {
         $(".cont_solista").show();
@@ -312,7 +312,7 @@ $("#category_add_proyecto").change(function () {
 
 });
 
-$("#select_solista").change(function () {
+$("#select_solista").change(function() {
 
     if ($(this).val() === "2") {
         $(".registro").show();
@@ -324,17 +324,17 @@ $("#select_solista").change(function () {
 
 $("#category_add_proyecto").change(event => {
     // alert("------");
-    $.get(`/dashboard/categories_by_id/${event.target.value}`,function(response, category){
-        // console.log(response);       
-         $("#genero_add_proyecto").empty();
-         response.forEach(cat => {
+    $.get(`/dashboard/categories_by_id/${event.target.value}`, function(response, category) {
+        // console.log(response);
+        $("#genero_add_proyecto").empty();
+        response.forEach(cat => {
             //  console.log(cat);
             //  console.log(cat.category);
             $("#genero_add_proyecto").append(`<option value="${cat.id}">${cat.category}</option>`);
             // console.log('selector',$("#genero_add_proyecto").append(`<option value=${cat.id}>${cat.category}</option>`));
-         });
+        });
 
-    }); 
+    });
 });
 
 // $("#category_add_proyecto").change(function (event) {
@@ -351,10 +351,10 @@ $("#category_add_proyecto").change(event => {
 
 
 
-// agregar otro input 
+// agregar otro input
 var cont = 0;
 
-$("#masInte").click(function (e) {
+$("#masInte").click(function(e) {
     e.preventDefault();
     cont += 1;
 
@@ -374,7 +374,7 @@ $("#masInte").click(function (e) {
             value="">
         <span class="m-form__help">${helpRol}</span>
     </div>
-</div>                                                                  
+</div>
 </div>`;
 
 

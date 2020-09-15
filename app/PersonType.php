@@ -8,4 +8,5 @@ class PersonType extends Model
 {
     //
     protected $fillable = ['name'];
+    protected $table = 'person_types';
 }

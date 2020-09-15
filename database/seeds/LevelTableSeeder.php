@@ -15,15 +15,15 @@ class LevelTableSeeder extends Seeder
         Level::truncate();
 
         $level = new Level;
-        $level->level = "Beginner";
+        $level->level = "Principiante";
         $level->save();
 
         $level = new Level;
-        $level->level = "Intermediate";
+        $level->level = "Intermedio";
         $level->save();
 
         $level = new Level;
-        $level->level = "Professional";
+        $level->level = "Profesional";
         $level->save();
     }
 }

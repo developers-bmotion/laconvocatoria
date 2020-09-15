@@ -1,4 +1,4 @@
-//== Class definition
+/* //== Class definition
 var WizardDemo = function() {
     //== Base elements
     var wizardEl = $('#m_wizard');
@@ -18,7 +18,7 @@ var WizardDemo = function() {
             if (validator.form() !== true) {
                 wizardObj.stop(); // don't go to the next step
             }
-        })
+        });
 
         //== Change event
         wizard.on('change', function(wizard) {
@@ -220,4 +220,4 @@ jQuery(document).ready(function() {
 $(function() {
 
 
-});
+}); */

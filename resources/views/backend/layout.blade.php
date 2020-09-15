@@ -453,11 +453,14 @@ License: You must have a valid license purchased only from themeforest(the above
         });
     });
     </script>
+
     <!--end::Page Scripts -->
     @include('sweet::alert')
     @section('dropzonePhotoArtist')
     @show
     @section('js.add-project')
+    @show
+    @section('js.new-register')
     @show
     @section('table.admin.projects')
     @show

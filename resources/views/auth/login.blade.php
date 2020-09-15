@@ -171,7 +171,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <span class="m-login__account-msg">
                                 Para registrarte como aspirante al concurso
                             </span>&nbsp;&nbsp;
-                            <a href="/register" class="m-link m-link--focus m-login__account-link">Clic a aquí</a>
+                            <a href="/register" class="m-link m-link--focus m-login__account-link">Clic aquí</a>
                         </div>
                     </div>
                 </div>

@@ -53,7 +53,13 @@ class Artist extends Model
         'published_at',
         'birthdate',
     ];
-    protected $fillable = ['user_id','nickname','biography','website_url','facebook','instagram','youtube','level_id','country_id','age','birthdate'];
+    protected $fillable = [
+        'user_id','nickname','biography','website_url',
+        'facebook','instagram','youtube','level_id',
+        'country_id','age','birthdate', 'adress',
+        'cities_id', 'township','permission','expedition_place',
+        'person_types_id','artist_types_id'
+    ];
 
     public function projects(){
         return $this->belongsToMany(Project::class,'artist_projects','artist_id','project_id');
@@ -67,7 +73,7 @@ class Artist extends Model
         return $this->belongsTo(Country::class,'country_id');
     }
     public function users(){
-        return $this->belongsTo(User::class,'user_id')->select('id','name','last_name','picture','front_picture','phone_1','phone_2','state','slug','email','created_at');
+        return $this->belongsTo(User::class,'user_id')->select('id','name','last_name','second_last_name','picture','front_picture','phone_1','phone_2','state','slug','email','created_at');
     }
     public function location(){
         return $this->belongsTo(Location::class,'location_id');

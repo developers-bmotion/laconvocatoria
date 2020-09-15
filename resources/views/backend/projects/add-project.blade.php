@@ -238,7 +238,7 @@
 														id="nombreProyecto" placeholder="" value="">
 													<span class="m-form__help">{{ __('help_nombre_proyecto') }}</span>
 												</div>
-											</div>	
+											</div>
 										{{-- seleccionar categoria --}}
 											<div class="col-lg-6 m-form__group-sub">
 												<label class="form-control-label" form="category_add_proyecto">*
@@ -291,10 +291,10 @@
 												<select name="category_id"
 													class="form-control  required"
 													id="genero_add_proyecto">
-													
+
 													<option value="">{{ __('seleccione_genero') }}</option>
 
-													
+
 													 {{-- @foreach($categories as $categorie)
 													<option value="{{ $categorie->id }}">{{ $categorie->category }}
 													</option>
@@ -302,7 +302,7 @@
 													{!! $errors->first('category_id','<div
 														class="form-control-feedback">*:message</div>')!!}
 												</select>
-													
+
 												<span class="m-form__help">{{ __('o_categoria') }}</span>
 											</div>
 

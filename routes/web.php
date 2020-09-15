@@ -125,10 +125,19 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     //Perfil Artista
     Route::get('/profile','ProfileController@index_artist')->name('profile.artist');
     Route::post('/profile-photo-artist','ProfileController@photo')->name('profile.photo.artist');
+
     Route::post('/front-photo-artist','ProfileController@front_photo')->name('front.photo.artist');
+
+    Route::post('/pdf-cedula-aspirante','ProfileController@pdf_cedula_aspirante')->name('cedula.pdf.aspirante');
+
+
     Route::put('/update-profile-artist/{id_artis}','ProfileController@profile_update_artist')->name('update.profile.artist');
 
     Route::get('/get-municipios/{id}','ProfileController@get_municipios')->name('get.municipios');
+
+    Route::get('/expedicion-departamento/{id}','ProfileController@get_departamento')->name('get.exped.departamento');
+
+    Route::get('/expedicion-municipio/{id}','ProfileController@get_municipio')->name('get.exped.municipio');
 
 
     Route::post('/update-password-artist','ProfileController@update_password')->name('update.password.artist');
