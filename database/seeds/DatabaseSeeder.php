@@ -37,6 +37,9 @@ class DatabaseSeeder extends Seeder
 
 
 }
+        factory(\App\DocumentType::class, 1)->create(['document' => 'Cédula de ciudadania']);
+        factory(\App\DocumentType::class, 1)->create(['document' => 'Tarjeta de identidad']);
+
 
     //     /*=============================================
     //     INICIALIZANDO LAS IMAGENES

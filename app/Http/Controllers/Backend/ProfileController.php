@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Artist;
+use App\City;
 use App\Country;
+use App\DocumentType;
 use App\Level;
 use App\Location;
 use App\Update;
@@ -15,20 +17,40 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function index_artist(){
+    public function index_artist()
+    {
         /* $countries = Country::all(); */
         /* $locactions = Location::all(); */
-        $levels = Level::all();
-        $artist = Artist::where('user_id',auth()->user()->id)->with('users.socialAcounts')->first();
-        return view('backend.profile.profile-artist',compact('levels','artist'));
+        $documenttype = DocumentType::all();
+        $departamentos = Country::all();
+
+        /*   dd($departamentos); */
+        $artist = Artist::where('user_id', auth()->user()->id)->with('users.socialAcounts')->first();
+        return view('backend.profile.profile-artist', compact('documenttype', 'artist', 'departamentos'));
     }
 
-    public function profile_update_artist(Request $request, $id_artis){
+    public function get_municipios($id)
+    {
 
-        $project_exist = Artist::where('user_id',auth()->user()->id)->with('projects')->first();
+        /* if($request->ajax()){
+            $municipios = City::where('iddepartamento', $request->departament_id)->get();
+            foreach($municipios as $municipio){
+                $municipiosArray =[$municipio->id] = $municipio->descripcion;
+            }
+            return response()->json($municipiosArray);
+        }
+ */
+        $municipios = City::where('iddepartamento', $id)->get();
+        return response()->json($municipios);
+    }
+
+    public function profile_update_artist(Request $request, $id_artis)
+    {
+
+        $project_exist = Artist::where('user_id', auth()->user()->id)->with('projects')->first();
         //Actualizar en la tabla Artist
         //Validaciones
-        $this->validate($request,[
+        $this->validate($request, [
             'nickname' => 'required',
             'biography' => 'required',
             'level_id' => 'required',
@@ -38,7 +60,7 @@ class ProfileController extends Controller
             'birthdate' => 'required',
         ]);
 
-        Artist::where('user_id','=',$id_artis)->update([
+        Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $request->get('nickname'),
             'biography' => ucfirst($request->get('biography')),
             'level_id' => $request->get('level_id'),
@@ -51,21 +73,21 @@ class ProfileController extends Controller
             'age' => $request->get('age'),
         ]);
 
-        User::where('id','=',$id_artis)->update([
+        User::where('id', '=', $id_artis)->update([
             'phone_1' => $request->get('phone_1'),
             'phone_2' => $request->get('phone_2'),
         ]);
-        alert()->success(__('perfil_actualizado'),__('muy_bien'))->autoClose(3000);
+        alert()->success(__('perfil_actualizado'), __('muy_bien'))->autoClose(3000);
         $count_project = count($project_exist->projects);
-        if ($count_project >= 1){
+        if ($count_project >= 1) {
             return back();
-        }else{
+        } else {
             return back()->with('profile_update', __('hora_crear_primer_project'));
         }
-
     }
 
-    public function update_password(Request $request){
+    public function update_password(Request $request)
+    {
 
         if ($request->filled('password')) {
 
@@ -77,46 +99,46 @@ class ProfileController extends Controller
             $password = $request->get('password');
             $newpassword = bcrypt($password);
 
-            $user = User::where('id',auth()->user()->id)->update([
-               'password' => $newpassword
+            $user = User::where('id', auth()->user()->id)->update([
+                'password' => $newpassword
             ]);
 
-            alert()->success(__('password_actualizado'),__('muy_bien'))->autoClose(3000);
+            alert()->success(__('password_actualizado'), __('muy_bien'))->autoClose(3000);
             return back();
         } else {
 
 
-            return back()->with('eliminar','Ningún Cambio');
+            return back()->with('eliminar', 'Ningún Cambio');
         }
     }
 
-    public function photo (Request $request){
-        $user = User::where('id',auth()->user()->id)->first();
-        $user_picture =  str_replace('storage','',$user->picture);;
+    public function photo(Request $request)
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        $user_picture =  str_replace('storage', '', $user->picture);;
         //Elimnar foto de perfil del servidor
         Storage::delete($user_picture);
         //Agregar la nueva foto de perfil
         $photo = $request->file('photo')->store('users');
-        User::where('id',auth()->user()->id)->update([
-            'picture' => '/storage/'.$photo
+        User::where('id', auth()->user()->id)->update([
+            'picture' => '/storage/' . $photo
         ]);
 
         return $user_picture;
-
     }
 
-    public function front_photo (Request $request){
-        $user = User::where('id',auth()->user()->id)->first();
-        $front_picture =  str_replace('storage','',$user->front_picture);;
+    public function front_photo(Request $request)
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        $front_picture =  str_replace('storage', '', $user->front_picture);;
         //Elimnar foto de perfil del servidor
         Storage::delete($front_picture);
         //Agregar la nueva foto de perfil
         $front_photo = $request->file('front_photo')->store('front');
-        User::where('id',auth()->user()->id)->update([
-            'front_picture' => '/storage/'.$front_photo
+        User::where('id', auth()->user()->id)->update([
+            'front_picture' => '/storage/' . $front_photo
         ]);
 
         return $front_picture;
-
     }
 }

@@ -4,8 +4,20 @@ var Select2 = function() {
     var demos = function() {
         // basic
         $('#m_select2_1, #m_select2_1_validate').select2({
-            placeholder: "Select a state"
+            placeholder: "Seleccione ciudad ó municipio"
         });
+        $('#m_select2_1_3, #m_select2_1_validate').select2({
+            placeholder: "Selecciona una opción"
+        });
+
+        $('#m_select2_1_4, #m_select2_1_validate').select2({
+            placeholder: "Selecciona una opción"
+        });
+
+        $('#m_select2_1_5, #m_select2_1_validate').select2({
+            placeholder: "Selecciona una opción"
+        });
+
         $('#select_2_gnre').select2({
             placeholder: "Select a state"
         });
@@ -158,7 +170,7 @@ var Select2 = function() {
     }
 
     var modalDemos = function() {
-        $('#m_select2_modal').on('shown.bs.modal', function () {
+        $('#m_select2_modal').on('shown.bs.modal', function() {
             // basic
             $('#m_select2_1_modal').select2({
                 placeholder: "Select a state"
@@ -178,7 +190,7 @@ var Select2 = function() {
             $('#m_select2_4_modal').select2({
                 placeholder: "Select a state",
                 allowClear: true
-            }); 
+            });
         });
     }
 

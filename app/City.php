@@ -24,10 +24,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class City extends Model
 {
-    public function countries(){
+
+    protected $table = 'ciudad';
+    public function countries()
+    {
         return $this->hasOne(Country::class);
     }
-    public function location(){
+    public function location()
+    {
         return $this->hasOne(Location::class);
     }
 }

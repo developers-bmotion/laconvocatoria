@@ -127,6 +127,10 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::post('/profile-photo-artist','ProfileController@photo')->name('profile.photo.artist');
     Route::post('/front-photo-artist','ProfileController@front_photo')->name('front.photo.artist');
     Route::put('/update-profile-artist/{id_artis}','ProfileController@profile_update_artist')->name('update.profile.artist');
+
+    Route::get('/get-municipios/{id}','ProfileController@get_municipios')->name('get.municipios');
+
+
     Route::post('/update-password-artist','ProfileController@update_password')->name('update.password.artist');
     //Proyectos del Artista
     Route::get('/my-projects','MyProjectsController@index_artist')->name('myprojects.artist');
