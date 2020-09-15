@@ -39,7 +39,8 @@ class ProjectsAdminController extends Controller
             'artists',
             'category',
             'artists.users'
-        ])->whereIn('status', [Project::APPROVAL, Project::PUBLISHED, Project::NOPUBLISHED]);
+        ])->whereIn('status', [Project::APPROVAL]);
+        // ])->whereIn('status', [Project::APPROVAL, Project::PENDING, Project::NOPUBLISHED]);
         return datatables()->of($project)->toJson();
     }
 

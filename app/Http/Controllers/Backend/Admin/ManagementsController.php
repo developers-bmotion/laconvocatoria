@@ -15,9 +15,10 @@ class ManagementsController extends Controller
     public function index(){
 
         $managements = Management::with('users')->paginate(6);
-        $countries = Country::all();
+        // $countries = Country::all();
         $categories = Category::all();
-        return view('backend.admin.management-admin',compact('managements','countries','categories'));
+        // return view('backend.admin.management-admin',compact('managements','countries','categories'));
+        return view('backend.admin.management-admin',compact('managements','categories'));
     }
 
     public function store(Request $request){
@@ -39,7 +40,7 @@ class ManagementsController extends Controller
         \Mail::to($add_user->email)->send(new NewManagerAdmin($add_user->email,$password));
         $add_management = Management::create([
             'user_id' => $add_user->id,
-            'country_id' => $request->get('country_id')
+            // 'country_id' => $request->get('country_id')
         ]);
         $add_user->roles()->attach(['4']);
         $add_management->categories()->attach($request->get('insteres'));

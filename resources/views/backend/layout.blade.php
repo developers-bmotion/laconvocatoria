@@ -106,24 +106,25 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <body
     class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
-    <!-- begin:: Page -->
-    <div class="m-grid m-grid--hor m-grid--root m-page" id="app">
+<!-- begin:: Page -->
+<div class="m-grid m-grid--hor m-grid--root m-page" id="app">
 
-        <!-- BEGIN: Header -->
-        <header id="m_header" class="m-grid__item    m-header " m-minimize-offset="200" m-minimize-mobile-offset="200">
-            <div class="m-container m-container--fluid m-container--full-height">
-                <div class="m-stack m-stack--ver m-stack--desktop">
+    <!-- BEGIN: Header -->
 
-                    <!-- BEGIN: Brand -->
-                    <div class="m-stack__item m-brand  m-brand--skin-dark ">
-                        <div class="m-stack m-stack--ver m-stack--general">
-                            <div class="m-stack__item m-stack__item--middle m-brand__logo">
-                                <a href="https://crowdfundig-test.tech/" class="m-brand__logo-wrapper">
-                                    {{--<h4 style="color: white">{{ config('app.name') }}</h4>--}}
-                                    <h4 style="color: white;width: 170px;">Caza talentos</h4>
-                                </a>
-                            </div>
-                            <div class="m-stack__item m-stack__item--middle m-brand__tools">
+    <header id="m_header" class="m-grid__item    m-header " m-minimize-offset="200" m-minimize-mobile-offset="200">
+        <div class="m-container m-container--fluid m-container--full-height">
+            <div class="m-stack m-stack--ver m-stack--desktop">
+
+                <!-- BEGIN: Brand -->
+                <div class="m-stack__item m-brand  m-brand--skin-dark ">
+                    <div class="m-stack m-stack--ver m-stack--general">
+                        <div class="m-stack__item m-stack__item--middle m-brand__logo">
+                            <a href="#" class="m-brand__logo-wrapper">
+                                {{--<h4 style="color: white">{{ config('app.name') }}</h4>--}}
+                                <h4 style="color: white;width: 170px;">Caza talentos</h4>
+                            </a>
+                        </div>
+                        <div class="m-stack__item m-stack__item--middle m-brand__tools">
 
                                 <!-- BEGIN: Left Aside Minimize Toggle -->
                                 <a href="javascript:;" id="m_aside_left_minimize_toggle"
@@ -166,7 +167,8 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </header>
 
-        <!-- END: Header -->
+
+    <!-- END: Header -->
 
         <!-- begin::Body -->
         <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
@@ -179,7 +181,9 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!--=====================================
 		  NAVEGACION
             ======================================-->
-                @include('backend.partials.menu_navigation')
+            @if(\App\User::navigation() !== "Subsanador" )
+            @include('backend.partials.menu_navigation')
+            @endif
 
             </div>
             <div class="m-grid__item m-grid__item--fluid m-wrapper">

@@ -63,10 +63,11 @@ class CreateArtistsTable extends Migration
             $table->foreign('level_id')->references('id')->on('levels');
             $table->unsignedInteger('cities_id')->nullable();
             $table->foreign('cities_id')->references('id')->on('ciudad');
-            $table->unsignedInteger('township')->nullable();
+            $table->string('township')->nullable();
             $table->string('addres')->nullable();
             $table->string('permission')->nullable();
-            $table->string('expedition_place')->nullable();
+            $table->unsignedInteger('expedition_place')->nullable();
+            $table->foreign('expedition_place')->references('id')->on('ciudad');
             $table->unsignedInteger('person_types_id')->nullable();
             $table->foreign('person_types_id')->references('id')->on('person_types');
             $table->unsignedInteger('artist_types_id')->nullable();
