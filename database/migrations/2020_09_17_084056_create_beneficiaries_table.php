@@ -21,10 +21,10 @@ class CreateBeneficiariesTable extends Migration
             $table->string('name');
             $table->string('last_name')->nullable();
             $table->string('second_last_name')->nullable();
-            $table->string('pdf_cedula')->nullable();
+            $table->string('pdf_documento')->nullable();
             $table->string('phone')->nullable();
             $table->longText('biography')->nullable();
-            $table->integer('age')->nullable();
+            $table->timestamp('birthday')->nullable();
             $table->unsignedInteger('cities_id')->nullable();
             $table->foreign('cities_id')->references('id')->on('ciudad');
             $table->string('township')->nullable();
