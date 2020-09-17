@@ -1,3 +1,7 @@
-.yellow-rating{
+.yellow-rating {
     color: #FFAE3C;
+}
+
+.select2-container--default {
+    width: 100% !important;
 }
