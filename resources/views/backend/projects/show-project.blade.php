@@ -39,13 +39,20 @@
                         <div class="m-section">
                             <div class="row">
                                 <div class="col-xs-5 col-lg-7">
-                                    <iframe width="560" height="315"
+                                    {{-- <iframe width="560" height="315"
                                             id="videoYoutube"
                                             src="https://www.youtube.com/embed/{{$project->iframe_video}}"
                                             frameborder="0"
                                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                             allowfullscreen>
-                                    </iframe>
+                                    </iframe> --}}
+                                     <!-- prettier-ignore -->
+
+                                        <!-- prettier-ignore -->
+                                        <div id="app">
+                                          <a-player :audio="audio" :lrc-type="3"></a-player>
+                                        </div>
+
                                 </div>
                                 <div class="col-xs-4 col-lg-5">
                                     <div class="form-group">
@@ -490,4 +497,27 @@
             }
         });
     </script>
+     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@moefe/vue-aplayer"></script>
+     <script>
+       Vue.use(VueAPlayer, {
+        //  defaultCover: 'https://github.com/u3u.png',
+         productionTip: true,
+       });
+
+       new Vue({
+         el: '#app',
+         data(){
+             return{
+           audio: {
+             name: 'Prueba',
+             artist: 'Aspirante',
+             url: '/storage/projects/audio.mp3',
+             cover: '/storage/projects/player.png', // prettier-ignore
+             lrc: '/storage/projects/player.png',
+           },
+         },
+        },
+       });
+     </script>
 @endsection
