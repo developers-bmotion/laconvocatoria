@@ -20,10 +20,6 @@ function onSelectDepartamentosChange() {
 
         $('.confirmTxtExpeDepartamentoAspirante').html(data.descripcion);
     });
-
-
-
-
 }
 
 function onSelectMunicipiosChange() {

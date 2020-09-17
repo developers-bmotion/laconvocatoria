@@ -1,4 +1,64 @@
-//== Class definition
+/*=============================================
+WIZARD PASO A PASO PARA EL REGISTRO
+=============================================*/
+var menordedad;
+var primeravez = true;
+
+$('.title-wizard-menor-edad').hide();
+
+
+
+$('.title-wizard-grupo-constituido').hide();
+
+$('.selectActuaraComoRegisterAspirante2').on('change', function() {
+    menordedad = $(this).val();
+
+    /* switch (menordedad) {
+        case '1':
+            alert('solista')
+            break;
+        case '2':
+            alert('niño')
+            break;
+        case '3':
+            alert('grupo')
+            break;
+        default:
+            alert('default')
+    } */
+
+    console.log('antes del if', menordedad);
+    if (menordedad == 2) {
+        console.log('menoredad', menordedad);
+        $('.title-wizard-menor-edad').show()
+
+    } else {
+        $('.title-wizard-menor-edad').hide();
+
+    }
+
+    if (menordedad == 3) {
+        $('.title-wizard-grupo-constituido').show()
+    } else {
+        $('.title-wizard-grupo-constituido').hide();
+    }
+
+    //return
+});
+
+$('.selectLineaConvocatoriaRegisterAspirante').on('change', function() {
+    var id = $(this).val();
+    console.log(id);
+    if (id == 1) {
+        $(".show-select-actuara-como").show();
+        $("#selectActuaraComoRepresentante option[value='3']").hide();
+    } else if (id == 2 || id == 3) {
+        $(".show-select-actuara-como").show();
+        $("#selectActuaraComoRepresentante option[value='3']").show();
+    }
+});
+
+
 var Wizard = function() {
     //== Base elements
     var wizardEl = $('#m_wizard_new_register');
@@ -20,16 +80,25 @@ var Wizard = function() {
             }
         })
 
-        //== Change event
+        //== Change event  wizard.getStep()
         wizard.on('change', function(wizard) {
+            alert('step: ', wizard.getStep())
             mUtil.scrollTop();
+            if (menordedad === 1 && primeravez) {
+                wizard.goTo(4);
+                primeravez = false;
+                return;
+            }
+            if (wizard.getStep() === 3 && menordedad === 1 && !primeravez) {
+                wizard.goTo(1);
+                primeravez = true
+                return;
+            }
         });
 
         //== Change event
         wizard.on('change', function(wizard) {
-            if (wizard.getStep() === 1) {
 
-            }
         });
     }
 

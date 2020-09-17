@@ -18,6 +18,13 @@ var Select2 = function() {
             placeholder: "Selecciona una opción"
         });
 
+        $('#m_select2_1_6, #m_select2_1_validate').select2({
+            placeholder: "Selecciona una opción"
+        });
+
+        $('#m_select2_1_7, #m_select2_1_validate').select2({
+            placeholder: "Seleccione ciudad ó municipio"
+        });
         $('#select_2_gnre').select2({
             placeholder: "Select a state"
         });

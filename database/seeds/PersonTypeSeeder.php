@@ -18,6 +18,10 @@ class PersonTypeSeeder extends Seeder
         $personType->name = "Persona natural";
         $personType->save();
 
+        $personType = new PersonType();
+        $personType->name = "Representante de un menor de edad";
+        $personType->save();
+
 
         $personType = new PersonType();
         $personType->name = "Grupo constituido";
