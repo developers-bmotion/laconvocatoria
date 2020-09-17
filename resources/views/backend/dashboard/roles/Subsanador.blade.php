@@ -3,6 +3,8 @@
 @endpush
 @include('backend.admin.projects-admin')
 
+
+
 @push('js')
     <script>
     setUrl("proyectosNuevos", "{{ route("admin.projects_news") }}");
