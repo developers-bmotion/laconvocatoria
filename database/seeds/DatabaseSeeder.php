@@ -109,6 +109,17 @@ class DatabaseSeeder extends Seeder
         });
 
         /*=============================================
+          CREAMOS EL ADMINISTRADOR DEL SISTEMA
+        =============================================*/
+        factory(\App\User::class, 1)->create([
+            'name' => 'Subsanador',
+            'email' => 'subsanador@gmail.com',
+            'password' => bcrypt('secret')
+        ])->each(function (\App\User $u) {
+            $u->roles()->attach('4');
+        });
+
+        /*=============================================
             CREANDO 50 USUARIOS POR DEFECTO Y LE ESTAMOS ASIGNANDO UN ARTISTA
         =============================================*/
         factory(\App\User::class, 50)->create()
