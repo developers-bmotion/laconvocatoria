@@ -24,7 +24,7 @@ class CreateCategoriesTable extends Migration
             $table->string('category');
             $table->string('slug');
             $table->text('description')->nullable();
-            $table->unsignedInteger('typeCategory_id');
+            $table->unsignedInteger('typeCategory_id')->nullable();
             $table->foreign('typeCategory_id')->references('id')->on('type_categories');
             $table->timestamps();
         });
