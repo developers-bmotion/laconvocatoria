@@ -1,68 +1,71 @@
 /*=============================================
 WIZARD PASO A PASO PARA EL REGISTRO
 =============================================*/
+
+/* Variables para el proceso de registro */
 var menordedad;
 var primeravez = true;
 
-$('.title-wizard-menor-edad').hide();
+/* titulos del wixard */
+$("#title-wizard-menor-edad").hide();
+$("#title-wizard-grupo-constituido").hide();
+/* $(".content-wizard-menor-edad").hide();
+$(".content-wizard-grupo-constituido").hide(); */
 
-//Titulo confirmación para datos dle menor de edad
-$('.titulo-confirmacion-menor-edad').hide();
+/* oculatar elementos */  
+$("#content-actuara-como").hide();
 
-
-
-$('.title-wizard-grupo-constituido').hide();
-
-$('.selectActuaraComoRegisterAspirante2').on('change', function() {
-    menordedad = $(this).val();
-
-    /* switch (menordedad) {
-        case '1':
-            alert('solista')
+/* Evento para selecionar la linea de convocatoria */
+$("#select-linea-convocatoria").on( 'change', function() {
+    hideTitlewizard();
+    switch ($(this).val()) {
+        case '-1': $("#content-actuara-como").hide();
             break;
-        case '2':
-            alert('niño')
+        case '1': $("#content-actuara-como").show();
+                $("#select-actuara-como option[value='1']").show();
+                $("#select-actuara-como option[value='3']").hide();
             break;
-        case '3':
-            alert('grupo')
+        case '2': $("#content-actuara-como").show();
+                $("#select-actuara-como option[value='1']").hide();
+                $("#select-actuara-como option[value='3']").show();
             break;
-        default:
-            alert('default')
-    } */
-
-    console.log('antes del if', menordedad);
-    if (menordedad == 2) {
-        console.log('menoredad', menordedad);
-        $('.title-wizard-menor-edad').show()
-        $('.titulo-confirmacion-menor-edad').show()
-
-    } else {
-        $('.title-wizard-menor-edad').hide();
-        $('.titulo-confirmacion-menor-edad').hide();
-
     }
-
-    if (menordedad == 3) {
-        $('.title-wizard-grupo-constituido').show()
-    } else {
-        $('.title-wizard-grupo-constituido').hide();
-    }
-
-    //return
+    
+    $("#select-actuara-como").val("-1");
 });
 
-$('.selectLineaConvocatoriaRegisterAspirante').on('change', function() {
-    var id = $(this).val();
-    console.log(id);
-    if (id == 1) {
-        $(".show-select-actuara-como").show();
-        $("#selectActuaraComoRepresentante option[value='3']").hide();
-    } else if (id == 2 || id == 3) {
-        $(".show-select-actuara-como").show();
-        $("#selectActuaraComoRepresentante option[value='3']").show();
+function hideTitlewizard() {
+    $("#title-wizard-menor-edad").hide();
+    $("#title-wizard-grupo-constituido").hide();
+}
+
+/* Evento para seleccionar como actuara el artista */ 
+$("#select-actuara-como").on( 'change', function() {
+    switch ($(this).val()) {
+        case '-1': $("#title-step-two").html('Datos Personales');
+                hideTitlewizard();
+            break;
+        case '1': $("#title-step-two").html('Datos Personales');
+                hideTitlewizard();   
+            break;
+        case '2': 
+                if ($("#select-linea-convocatoria").val() === '1') {
+                    $("#title-step-two").html('Datos del Representante del Menor');
+                    $("#title-wizard-menor-edad").show();
+                    $("#title-wizard-grupo-constituido").hide();
+                } 
+                if ($("#select-linea-convocatoria").val() === '2') {
+                    $("#title-step-two").html('Datos del Representante del Menor y el grupo');
+                    $("#title-wizard-menor-edad").hide();
+                    $("#title-wizard-grupo-constituido").show();
+                }     
+            break;
+        case '3': $("#title-step-two").html('Datos del Representante del Grupo');
+                $("#title-wizard-menor-edad").hide();
+                $("#title-wizard-grupo-constituido").show();
+            break;
     }
 });
-
 
 var Wizard = function() {
     //== Base elements
@@ -87,9 +90,9 @@ var Wizard = function() {
 
         //== Change event  wizard.getStep()
         wizard.on('change', function(wizard) {
-            alert('step: ', wizard.getStep())
+            console.log('step:::. ', wizard.getStep())
             mUtil.scrollTop();
-            if (menordedad === 1 && primeravez) {
+            /* if (menordedad === 1 && primeravez) {
                 wizard.goTo(4);
                 primeravez = false;
                 return;
@@ -98,7 +101,7 @@ var Wizard = function() {
                 wizard.goTo(1);
                 primeravez = true
                 return;
-            }
+            } */
         });
 
         //== Change event
@@ -158,7 +161,6 @@ var Wizard = function() {
                 },
                 artist_type_id: {
                     required: true,
-
                 },
 
                 //== Client Settings
@@ -353,8 +355,6 @@ $(function() {
     $('.confirmTxtActuaraComoAspirante').html(actuaraComo);
     $('.confirmTxtLineaConvocatoriaAspirante').html(lineaConvocatoria);
     $('.confirmTxtExperienciaMusicalAspirante').html(experienciaMusical);
-
-
 
 
     $('.confirmSelectTypeDocumentAspirante').html('Cédula de Ciudadania');
