@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Artist;
 use App\ArtistType;
+use App\Beneficiary;
 use App\City;
 use App\Country;
 use App\DocumentType;
@@ -46,7 +47,7 @@ class ProfileController extends Controller
     public function profile_update_artist(Request $request, $id_artis)
     {
 
-        $project_exist = Artist::where('user_id', auth()->user()->id)->with('projects')->first();
+        /*  $project_exist = Artist::where('user_id', auth()->user()->id)->with('projects')->first(); */
         //Actualizar en la tabla Artist
         //Validaciones
         /* $this->validate($request, [
@@ -59,6 +60,12 @@ class ProfileController extends Controller
             'birthdate' => 'required',
         ]);
  */
+        /*=============================================
+            AGREGAR ASPIRANTE O REPRESENTANTE DEL NIÑO
+            =============================================*/
+
+
+
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $request->get('nickname'),
             'biography' => ucfirst($request->get('biography')),
@@ -83,13 +90,57 @@ class ProfileController extends Controller
             'phone_1' => $request->get('phone_1'),
             /* 'phone_2' => $request->get('phone_2'), */
         ]);
-        alert()->success(__('perfil_actualizado'), __('muy_bien'))->autoClose(3000);
+
+        $artist = Artist::select('id')->where('user_id', $id_artis)->first();
+
+
+        /*=============================================
+            AGREGAR MENOR DE EDAD NIÑO
+            =============================================*/
+        $sitieneartist = null;
+        $sitieneartist = Beneficiary::where('artist_id', $artist)->first();
+
+        if ($sitieneartist) {
+            Beneficiary::create([
+
+                'document_type' => $request->get('document_type_menor'),
+                'identification' => $request->get('identificacion_menor'),
+                'name' => $request->get('name_menor'),
+                'last_name' => $request->get('last_name_menor'),
+                'second_last_name' => $request->get('second_last_name_menor'),
+                'phone' => $request->get('phone_1_menor'),
+                'adress' => $request->get('adress_menor'),
+                'cities_id' => $request->get('cities_id_menor'),
+                'expedition_place' => $request->get('expedition_place_menor'),
+                'birthday' => Carbon::parse($request->get('birthdate_menor')),
+                'artist_id' =>  $artist->id
+
+            ]);
+        } else {
+
+            Beneficiary::where('artist_id', '=', $artist->id)->update([
+
+                'document_type' => $request->get('document_type_menor'),
+                'identification' => $request->get('identificacion_menor'),
+                'name' => $request->get('name_menor'),
+                'last_name' => $request->get('last_name_menor'),
+                'second_last_name' => $request->get('second_last_name_menor'),
+                'phone' => $request->get('phone_1_menor'),
+                'adress' => $request->get('adress_menor'),
+                'cities_id' => $request->get('cities_id_menor'),
+                'expedition_place' => $request->get('expedition_place_menor'),
+                'birthday' => Carbon::parse($request->get('birthdate_menor')),
+                'artist_id' =>  $artist->id
+
+            ]);
+        }
+        /* alert()->success(__('perfil_actualizado'), __('muy_bien'))->autoClose(3000);
         $count_project = count($project_exist->projects);
         if ($count_project >= 1) {
             return back();
         } else {
             return back()->with('profile_update', __('hora_crear_primer_project'));
-        }
+        } */
     }
 
     public function update_password(Request $request)
@@ -148,7 +199,8 @@ class ProfileController extends Controller
         return $front_picture;
     }
 
-    public function pdf_cedula_aspirante(Request $request){
+    public function pdf_cedula_aspirante(Request $request)
+    {
 
         $user = User::where('id', auth()->user()->id)->first();
         $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
@@ -164,12 +216,14 @@ class ProfileController extends Controller
     }
 
 
-    public function get_departamento($id){
-        $departamento = Country::where('id',$id)->first();
+    public function get_departamento($id)
+    {
+        $departamento = Country::where('id', $id)->first();
         return response()->json($departamento);
     }
-    public function get_municipio($id){
-        $municipio = City::where('id',$id)->first();
+    public function get_municipio($id)
+    {
+        $municipio = City::where('id', $id)->first();
         return response()->json($municipio);
     }
 }

@@ -412,7 +412,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="/backend/assets/js/admin/admin.js" type="text/javascript"></script>
     <script src="/backend/build/js/intlTelInput.js"></script>
 
-
+    @section('js.new-register')
+    @show
 
     <!--end::Global Theme Bundle -->
 
@@ -422,6 +423,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="/backend/assets/demo/custom/crud/forms/widgets/bootstrap-datetimepicker.js" type="text/javascript">
     </script>
     <script src="/backend/assets/js/select_expendicion_departamentos.js"></script>
+    <script src="/backend/assets/js/lenguage-datepicker.js"></script>
 
 
     <!--end::Page Vendors -->
@@ -469,8 +471,7 @@ License: You must have a valid license purchased only from themeforest(the above
     @show
     @section('js.add-project')
     @show
-    @section('js.new-register')
-    @show
+
     @section('table.admin.projects')
     @show
     @section('rating.projects')

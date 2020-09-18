@@ -6,6 +6,9 @@ var primeravez = true;
 
 $('.title-wizard-menor-edad').hide();
 
+//Titulo confirmación para datos dle menor de edad
+$('.titulo-confirmacion-menor-edad').hide();
+
 
 
 $('.title-wizard-grupo-constituido').hide();
@@ -31,9 +34,11 @@ $('.selectActuaraComoRegisterAspirante2').on('change', function() {
     if (menordedad == 2) {
         console.log('menoredad', menordedad);
         $('.title-wizard-menor-edad').show()
+        $('.titulo-confirmacion-menor-edad').show()
 
     } else {
         $('.title-wizard-menor-edad').hide();
+        $('.titulo-confirmacion-menor-edad').hide();
 
     }
 

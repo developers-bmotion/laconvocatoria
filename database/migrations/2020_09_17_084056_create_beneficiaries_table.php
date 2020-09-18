@@ -23,6 +23,7 @@ class CreateBeneficiariesTable extends Migration
             $table->string('second_last_name')->nullable();
             $table->string('pdf_documento')->nullable();
             $table->string('phone')->nullable();
+            $table->string('adress')->nullable();
             $table->longText('biography')->nullable();
             $table->timestamp('birthday')->nullable();
             $table->unsignedInteger('cities_id')->nullable();
