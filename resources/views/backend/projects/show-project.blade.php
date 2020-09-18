@@ -2,16 +2,16 @@
 
 @section('content')
     <div class="m-content">
-        <div class="row">
-            <div class="col-xl-5 col-lg-6">
+        {{-- <div class="row"> --}}
+            {{-- <div class="col-xl-5 col-lg-6">
                 @if(Storage::disk('public')->exists('projects/'.$project->project_picture))
                     <img width="100%" height="80%" src="{{ $project->pathAttachment() }}" alt=""/>
                 @else
                     <img class="" width="100%" src="{{ $project->project_picture }}"
                          alt="">
                 @endif
-            </div>
-            <div class="col-xs-7 col-lg-6">
+            </div> --}}
+            {{-- <div class="col-xs-7 col-lg-6">
                 <h3 style="font-weight: bold;">{{ $project->title }}</h3>
                 <a data-toggle="modal" data-target="#m_modal_1" class="m-link m--font-success m--font-bolder"
                    style="padding-bottom: 5px;cursor: pointer">by {{ $artist->artists[0]->nickname }} [{{__('ver_mas')}}
@@ -20,7 +20,7 @@
                     <p style="text-align: justify">{{ $project->short_description }}</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <br>
         <br>
         <div class="row">
@@ -30,7 +30,125 @@
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
-                                    {{ __('mas_informacion') }}
+                                    {{ __('informacion_artista') }}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__body ">
+                        <div class="row">
+
+                        <div class="col-md-4">
+
+                        <div class="m-portlet m-portlet--full-height  ">
+                            <div class="m-portlet__body ">
+                                <div class="m-card-profile">
+                                    <div class="m-card-profile__title m--hide">
+                                        Your Profile
+                                    </div>
+                                    <div class="m-card-profile__pic">
+                                        <div class="m-card-profile__pic-wrapper">
+                                            @if(Storage::disk('public')->exists('users/'.$artist->artists[0]->users->picture))
+                                                <img src="{{ $artist->artists[0]->users->pathAttachment()}}"
+                                                     alt=""/>
+                                            @else
+                                                <img src="{{ $artist->artists[0]->users->picture }}" alt="">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="m-card-profile__details">
+                                        <span
+                                            class="m-card-profile__name">{{ $artist->artists[0]->nickname }}</span>
+
+                                        <a href="" class="m-card-profile__email m-link"
+                                           style="margin-left: -15px; width: 80%; word-wrap: break-word;">{{ $artist->artists[0]->users->email }}</a>
+
+                                    </div>
+                                        <div class="form-group m-form__group row" style="margin-left: 5.79rem;">
+                                            <label for="example-text-input"
+                                                   class="col-3 col-form-label mt-1">{{ __('Origen') }}:</label>
+                                            <div class="col-4 pull-right mt-3">
+                                                <span>{{$country->descripcion}}</span>
+
+                                            </div>
+                                        </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="biografia col-md-7">
+                    <div class="row">
+
+                        <div class="col-md-6 mt-2">
+
+                            <label style="font-weight: bold">{{ __('biografia') }}:</label>
+                            <div class="m-scrollable" data-scrollable="true" style="">
+                                <p>{{ $artist->artists[0]->biography }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                        <label style="font-weight: bold">Identificación:</label>
+                        <div class="m-scrollable" data-scrollable="true" style="">
+                            <p>{{ $artist->artists[0]->identification }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label style="font-weight: bold">Direccion:</label>
+                        <div class="m-scrollable" data-scrollable="true" style="">
+                            <p>{{ $artist->artists[0]->adress }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label style="font-weight: bold">Fecha de nacimiento:</label>
+                        <div class="m-scrollable" data-scrollable="true" style="">
+                            <p>{{ date('d-m-Y', strtotime( $artist->artists[0]->byrthdate)) }}</p>
+                        </div>
+                    </div>
+
+                        @if($artist->artists[0]->township)
+                        <div class="col-md-6 mt-2">
+                        <label style="font-weight: bold">Vereda/Corregimiento:</label>
+                        <div class="m-scrollable" data-scrollable="true" style="">
+                            <p>{{$artist->artists[0]->township }}</p>
+                        </div>
+                        </div>
+                        @endif
+                        <div class="col-md-6 mt-2">
+                        <label style="font-weight: bold">Teléfono:</label>
+                        <div class="m-scrollable" data-scrollable="true" style="">
+                            <p>{{ $artist->artists[0]->users->phone_1}}</p>
+                        </div>
+                        </div>
+                        @if($artist->artists[0]->users->phone_2)
+                        <div class="col-md-6 mt-2">
+                        <label style="font-weight: bold">Otro teléfono:</label>
+                        <div class="m-scrollable" data-scrollable="true" style="">
+                            <p>{{$artist->artists[0]->users->phone_2 }}</p>
+                        </div>
+                        </div>
+                        @endif
+
+
+
+
+                    </div>
+                </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-8">
+                <div class="m-portlet m-portlet--full-height ">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Información del proyecto
                                 </h3>
                             </div>
                         </div>
@@ -38,23 +156,32 @@
                     <div class="m-portlet__body">
                         <div class="m-section">
                             <div class="row">
-                                <div class="col-xs-5 col-lg-7">
-                                    {{-- <iframe width="560" height="315"
-                                            id="videoYoutube"
-                                            src="https://www.youtube.com/embed/{{$project->iframe_video}}"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen>
-                                    </iframe> --}}
+                                <div class="col-xs-5 col-lg-3 ml-5">
                                      <!-- prettier-ignore -->
-
-                                        <!-- prettier-ignore -->
-                                        <div id="app">
-                                          <a-player :audio="audio" :lrc-type="3"></a-player>
+                                       <!-- jquery_jplayer_1 is the id here -->
+                                        <div id="jquery_jplayer_1" class="cp-jplayer"></div>
+                                        <!-- paste the lines below as it is, it will be required by the circle player -->
+                                        <div id="cp_container_1" class="cp-container">
+                                                    <div class="cp-buffer-holder">
+                                                        <div class="cp-buffer-1"></div>
+                                                        <div class="cp-buffer-2"></div>
+                                                    </div>
+                                                    <div class="cp-progress-holder">
+                                                        <div class="cp-progress-1"></div>
+                                                        <div class="cp-progress-2"></div>
+                                                    </div>
+                                                    <div class="cp-circle-control"></div>
+                                                    <ul class="cp-controls">
+                                                        <li><a class="cp-play" tabindex="1">play</a></li>
+                                                        <li><a class="cp-pause" style="display:none;" tabindex="1">pause</a></li>
+                                                    </ul>
                                         </div>
 
                                 </div>
-                                <div class="col-xs-4 col-lg-5">
+                                <div class="col-xs-4 col-lg-6">
+                                    <div class="row mt-2">
+
+                                    <div class="col-md-6">
                                     <div class="form-group">
                                         <h5 style="font-weight: bold">{{ __('estado') }}:</h5>
                                     </div>
@@ -76,6 +203,8 @@
                                                 class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('rechazado') }}</span>
                                         @endif
                                     </div>
+                                </div>
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <h5 style="font-weight: bold">{{ __('genero') }}:</h5>
                                     </div>
@@ -83,28 +212,45 @@
                                         <button
                                             class="btn btn-secondary btn-md">{{ $project->category->category }}</button>
                                     </div>
+                                </div>
+
+                                <div class="col-md-6 mt-5">
+
                                     <div class="form-group">
-                                        <h5 style="font-weight: bold">{{ __('costo_proyecto') }}:</h5>
+                                        <h5 style="font-weight: bold">Descripción:</h5>
                                     </div>
                                     <div class="form-group">
-                                        <h4 class="m--font-success" style="font-weight: bold">
-                                            ${{ $project->price }}</h4>
+
+                                            {{ $project->description }}
                                     </div>
-                                    @if( count($team->teams) != 0)
-                                        <div class="form-group">
-                                            <h5 style="font-weight: bold">{{ __('integrantes_del_grupo_o_orquesta') }}
-                                                :</h5>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="button" data-toggle="modal" data-target="#list_modal_team"
-                                                    class="btn btn-brand m-btn m-btn--icon">
-                                                <span>
-                                                    <i class="la la-users"></i>
-                                                    <span>{{ __('mostrar') }}</span>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    @endif
+                                </div>
+                                <div class="col-md-6 mt-5">
+                                    <div class="form-group">
+                                        <h5 style="font-weight: bold">Autor:</h5>
+                                    </div>
+                                    <div class="form-group">
+
+                                            {{ $project->author }}
+                                    </div>
+                                </div>
+                                 @if( count($team->teams) != 0)
+                                 <div class="col-md-12 mt-5">
+                                 <div class="form-group">
+                                    <h5 style="font-weight: bold">{{ __('integrantes_del_grupo_o_orquesta') }}
+                                        :</h5>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" data-toggle="modal" data-target="#list_modal_team"
+                                            class="btn btn-brand m-btn m-btn--icon">
+                                        <span>
+                                            <i class="la la-users"></i>
+                                            <span>{{ __('mostrar') }}</span>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            @endif
+
 
                                 <!-- ------------------------- ACCIONES SEGUN LOS ROLES----------------------------- -->
 
@@ -137,6 +283,8 @@
                                         </div>
                                     @endif --}}
                                 </div>
+
+                            </div>
                             </div>
                         </div>
                         @if(\App\User::rating_proyect())
@@ -181,126 +329,15 @@
                 </div>
             </div>
         </div>
-    </div>
 
+
+
+
+</div>
     <!--=====================================
         MODAL INFORMACION DEL ARTISTA
     ======================================-->
-    <div class="modal fade" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('informacion_artista') }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-4">
-                            <div class="m-portlet m-portlet--full-height  ">
-                                <div class="m-portlet__body">
-                                    <div class="m-card-profile">
-                                        <div class="m-card-profile__title m--hide">
-                                            Your Profile
-                                        </div>
-                                        <div class="m-card-profile__pic">
-                                            <div class="m-card-profile__pic-wrapper">
-                                                @if(Storage::disk('public')->exists('users/'.$artist->artists[0]->users->picture))
-                                                    <img src="{{ $artist->artists[0]->users->pathAttachment()}}"
-                                                         alt=""/>
-                                                @else
-                                                    <img src="{{ $artist->artists[0]->users->picture }}" alt="">
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="m-card-profile__details">
-                                            <span
-                                                class="m-card-profile__name">{{ $artist->artists[0]->nickname }}</span>
 
-                                            <a href="" class="m-card-profile__email m-link"
-                                               style="margin-left: -15px; width: 80%; word-wrap: break-word;">{{ $artist->artists[0]->users->email }}</a>
-
-                                        </div>
-                                        {{-- @if($country->flag !== null)
-                                            <div class="form-group m-form__group row">
-                                                <label for="example-text-input"
-                                                       class="col-2 col-form-label">{{ __('Origen') }}:</label>
-                                                <div class="col-10 pull-right">
-                                                    <img data-toggle="tooltip" title="{{ $country->country }}"
-                                                         src="{{ $country->flag }}" width="21" alt=""
-                                                         style="margin-left: 80px;margin-top: 7px">
-                                                </div>
-                                            </div>
-                                        @endif --}}
-                                        {{-- @if($location->flag !== null)
-                                            <div class="form-group m-form__group row">
-                                                <label for="example-text-input"
-                                                       class="col-2 col-form-label">{{ __('localizacion') }}:</label>
-                                                <div class="col-10 pull-right">
-                                                    <img data-toggle="tooltip" title="{{ $location->country }}"
-                                                         src="{{ $location->flag }}" width="21" alt=""
-                                                         style="margin-left: 80px;margin-top: 7px">
-                                                </div>
-                                            </div>
-                                        @endif --}}
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-5">
-                            <div class="m-portlet">
-                                <div class="m-portlet__head">
-                                    <div class="m-portlet__head-caption">
-                                        <div class="m-portlet__head-title">
-                                            <h3 class="m-portlet__head-text">
-                                                {{ __('biografia') }}
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="m-portlet__body">
-                                    <div class="m-scrollable" data-scrollable="true" style="height: 200px">
-                                        <p>{{ $artist->artists[0]->biography }}</p>
-                                    </div>
-                                </div>
-                                <div class="m-portlet__foot">
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-12">
-                                            <a target="_blank"
-                                               {!! $artist->artists[0]->google ? "href=".$artist->artists[0]->google :'data-toggle="tooltip" title="'.__('no_registrado').'!"'!!}class="p-2 pull-right"
-                                               style="color: #dd4b39">
-                                                <i class="fab fa-google-plus-g fa-2x"></i>
-                                            </a>
-                                            <a target="_blank"
-                                               {!! $artist->artists[0]->youtube ? "href=".$artist->artists[0]->youtube :'data-toggle="tooltip" title="'.__('no_registrado').'!"'!!} class="p-2 pull-right"
-                                               style="color: #bb0000">
-                                                <i class="fab fa-youtube fa-2x"></i>
-                                            </a>
-                                            <a target="_blank"
-                                               {!! $artist->artists[0]->instagram ? "href=".$artist->artists[0]->instagram :'data-toggle="tooltip" title="'.__('no_registrado').'!"'!!} class="p-2 pull-right">
-                                                <i class="fab fa-instagram fa-2x" style="color: #c13584"></i>
-                                            </a>
-                                            <a target="_blank"
-                                               {!! $artist->artists[0]->facebook ? "href=".$artist->artists[0]->facebook :'data-toggle="tooltip" title="'.__('no_registrado').'!"'!!} class="p-2 pull-right"
-                                               style="color: #3b5998">
-                                                <i class="fab fa-facebook-square fa-2x"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- MODAL, MOSTRAR EL EQUIPO DE ARTISTAS-->
     <div class="modal fade" id="list_modal_team" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -344,7 +381,21 @@
 
     <script>
         $(document).ready(function () {
+
             $('[data-toggle="tooltip"]').tooltip();
+            var myCirclePlayer = new CirclePlayer("#jquery_jplayer_1",
+              {
+
+                mp3:@json($project->audio),
+              }, {
+        cssSelectorAncestor: "#cp_container_1",
+        swfPath: "js",
+        wmode: "window",
+        supplied: "mp3",
+        keyEnabled: true
+      });
+      console.log('boject',myCirclePlayer);
+
         });
 
         function mostrarComentario(texto) {
@@ -497,27 +548,20 @@
             }
         });
     </script>
-     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-     <script src="https://cdn.jsdelivr.net/npm/@moefe/vue-aplayer"></script>
-     <script>
-       Vue.use(VueAPlayer, {
-        //  defaultCover: 'https://github.com/u3u.png',
-         productionTip: true,
-       });
+{{-- <script type="text/javascript">
+    $(document).ready(function() {
+        console.log('llego');
+      var myCirclePlayer = new CirclePlayer("#jquery_jplayer_1",
+              {
 
-       new Vue({
-         el: '#app',
-         data(){
-             return{
-           audio: {
-             name: 'Prueba',
-             artist: 'Aspirante',
-             url: '/storage/projects/audio.mp3',
-             cover: '/storage/projects/player.png', // prettier-ignore
-             lrc: '/storage/projects/player.png',
-           },
-         },
-        },
-       });
-     </script>
+                mp3: "/storage/projects/audio.mp3",
+              }, {
+        cssSelectorAncestor: "#cp_container_1",
+        swfPath: "js",
+        wmode: "window",
+        supplied: "mp3",
+        keyEnabled: true
+      });
+    });
+</script> --}}
 @endsection

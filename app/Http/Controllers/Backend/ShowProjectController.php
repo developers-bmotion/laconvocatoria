@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Artist;
+use App\City;
 use App\Country;
 use App\EndProject;
 use App\Location;
@@ -24,7 +25,8 @@ class ShowProjectController extends Controller
         $rol = array_pluck($users->roles, 'rol');
         $end_time = EndProject::where('project_id',$project->id)->first();
         $artist= Project::where('id',$project->id)->with('artists.users')->first();
-        // $country = Country::where('id',$artist->artists[0]->country_id)->first();
+        $country = City::where('id',$artist->artists[0]->cities_id)->first();
+        // dd($artist);
         // $location = Location::where('id',$artist->artists[0]->location_id)->first();
         $team = Project::where('id',$project->id)->with('teams')->first();
         if (in_array('Admin', $rol)||in_array('Subsanador', $rol)) {
@@ -32,12 +34,12 @@ class ShowProjectController extends Controller
             $asignado = count($review);
             // dd($asignado);
             // $currentRaing = $review->avg("rating");
-            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team'));
+            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country'));
             // return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','country', "currentRaing",'location','team'));
         } else if (in_array('Manage', $rol)){
             $review = Review::where("project_id","=", $project->id)
                 ->where("user_id","=", auth()->user()->id)->first();
-            return view('backend.projects.show-project', compact('project','end_time','artist', 'review','team'));
+            return view('backend.projects.show-project', compact('project','end_time','artist', 'review','team','country'));
             // return view('backend.projects.show-project', compact('project','end_time','artist','country', 'review','location','team'));
         }else {
 
@@ -53,7 +55,7 @@ class ShowProjectController extends Controller
             $project->first();
 
             if (in_array($seacharSlug, $array)) {
-                return view('backend.projects.show-project', compact('project','end_time','artist','team'));
+                return view('backend.projects.show-project', compact('project','end_time','artist','team','country'));
                 // return view('backend.projects.show-project', compact('project','end_time','artist','country','location','team'));
             } else {
                 return response('No puedes continuar', 404);

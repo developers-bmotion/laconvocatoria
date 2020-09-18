@@ -70,7 +70,7 @@ class Artist extends Model
     }
 
     public function countries(){
-        return $this->belongsTo(Country::class,'country_id');
+        return $this->belongsTo(Country::class,'cities_id');
     }
     public function users(){
         return $this->belongsTo(User::class,'user_id')->select('id','name','last_name','second_last_name','picture','front_picture','phone_1','phone_2','state','slug','email','created_at');
