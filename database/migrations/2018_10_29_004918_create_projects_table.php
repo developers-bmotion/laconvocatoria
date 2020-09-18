@@ -25,6 +25,7 @@ class CreateProjectsTable extends Migration
                 \App\Project::PENDING,
                 \App\Project::REJECTED,
                 \App\Project::REVISON_UPDATE,
+                \App\Project::ACEPTED,
             ])->default(\App\Project::REVISION);
             $table->mediumText('audio')->nullable();
             $table->timestamp('end_time')->nullable();
@@ -34,9 +35,9 @@ class CreateProjectsTable extends Migration
             $table->unsignedInteger('type_categories_id')->nullable();
             $table->foreign('type_categories_id')->references('id')->on('type_categories');
             $table->string('group_name')->default(null);
-            $table->string('author');
-            $table->boolean('previous_approved')->default(false);
-            $table->boolean('previous_rejected')->default(false);
+            $table->string('author')->nullable();
+//            $table->boolean('previous_approved')->default(false);
+//            $table->boolean('previous_rejected')->default(false);
             $table->timestamps();
             $table->softDeletes();
 

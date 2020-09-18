@@ -78,9 +78,10 @@ class Project extends Model
     const PENDING = 4;
     const REJECTED = 5;
     const REVISON_UPDATE=6;
+    const ACEPTED=7;
     // const NOPUBLISHED = 6;
 
-    const PERCENTAGE_APPROVAL = 3;
+//    const PERCENTAGE_APPROVAL = 3;
 
     protected $withCount = ['reviews','updates'];
     protected $fillable = [

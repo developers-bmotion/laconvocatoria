@@ -36,7 +36,7 @@ class CategoriesTableSeeder extends Seeder
         $category->save();
 
         $category = new Category;
-        $category->category = "Música tradicional del Pacífico ";
+        $category->category = "Música tradicional del Pacífico";
         $category->slug = str_slug("música_tradicional_pc",'-');
         $category->description = "Norte, centro y sur";
         $category->typeCategory_id = 1;

@@ -7,8 +7,14 @@ $factory->define(App\Artist::class, function (Faker $faker) {
         'user_id' => null,
         'nickname' => $faker->jobTitle,
         'biography' => $faker->text,
-        'level_id' => \App\Level::all()->random()->id,
-        'country_id' => \App\Country::all()->random()->id,
-        'location_id' => \App\Location::all()->random()->id
+        'adress' => $faker->address,
+        'township' => $faker->city,
+        'byrthdate' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'identification' =>$faker->randomNumber($nbDigits = NULL, $strict = false),
+        'document_type' => 1,
+        'cities_id' => \App\City::all()->random()->id,
+        'expedition_place' => \App\City::all()->random()->id,
+        'person_types_id' => \App\PersonType::all()->random()->id,
+        'artist_types_id' => \App\ArtistType::all()->random()->id
     ];
 });
