@@ -55,6 +55,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="/backend/vendors/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" rel="stylesheet"
         type="text/css" />
     <link rel="stylesheet" href="/backend/build/css/intlTelInput.css">
+    <link rel="stylesheet" href="/backend/assets/css/circle.player.css">
     <link rel="stylesheet" href="/backend/build/css/demo.css">
     <link href="/backend/vendors/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
     <link href="/backend/vendors/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
@@ -317,6 +318,14 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="/backend/vendors/wnumb/wNumb.js" type="text/javascript"></script>
 
     <!--end:: Global Mandatory Vendors -->
+
+    {{-- js de reproductor --}}
+    {{-- <script src="/backend/vendors/jplayer/jquery-1.11.1.min.js" type="text/javascript"></script> --}}
+    <script src="/backend/vendors/jplayer/circle.player.js" type="text/javascript"></script>
+    <script src="/backend/vendors/jplayer/jquery.grab.js" type="text/javascript"></script>
+    <script src="/backend/vendors/jplayer/jquery.jplayer.min.js" type="text/javascript"></script>
+    <script src="/backend/vendors/jplayer/jquery.transform2d.js" type="text/javascript"></script>
+    <script src="/backend/vendors/jplayer/mod.csstransforms.min.js" type="text/javascript"></script>
 
     <!--begin:: Global Optional Vendors -->
     <script src="/backend/vendors/jquery.repeater/src/lib.js" type="text/javascript"></script>
