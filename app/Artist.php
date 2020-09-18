@@ -83,6 +83,22 @@ class Artist extends Model
         return $this->belongsToMany(Answer::class,'answer_artist','artist_id','answer_id');
     }
 
+    public function beneficiary(){
+        return $this->hasMany(Beneficiary::class, 'artist_id');
+    }
+
+    public function personType(){
+        return $this->belongsTo(PersonType::class,'person_types_id');
+    }
+
+    public function artistType(){
+        return $this->belongsTo(ArtistType::class,'artist_types_id');
+    }
+
+    public function documentType(){
+        return $this->belongsTo(DocumentType::class,'document_type');
+    }
+
     /**
      * Consultas $
      */

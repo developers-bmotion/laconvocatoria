@@ -14,12 +14,20 @@
 CONSULTAS DE PRUEBAS
 =============================================*/
 
+use App\Artist;
+
 Route::get('test' , function (){
     // Artisan::call('projects:close');
     // dd(\App\Category::where('typeCategory_id', 2)->get());
     dd(App\Project::where('status', 1)->count());
 });
 
+Route::get('/represtante-menor-edad/{id}', function($id){
+    $artist = Artist::where('id', $id)
+    ->with('users', 'beneficiary.documentType', 'beneficiary.city.departaments','beneficiary.expeditionPlace.departaments', 'personType','artistType', 'documentType')
+    ->first();
+    return $artist;
+});
 
     // Artisan::call('projects:close');
     // dd(\App\Category::where('typeCategory_id', $id_category)->get());

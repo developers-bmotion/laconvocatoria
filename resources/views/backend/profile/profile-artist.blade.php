@@ -174,7 +174,7 @@
                             </a>
                             <div class="m-wizard__step-info">
                                 <div class="m-wizard__step-title">
-                                    Menor de edad beneficiado
+                                    Menor de edad beneficiario
                                 </div>
                                 {{-- <div class="m-wizard__step-desc">
                                     Lorem ipsum doler amet elit<br>
@@ -506,7 +506,9 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <!--=====================================
+                                    DIRECCIÓN Y CIUDAD DE RESIDENCIA
+                                ======================================-->
                                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                 <div class="m-form__section">
                                     <div class="m-form__heading">
@@ -692,14 +694,7 @@
                                                 Tipo de documento:</label>
                                             <select name="document_type_menor"
                                                 class="form-control m-bootstrap-select m_selectpicker selectTipoDocumentRegisterAspiranteMenor">
-                                                @foreach($documenttype as $document_type)
-                                                <option value="{{$document_type->id}}"
-                                                    {{ old('document_type_menor',$artist->document_type_menor) == $document_type->id ? 'selected':''}}>
-                                                    {{ $document_type->document }}</option>
-                                                @endforeach
-                                                {!! $errors->first('document_type_menor','<div class="form-control-feedback">
-                                                    *:message
-                                                </div>')!!}
+                                                <option value="2">Tarjeta de identidad</option>
                                             </select>
 
                                         </div>
@@ -709,7 +704,7 @@
                                                 Nº de
                                                 indentificación:</label>
 
-                                            <input type="num" name="identificacion:menor"
+                                            <input type="num" name="identificacion_menor"
                                                 class="form-control m-input inputNoDocumentRegisterAspiranteMenor"
                                                 placeholder=""
                                                 value="{{ old('identificacion_menor', $artist->identification_menor) }}">
@@ -734,7 +729,7 @@
                                                 expedición:</label>
 
                                             <select name="departamento_expedida_menor"
-                                                class="form-control m-select2 expedi_departamentos" id="m_select2_1_6">
+                                                class="form-control m-select2 expedi_departamentos_menor" id="m_select2_1_6">
                                                 <option>Seleccione departamento</option>
                                                 @foreach($departamentos as $departamento)
                                                 <option value="{{$departamento->id}}">
@@ -752,7 +747,7 @@
                                                 expedición:</label>
 
                                             <select name="expedition_place_menor"
-                                                class="expid_municipios form-control m-select2" id="m_select2_1_7">
+                                                class="expid_municipios_menor form-control m-select2" id="m_select2_1_7">
                                             </select>
 
                                         </div>
@@ -761,7 +756,7 @@
 
 
                                     <!--=====================================
-                                        CARGAR DOCUMENTO MENOR
+                                        CARGAR DOCUMENTO Y FECHA DE NACIMIENTO MENOR
                                     ======================================-->
                                     <div class="form-group m-form__group row">
                                         <div class="col-lg-6 m-form__group-sub">
@@ -776,6 +771,87 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-lg-6 m-form__group-sub">
+
+                                            <label for="example-text-input"
+                                            class="form-control-label">Fecha de nacimiento</label>
+                                            <input type="text" name="birthdate_menor" class="form-control"
+                                            value=""
+                                            id="datepicker_fecha_nacimiento" readonly
+                                            placeholder="{{ __('fecha_nacimiento') }}" />
+
+
+                                        </div>
+                                    </div>
+
+                                    <!--=====================================
+                                        DIRECCIÓN Y CIUDAD DE RESIDENCIA MENOR
+                                    ======================================-->
+                                    <div class="m-separator m-separator--dashed m-separator--lg"></div>
+                                    <div class="m-form__section">
+                                        <div class="m-form__heading">
+                                            <h3 class="m-form__heading-title">
+                                                Información de nacimiento y residencia
+                                                <i data-toggle="m-tooltip" data-width="auto"
+                                                    class="m-form__heading-help-icon flaticon-info"
+                                                    title="Some help text goes here"></i>
+                                            </h3>
+                                        </div>
+
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-lg-6 m-form__group-sub">
+
+                                                <label class="form-control-label">* Departamento de
+                                                    nacimiento:</label>
+
+                                                <select class="form-control m-select2 nacimiento_departamentos_menor"
+                                                    id="m_select2_1_8">
+                                                    <option>Seleccione departamento</option>
+                                                    @foreach($departamentos as $departamento)
+                                                    <option value="{{$departamento->id}}">
+                                                        {{ $departamento->descripcion }}</option>
+                                                    @endforeach
+                                                    {!! $errors->first('departamento_expedida','<div
+                                                        class="form-control-feedback">
+                                                        *:message
+                                                    </div>')!!}
+                                                </select>
+
+
+                                            </div>
+                                            <div class="col-lg-6 m-form__group-sub">
+                                                <label class="form-control-label">* Municipio de
+                                                    nacimiento:</label>
+
+                                                <select name="cities_id_menor"
+                                                    class="nacimiento_municipios_menor form-control m-select2" id="m_select2_1_9">
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-lg-6 m-form__group-sub">
+
+                                                <label
+                                                    class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">*
+                                                    Dirección de residencia:</label>
+
+                                                <input type="text" name="adress_menor"
+                                                    class="form-control m-input inputDireccionRegisterAspirante"
+                                                    placeholder="" value="">
+                                                {!! $errors->first('adress','<div class="form-control-feedback">
+                                                    *:message
+                                                </div>')!!}
+
+                                                <span class="m-form__help">Por favor ingrese dirección de
+                                                    residencia</span>
+
+
+                                            </div>
+
+                                        </div>
+
+
                                     </div>
                                 </div>
 
@@ -811,14 +887,17 @@
                                             Información del aspirante</a>
                                     </li>
                                     <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_form_confirm_2"
+                                        <a class="nav-link m-tabs__link titulo-confirmacion-menor-edad" data-toggle="tab" href="#m_form_confirm_2"
                                             role="tab">2.
-                                            Información para la convocatoria</a>
+                                            Información del beneficiario</a>
                                     </li>
 
                                 </ul>
 
                                 <div class="tab-content m--margin-top-40">
+                                    <!--=====================================
+                                        TAB PARA CONFIRMAR DATOS DEL REPESENTANTE
+                                    ======================================-->
                                     <div class="tab-pane active" id="m_form_confirm_1" role="tabpanel">
                                         <div class="m-form__section m-form__section--first">
                                             <div class="m-form__heading">
@@ -957,11 +1036,14 @@
                                         </div>
                                     </div>
 
+                                    <!--=====================================
+                                        TAB PARA CONFIMAR DATOS DEL MENOR DE EDAD
+                                     ======================================-->
+
                                     <div class="tab-pane" id="m_form_confirm_2" role="tabpanel">
                                         <div class="m-form__section m-form__section--first">
                                             <div class="m-form__heading">
-                                                <h4 class="m-form__heading-title">Información para la
-                                                    convocatoria
+                                                <h4 class="m-form__heading-title">Información del beneficiario
                                                 </h4>
                                             </div>
                                             <!--=====================================
@@ -977,23 +1059,7 @@
                                                         style="font-size: 1.3rem;"></span>
 
                                                 </div>
-                                                <div class="col-lg-4 m-form__group-sub">
-                                                    <label class="col-form-label"> Linea de la
-                                                        convocatoria:</label><br>
-                                                    <span
-                                                        class="m-form__control-static confirmTxtLineaConvocatoriaAspirante"
-                                                        style="font-size: 1.3rem;"></span>
 
-                                                </div>
-
-                                                <div class="col-lg-4 m-form__group-sub">
-                                                    <label class="col-form-label">Experiencia
-                                                        Musical</label><br>
-                                                    <span
-                                                        class="m-form__control-static confirmTxtExperienciaMusicalAspirante"
-                                                        style="font-size: 1.3rem;"></span>
-
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1102,10 +1168,14 @@
                     rtl: mUtil.isRTL(),
                     todayHighlight: true,
                     orientation: "bottom left",
+                    language: 'es',
+                    startDate: '-18y',
                     templates: arrows
                 });
                 $('#datepicker_fecha_nacimiento').datepicker({
                     rtl: mUtil.isRTL(),
+                    language: 'es',
+                    startDate: '-18y',
                     todayHighlight: true,
                     orientation: "bottom left",
                     templates: arrows
@@ -1122,26 +1192,6 @@
 
         jQuery(document).ready(function () {
             BootstrapDatepicker.init();
-
-           /* $("#expedi_departamentos").change(function(){
-
-                var departament_id = $(this).val();
-                if($.trim(departament_id) != '' ){
-
-                    $.get('get-municipios', {departament_id: departament_id}, function(municipios){
-                        alert('hola');
-                        console.log(municipios);
-                        $('.expid_municipios').empty();
-                        $('.expid_municipios').append('<option value= "">Selecciona ciuidad o municipio</option>');
-                        {{-- $.each(municipios, function(index, value){
-                            $('.expid_municipios').append("<option value= '"+index+"'>"+value+"</option> ");
-                        }); --}}
-                    });
-                }
-            });
-            */
-
-
 
         });
 

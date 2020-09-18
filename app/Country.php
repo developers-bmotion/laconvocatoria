@@ -33,7 +33,7 @@ class Country extends Model
     protected $table = "departamento";
 
     public function cities(){
-        return $this->belongsTo(City::class)->select('city');
+        return $this->hasMany(City::class);
     }
     public function artist(){
         return $this->hasOne(Artist::class);
@@ -41,4 +41,5 @@ class Country extends Model
     public function management(){
         return $this->hasOne(Management::class);
     }
+
 }
