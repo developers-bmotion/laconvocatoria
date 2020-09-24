@@ -132,10 +132,16 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                     <span class="changeType w-100 btn btn-outline-success m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::APPROVAL}}">{{ __('aprovado') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-info m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PENDING}}">{{ __('pendiente') }}</span>
+                                                    <span class="changeType w-100 btn btn-outline-warning m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PENDING}}">{{ __('pendiente') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
                                                     <span class="changeType w-100 btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REJECTED}}">{{ __('rechazados') }}</span>
+                                                </li>
+                                                <li class="m-nav__item text-center">
+                                                    <span style="color:black" class="changeType w-100 btn btn-outline-secondary m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::ACEPTED}}">{{ __('aceptado') }}</span>
+                                                </li>
+                                                <li class="m-nav__item text-center">
+                                                    <span class="changeType w-100 btn btn-outline-info m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('nueva revisión') }}</span>
                                                 </li>
                                                 <li class="m-nav__separator m-nav__separator--fit">
                                                 </li>
@@ -236,10 +242,16 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                     info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('aprovado2') }}</span>';
                                     break;
                                 case 4:
-                                    info = '<span class="m-badge  m-badge--info m-badge--wide">{{ __('publicado2') }}</span>';
+                                    info = '<span class="m-badge  m-badge--warning m-badge--wide">Pendiente</span>';
                                     break;
                                 case 5:
                                     info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('rechazado') }}</span>';
+                                    break;
+                                case 6:
+                                    info = '<span class="m-badge  m-badge--info m-badge--wide">Nueva revisión</span>';
+                                    break;
+                                case 7:
+                                    info = '<span class="m-badge  m-badge--secondary m-badge--wide">Aceptado</span>';
                                     break;
                             }
                             return '<div class="text-center">'+info+'</div>';

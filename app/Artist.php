@@ -73,7 +73,7 @@ class Artist extends Model
         return $this->belongsTo(Country::class,'cities_id');
     }
     public function users(){
-        return $this->belongsTo(User::class,'user_id')->select('id','name','last_name','second_last_name','picture','front_picture','phone_1','phone_2','state','slug','email','created_at');
+        return $this->belongsTo(User::class,'user_id');
     }
     public function location(){
         return $this->belongsTo(Location::class,'location_id');
@@ -97,6 +97,11 @@ class Artist extends Model
 
     public function documentType(){
         return $this->belongsTo(DocumentType::class,'document_type');
+    }
+
+
+    public function teams(){
+        return $this->hasMany(Team::class,'artist_id');
     }
 
     /**

@@ -1,6 +1,6 @@
 <!-- Acciones para el Admin -->
 @if($project->status == 1)
-<div class="col-md-6 mt-5">
+<div class="col-md-12 mt-5">
 
 
     <div class="form-group">
@@ -14,6 +14,7 @@
             <span>{{ __('buscar') }}</span>
         </span>
         </button>
+
         <form method="post" action="{{ route('project.admin.rejected') }}" class="" style="display: inline"
               id="frm_rejected_admin">
             @csrf {{ method_field('PUT') }}
@@ -25,6 +26,13 @@
             </button>
             <input type="hidden" name="rejected" value="{{ $project->id }}">
         </form>
+        <button type="button" data-toggle="modal" data-target="#revision"
+        class="btn btn-warning m-btn m-btn--icon">
+<span style="color: white">
+    <i class="la la-exclamation-triangle"></i>
+    <span >Enviar a revisión</span>
+</span>
+</button>
     </div>
 </div>
 @else
@@ -61,9 +69,10 @@
         </div> --}}
     @endif
     <!-- VER A QUIEN SE ASIGNO EL PROYECTO-->
-    @if($project->status !== 1 && $asignado !== 0)
+    @if( ($project->status !== 1 && $asignado !== 0))
+    @if($project->status != 4)
         <div class="form-group">
-            <h5 style="font-weight: bold">{{ __('asignado_a') }}:</h5>
+            <h5 style="font-weight: bold">{{ __('asignado_a') }}:{{ $project->status }}</h5>
         </div>
         <div class="form-group">
             <button type="button" id="mostrar_managements_asignados" class="btn btn-danger m-btn m-btn--icon">
@@ -74,6 +83,7 @@
             </button>
 
         </div>
+     @endif
     @endif
 @endif
 
@@ -105,6 +115,29 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="btnSendMessage">{{ __('enviar') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL REVISIÓN PROJECTO-->
+<div class="modal fade" id="revision" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Enviar observación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                    <label style="font-weight: bold" class="col-md-12">Observación:</label>
+                <textarea name="mesage" id="mesage" cols="50" rows="10" class="col-md-12" required></textarea>
+            </div>
+            <div class="modal-footer">
+                {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                <button type="button" class="btn btn-primary" id="btnSendObservation">{{ __('enviar') }}</button>
             </div>
         </div>
     </div>
@@ -314,6 +347,60 @@
 
 
                 ajax(url, data, success, "post", error, true, "#list_modal_manage");
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $("#btnSendObservation").click(function () {
+                if($('#mesage').val() !==''){
+                const
+                    mesage=$('#mesage').val(),
+                    token = '{{ csrf_token() }}',
+                    url = '{{route("project.admin.revision")}}';
+
+                let data = {
+                    __token: token,
+                    observation: mesage,
+                    project: {{ $project->id }}
+                };
+                const success = function (r) {
+                    console.log(r);
+                    if (r.status === 200) {
+                        swal({
+                            "title": "",
+                            "text": r.msg,
+                            "type": "success",
+                            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                        }).then((result) => {
+                            document.location.reload();
+                        });
+                    }
+                };
+                const error = function (e) {
+                    swal({
+                        "title": "",
+                        "text": "No se ha enviado el mensaje.",
+                        "type": "error",
+                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                    });
+                };
+
+
+                ajax(url, data, success, "post", error, true, "#list_modal_manage");
+            }else{
+                swal({
+                        "title": "",
+                        "text": "Debe llenar el campo de observación.",
+                        "type": "error",
+                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                    });
+            }
             });
         })();
     </script>

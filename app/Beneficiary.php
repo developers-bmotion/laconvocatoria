@@ -3,9 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use \Seiler\EloquentDate\EloquentDate;
 
 class Beneficiary extends Model
 {
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'published_at',
+        'birthday',
+    ];
     protected $fillable = [
         'document_type', 'identification', 'name', 'last_name',
         'second_last_name', 'pdf_documento', 'phone', 'adress',

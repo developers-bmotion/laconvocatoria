@@ -15,11 +15,15 @@ CONSULTAS DE PRUEBAS
 =============================================*/
 
 use App\Artist;
+use App\Mail\ArtistProjectRevision;
+use App\Project;
 
 Route::get('test' , function (){
+    // $project = Project::where('id',9)->with('artists.users')->first();
+    // return new ArtistProjectRevision($project,'nombre', 'mensaje');
     // Artisan::call('projects:close');
     // dd(\App\Category::where('typeCategory_id', 2)->get());
-    dd(App\Project::where('status', 1)->count());
+    // dd(App\Project::where('status', 1)->count());
 });
 
 Route::get('/represtante-menor-edad/{id}', function($id){
@@ -179,6 +183,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
         //Lista proyectos managements
         Route::get('/projects-admin', 'Admin\ProjectsAdminController@index')->name('projects.admin');
         Route::put('/project-rejected-admin','Admin\ProjectsAdminController@rejected_project')->name('project.admin.rejected');
+        Route::post('/project-revision-admin','Admin\ProjectsAdminController@revision_project')->name('project.admin.revision');
         Route::get('/datatables-projects-admin','Admin\ProjectsAdminController@table_projects')->name('datatables.projects.admin');
         Route::get('/datatables-projects-admin-approved','Admin\ProjectsAdminController@table_projects_approved')->name('datatables.projects.admin.approved');
         Route::get('/datatables-managements-admin','Admin\ProjectsAdminController@table_managements')->name('datatables.management.admin');

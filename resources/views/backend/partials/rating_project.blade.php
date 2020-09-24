@@ -4,12 +4,13 @@
 </div>
 <div class="form-group">
     <a href="#" class="btn btn-info m-btn m-btn--icon">
-                                            <span>
-                                                <i class="la la-user"></i>
-                                                <span>{{ __('buscar') }}</span>
-                                            </span>
+        <span>
+            <i class="la la-user"></i>
+            <span>{{ __('buscar') }}</span>
+        </span>
     </a>
 </div>
+
 <!-- Acciones para el Managment -->
 <div class="form-group">
     <h5 style="font-weight: bold">{{ __('calificar_proyecto') }}:</h5>

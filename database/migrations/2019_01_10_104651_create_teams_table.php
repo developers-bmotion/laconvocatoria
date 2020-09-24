@@ -25,9 +25,10 @@ class CreateTeamsTable extends Migration
             $table->string('addres')->nullable();
             $table->string('phone1')->nullable();
             $table->string('phone2')->nullable();
-            $table->string('permission')->nullable();
+            $table->string('pdf_identificacion')->nullable();
             $table->string('role')->nullable();
-
+            $table->unsignedInteger('artist_id')->nullable();
+            $table->foreign('artist_id')->references('id')->on('artists');
             $table->timestamps();
         });
     }

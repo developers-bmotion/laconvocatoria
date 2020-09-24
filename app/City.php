@@ -38,6 +38,9 @@ class City extends Model
     public function beneficiary(){
         return $this->hasMany(Beneficiary::class);
     }
+    public function team(){
+        return $this->hasMany(Team::class);
+    }
 
     public function departaments(){
         return $this->belongsTo(Country::class, 'iddepartamento');

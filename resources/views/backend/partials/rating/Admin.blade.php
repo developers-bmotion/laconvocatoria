@@ -11,6 +11,7 @@
             <span>{{ __('buscar') }}</span>
         </span>
         </button>
+
         <form method="post" action="{{ route('project.admin.rejected') }}" class="" style="display: inline"
               id="frm_rejected_admin">
             @csrf {{ method_field('PUT') }}

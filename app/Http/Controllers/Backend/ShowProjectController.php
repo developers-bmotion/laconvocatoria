@@ -24,19 +24,27 @@ class ShowProjectController extends Controller
         $users = User::where('id', \Auth::user()->id)->with(['roles'])->first();
         $rol = array_pluck($users->roles, 'rol');
         $end_time = EndProject::where('project_id',$project->id)->first();
-        $artist= Project::where('id',$project->id)->with('artists.users')->first();
+        $artist= Project::where('id',$project->id)->with('artists.users','artists.artistType','artists.personType','artists.beneficiary.documentType','artists.beneficiary.city','artists.beneficiary.expeditionPlace','artists.teams','artists.teams.expeditionPlace')->first();
         $country = City::where('id',$artist->artists[0]->cities_id)->first();
-        // dd($artist);
         // $location = Location::where('id',$artist->artists[0]->location_id)->first();
+        // dd($artist);
         $team = Project::where('id',$project->id)->with('teams')->first();
-        if (in_array('Admin', $rol)||in_array('Subsanador', $rol)) {
+        if (in_array('Admin', $rol)) {
             $review = Review::where("project_id","=", $project->id)->get();
             $asignado = count($review);
-            // dd($asignado);
+
+
             // $currentRaing = $review->avg("rating");
             return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country'));
             // return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','country', "currentRaing",'location','team'));
-        } else if (in_array('Manage', $rol)){
+        }else if(in_array('Subsanador', $rol)) {
+            $review = Review::where("project_id","=", $project->id)->get();
+            $asignado = count($review);
+
+            // $currentRaing = $review->avg("rating");
+            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country'));
+
+        }else if(in_array('Manage', $rol)){
             $review = Review::where("project_id","=", $project->id)
                 ->where("user_id","=", auth()->user()->id)->first();
             return view('backend.projects.show-project', compact('project','end_time','artist', 'review','team','country'));
