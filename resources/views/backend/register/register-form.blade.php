@@ -743,9 +743,97 @@
 
 
             <!--=====================================
-                INFORMACIÓN DEL MENOR DE EDAD BENEFICIARIO
+                INFORMACIÓN DEL GRUPO
             ======================================-->
             <div style="display: none"
+                 class="content-informacion-grupo-musical m-portlet m-portlet--mobile m-portlet--body-progress-">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Datos del Grupo Musical
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item">
+                                <a href="#" data-toggle="m-tooltip"
+                                   class="m-portlet__nav-link m-portlet__nav-link--icon"
+                                   data-direction="left" data-width="auto" title="Get help with filling up this form">
+                                    <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <div class="row">
+                        <div class="col col-lg-12" style="padding-bottom: 1.5rem;">
+                            <div class="row" style="padding-left: 1rem;">
+                                <div class="col-3 form-group m-form__group row">
+                                    <label for="example-number-input">Ingrese el número de integrantes</label>
+                                    <input id="input-max-members" class="form-control m-input" type="number" value="">
+                                </div>
+                                <div class="col-lg-4">
+                                    <div id="event-add-max-members" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide" style="margin: 2rem 2rem 0; padding: 0.8rem 2rem;">
+                                        <span>
+                                            <i class="la la-plus"></i>
+                                            <span>Agregar Integrantes</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="help-max-members" class="m-form__help" style="display:none; margin-top: -1rem; color: #f4516c; font-size: 1rem;">Recuerde que el número máximo de integrantes para el grupo es 12 personas</span>
+                        </div>
+
+                        <div class="col col-lg-12">
+                            <div class="m-tabs-content" id="m_sections">
+                                <!-- add members group -->
+                                <div class="m-tabs-content__item m-tabs-content__item--active" id="m_section_1">
+                                    {{-- <h4 class="m--font-bold m--margin-top-15 m--margin-bottom-20">General Instruction</h4> --}}
+                                    <div class="m-accordion m-accordion--section m-accordion--padding-lg" id="m_section_1_content">
+
+                                        <!--begin::Item-->
+                                        {{-- <div id="member-uno" class="m-accordion__item">
+                                            <div class="m-accordion__item-head collapsed-" role="tab" id="section_members_head_1" data-toggle="collapse" href="#section_members_body_1">
+                                                <span class="m-accordion__item-title">Datos de la Persona</span>                                                
+                                                <span class="m-accordion__item-mode"></span>                                                
+                                            </div>
+                                            <div class="m-accordion__item-body collapse show" id="section_members_body_1" role="tabpanel" aria-labelledby="section_members_head_1" data-parent="#m_section_1_content">
+                                                <div class="m-accordion__item-content">          
+                                                    <p>
+                                                        parte uno
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div> --}}
+                                        <!--end::Item-->                                
+                                    </div>
+                                </div>
+                                <!-- add members group -->
+                                
+                                {{-- Boton para agregar nuevos integrantes --}}
+                                {{-- <div class="col-lg-4 mt-3">
+                                    <div id="add-new-member" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                                        <span>
+                                            <i class="la la-plus"></i>
+                                            <span>Agregar Nuevo Integrante</span>
+                                        </span>
+                                    </div>
+                                </div> --}}
+
+                                {{-- <div id="limit-members" class="mt-3" style="display: none; color: #f4516c; ">Lo sentimos solo se admite un maximo de 12 integrantes por grupo</div> --}}
+                            </div>                            
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+            <!--=====================================
+                INFORMACIÓN DEL MENOR DE EDAD BENEFICIARIO
+            ======================================-->
+            {{-- <div style="display: none"
                  class="content-informacion-grupo-musical m-portlet m-portlet--mobile m-portlet--body-progress-">
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
@@ -771,7 +859,7 @@
                     <div class="row">
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
             <!--=====================================
