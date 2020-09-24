@@ -70,10 +70,10 @@ class LoginController extends Controller
         }else{
 
             if ($request->input("json") === "true"){
-                return "/dashboard/profile";
+                return "/dashboard/form-register";
             }
 
-            return redirect('/dashboard/profile');
+            return redirect('/dashboard/form-register');
         }
     }
 
