@@ -65,14 +65,14 @@
                                            style="margin-left: -15px; width: 80%; word-wrap: break-word;">{{ $artist->artists[0]->users->email }}</a>
 
                                     </div>
-                                        <div class="form-group m-form__group row" style="margin-left: 5.79rem;">
+                                        {{-- <div class="form-group m-form__group row" style="margin-left: 5.79rem;">
                                             <label for="example-text-input"
                                                    class="col-3 col-form-label mt-1">{{ __('Origen') }}:</label>
                                             <div class="col-4 pull-right mt-3">
                                                 <span>{{$country->descripcion}}</span>
 
                                             </div>
-                                        </div>
+                                        </div> --}}
 
 
                                 </div>
@@ -86,7 +86,7 @@
 
                             <label style="font-weight: bold">{{ __('biografia') }}:</label>
                             <div class="m-scrollable" data-scrollable="true" style="">
-                                <p>{{ $artist->artists[0]->biography }}</p>
+                                <p style="text-align: justify">{{ $artist->artists[0]->biography }}</p>
                             </div>
                         </div>
                         <div class="col-md-6 mt-2">
@@ -104,9 +104,18 @@
                     <div class="col-md-6 mt-2">
                         <label style="font-weight: bold">Fecha de nacimiento:</label>
                         <div class="m-scrollable" data-scrollable="true" style="">
-                            <p>{{ date('d-m-Y', strtotime( $artist->artists[0]->byrthdate)) }}</p>
+                            <p>{{ Carbon\Carbon::parse($artist->artists[0]->byrthdate)->formatLocalized('%d de %B de %Y') }}
+                            </p>
                         </div>
                     </div>
+                    <div class="col-md-6 mt-2">
+                        <label style="font-weight: bold">Ciudad:</label>
+                        <div class="m-scrollable" data-scrollable="true" style="">
+                 <p>{{$country->descripcion}}</p>
+                        </div>
+
+             </div>
+
 
                         @if($artist->artists[0]->township)
                         <div class="col-md-6 mt-2">
@@ -121,6 +130,24 @@
                         <div class="m-scrollable" data-scrollable="true" style="">
                             <p>{{ $artist->artists[0]->users->phone_1}}</p>
                         </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                        <label style="font-weight: bold">Linea de convocatoria:</label>
+                        <div class="m-scrollable" data-scrollable="true" style="">
+                            <p>{{ $artist->artists[0]->personType->name}}</p>
+                        </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                        <label style="font-weight: bold">Actuara como:</label>
+                        <div class="m-scrollable" data-scrollable="true" style="">
+                            <p>{{ $artist->artists[0]->artistType->name}}</p>
+                        </div>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label style="font-weight: bold">Documento de identificación:</label>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#verpdfidentificacion">
+                                Ver documento de identidad
+                              </button>
                         </div>
                         @if($artist->artists[0]->users->phone_2)
                         <div class="col-md-6 mt-2">
@@ -141,6 +168,302 @@
                 </div>
             </div>
         </div>
+                {{-- informacion de beneficiario --}}
+                @if(count($artist->artists[0]->beneficiary) != 0)
+                <div class="row">
+                    <div class="col-xl-12 col-lg-8">
+                        <div class="m-portlet m-portlet--full-height ">
+                            <div class="m-portlet__head">
+                                <div class="m-portlet__head-caption">
+                                    <div class="m-portlet__head-title">
+                                        <h3 class="m-portlet__head-text">
+                                            Información del beneficiario
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="m-portlet__body ml-5">
+                                <div class="row">
+
+
+                            <div class="biografia col-md-12">
+                            <div class="row">
+
+
+                                <div class="col-md-4 mt-2">
+                                <label style="font-weight: bold">Tipo identificación:</label>
+                                <div class="m-scrollable" data-scrollable="true" style="">
+                                    <p>{{ $artist->artists[0]->beneficiary[0]->documentType->document}}</p>
+                                </div>
+                            </div>
+                                <div class="col-md-4 mt-2">
+                                <label style="font-weight: bold">Identificación:</label>
+                                <div class="m-scrollable" data-scrollable="true" style="">
+                                    <p>{{ $artist->artists[0]->beneficiary[0]->identification}}</p>
+                                </div>
+                            </div>
+                                <div class="col-md-4 mt-2">
+                                <label style="font-weight: bold">Nombre:</label>
+                                <div class="m-scrollable" data-scrollable="true" style="">
+                                    <p>{{ $artist->artists[0]->beneficiary[0]->name}}</p>
+                                </div>
+                            </div>
+                                <div class="col-md-4 mt-2">
+                                <label style="font-weight: bold">Apellidos:</label>
+                                <div class="m-scrollable" data-scrollable="true" style="">
+                                    <p>{{ $artist->artists[0]->beneficiary[0]->last_name}} {{ $artist->artists[0]->beneficiary[0]->second_last_name}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <label style="font-weight: bold">Direccion:</label>
+                                <div class="m-scrollable" data-scrollable="true" style="">
+                                    <p>{{ $artist->artists[0]->beneficiary[0]->adress}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <label style="font-weight: bold">Fecha de nacimiento:</label>
+                                <div class="m-scrollable" data-scrollable="true" style="">
+                                    <p>{{  Carbon\Carbon::parse($artist->artists[0]->beneficiary[0]->birthday)->formatLocalized('%d de %B de %Y') }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-2">
+                                <label style="font-weight: bold">Ciudad:</label>
+                                <div class="m-scrollable" data-scrollable="true" style="">
+                         <p>{{ $artist->artists[0]->beneficiary[0]->city->descripcion}}</p>
+                                </div>
+
+                     </div>
+
+
+                                @if($artist->artists[0]->township)
+                                <div class="col-md-4 mt-2">
+                                <label style="font-weight: bold">Vereda/Corregimiento:</label>
+                                <div class="m-scrollable" data-scrollable="true" style="">
+                                    <p>{{ $artist->artists[0]->beneficiary[0]->township}}</p>
+                                </div>
+                                </div>
+                                @endif
+                                <div class="col-md-4 mt-2">
+                                <label style="font-weight: bold">Teléfono:</label>
+                                <div class="m-scrollable" data-scrollable="true" style="">
+                                    <p>{{ $artist->artists[0]->beneficiary[0]->phone}}</p>
+                                </div>
+                                </div>
+                                <div class="col-md-4 mt-2">
+
+                                    <label style="font-weight: bold">{{ __('biografia') }}:</label>
+                                    <div class="m-scrollable" data-scrollable="true" style="">
+                                        <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->biography}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mt-2">
+                                    <label style="font-weight: bold">Documento de identificación:</label>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pdfidentificacionBeneficiario">
+                                        Ver documento de identidad
+                                      </button>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- modal documento benefifciario --}}
+
+                <div class="modal fade" id="pdfidentificacionBeneficiario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                Documento de {{ $artist->artists[0]->beneficiary[0]->name}}</h5>
+                            <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @if(!$artist->artists[0]->beneficiary[0]->pdf_documento)
+                            <p>No se cargo el documento correctamente</p>
+                        @else
+                            <div>
+                                <embed src="{{ $artist->artists[0]->beneficiary[0]->pdf_documento}}" frameborder="0" width="100%" height="400px">
+                                </div>
+                        @endif
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                @endif
+                {{-- mostrar integrantes de grupo --}}
+                @if( count($artist->artists[0]->teams) != 0)
+
+           <!--begin::Portlet-->
+               <div class="m-portlet m-portlet--full-height">
+                   <div class="m-portlet__head">
+                       <div class="m-portlet__head-caption">
+                           <div class="m-portlet__head-title">
+                               <h3 class="m-portlet__head-text">
+                                   Información de los integrantes
+                               </h3>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="m-portlet__body">
+
+                       <!--begin::Section-->
+                       <div class="m-accordion m-accordion--bordered m-accordion--solid" id="m_accordion_4" role="tablist">
+
+                           <!--begin::Item-->
+                           @foreach ($artist->artists[0]->teams as $team)
+                           <div class="m-accordion__item">
+                               <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_4_item_1_head" data-toggle="collapse" href="#m_accordion_4_item_{{ $loop->iteration }}" aria-expanded="    false">
+                                   <span class="m-accordion__item-icon">{{ $loop->iteration }}</span>
+                                   <span class="m-accordion__item-title">{{ $team->name }}</span>
+                                   <span class="m-accordion__item-mode"></span>
+                               </div>
+                               <div class="m-accordion__item-body collapse" id="m_accordion_4_item_{{ $loop->iteration }}" class=" " role="tabpanel" aria-labelledby="m_accordion_4_item_1_head" data-parent="#m_accordion_4">
+                                   <div class="m-accordion__item-content">
+                                    <div class="m-portlet__body ml-5">
+                                        <div class="row">
+
+
+                                    <div class="biografia col-md-12">
+                                    <div class="row">
+
+
+                                        <div class="col-md-4 mt-2">
+                                        <label style="font-weight: bold">Tipo identificación:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $team->document_type}}</p>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-4 mt-2">
+                                        <label style="font-weight: bold">Identificación:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $team->identification}}</p>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-4 mt-2">
+                                        <label style="font-weight: bold">Nombre:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $team->name}}</p>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-4 mt-2">
+                                        <label style="font-weight: bold">Apellidos:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $team->last_name}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label style="font-weight: bold">Direccion:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $team->addres}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label style="font-weight: bold">Fecha de nacimiento:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{  Carbon\Carbon::parse($team->birthday)->formatLocalized('%d de %B de %Y') }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label style="font-weight: bold">Lugar de expedición:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                          <p>{{ $team->expeditionPlace->descripcion}}</p>
+                                        </div>
+
+                             </div>
+
+
+                                        {{-- @if($artist->artists[0]->township)
+                                        <div class="col-md-4 mt-2">
+                                        <label style="font-weight: bold">Vereda/Corregimiento:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $artist->artists[0]->beneficiary[0]->township}}</p>
+                                        </div>
+                                        </div>
+                                        @endif --}}
+                                        <div class="col-md-4 mt-2">
+                                        <label style="font-weight: bold">Teléfono:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $team->phone1}}</p>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+                                        <label style="font-weight: bold">Teléfono:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $team->phone2}}</p>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+
+                                            <label style="font-weight: bold">Rol:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p style="text-align: justify">{{ $team->role}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mt-2">
+                                            <label style="font-weight: bold">Documento de identificación:</label>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pdfidentificacion{{$loop->iteration}}">
+                                                Ver documento de identidad
+                                              </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                    </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="modal fade" id="pdfidentificacion{{$loop->iteration}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        Documento de {{ $team->name}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @if(!$team->pdf_identificacion)
+                                        <p>No se cargo el documento correctamente</p>
+                                    @else
+                                    <div>
+                                        <embed src="{{ $team->pdf_identificacion }}" frameborder="0" width="100%" height="400px">
+                                        </div>
+                                     @endif
+                                </div>
+                                <div class="modal-footer">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                           @endforeach
+
+                       </div>
+
+                       <!--end::Section-->
+                   </div>
+               </div>
+
+
+               <!--end::Portlet-->
+           @endif
         <div class="row">
             <div class="col-xl-12 col-lg-8">
                 <div class="m-portlet m-portlet--full-height ">
@@ -197,14 +520,29 @@
                                                 class="m-badge m-badge--success m-badge--wide m-badge--rounded">{{ __('aprobado') }}</span>
                                         @elseif($project->status == 4)
                                             <span
-                                                class="m-badge m-badge--info m-badge--wide m-badge--rounded">{{ __('publicado') }}</span>
-                                        @else
+                                                class="m-badge m-badge--warning m-badge--wide m-badge--rounded">pendiente</span>
+                                        @elseif($project->status == 5)
                                             <span
                                                 class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('rechazado') }}</span>
+                                        @elseif($project->status == 6)
+                                        <span
+                                            class="m-badge m-badge--danger m-badge--wide m-badge--rounded">Nueva revision</span>
+                                       @elseif($project->status == 7)
+                                        <span
+                                            class="m-badge m-badge--danger m-badge--wide m-badge--rounded">aceptado</span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                        <h5 style="font-weight: bold">Autor:</h5>
+                                    </div>
+                                    <div class="form-group">
+
+                                            {{ $project->author }}
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-5">
                                     <div class="form-group">
                                         <h5 style="font-weight: bold">{{ __('genero') }}:</h5>
                                     </div>
@@ -214,42 +552,17 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 mt-5">
+
+                                <div class="col-md-12 mt-5">
 
                                     <div class="form-group">
                                         <h5 style="font-weight: bold">Descripción:</h5>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="text-align: justify">
 
                                             {{ $project->description }}
                                     </div>
                                 </div>
-                                <div class="col-md-6 mt-5">
-                                    <div class="form-group">
-                                        <h5 style="font-weight: bold">Autor:</h5>
-                                    </div>
-                                    <div class="form-group">
-
-                                            {{ $project->author }}
-                                    </div>
-                                </div>
-                                 @if( count($team->teams) != 0)
-                                 <div class="col-md-12 mt-5">
-                                 <div class="form-group">
-                                    <h5 style="font-weight: bold">{{ __('integrantes_del_grupo_o_orquesta') }}
-                                        :</h5>
-                                </div>
-                                <div class="form-group">
-                                    <button type="button" data-toggle="modal" data-target="#list_modal_team"
-                                            class="btn btn-brand m-btn m-btn--icon">
-                                        <span>
-                                            <i class="la la-users"></i>
-                                            <span>{{ __('mostrar') }}</span>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                            @endif
 
 
                                 <!-- ------------------------- ACCIONES SEGUN LOS ROLES----------------------------- -->
@@ -288,7 +601,7 @@
                             </div>
                         </div>
                         @if(\App\User::rating_proyect())
-                            <div id="show_assign_list_management" style="display: none">
+                            {{-- <div id="show_assign_list_management" style="display: none">
                                 <div class="m-portlet__head">
                                     <div class="m-portlet__head-caption">
                                         <div class="m-portlet__head-title">
@@ -307,7 +620,7 @@
                                                        id="table_assign_management">
                                                     <thead>
                                                     <tr>
-                                                        <th>Management</th>
+                                                        <th>Curador</th>
                                                         <th>{{ __('nombre') }}</th>
                                                         <th>{{ __('compañia') }}</th>
                                                         <th>{{ __('email') }}</th>
@@ -323,12 +636,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         @endif
                     </div>
                 </div>
             </div>
         </div>
+
+
 
 
 
@@ -339,34 +654,37 @@
     ======================================-->
 
 
-    <!-- MODAL, MOSTRAR EL EQUIPO DE ARTISTAS-->
-    <div class="modal fade" id="list_modal_team" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+
+
+    {{-- modal mostrar documento pdf padre --}}
+    <div class="modal fade" id="verpdfidentificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('management') }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-striped- table-bordered table-hover table-checkable" id="table_teams">
-                        <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Rol</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    {{-- <button type="button" class="btn btn-primary" id="btnSendMessage">{{ __('enviar') }}</button> --}}
-                </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    Documento de {{ $artist->artists[0]->nickname }}</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            @if(!$artist->artists[0]->users->pdf_cedula )
+                <p>No se cargo el documento correctamente</p>
+            @else
+                <div>
+                    <embed src="{{ $artist->artists[0]->users->pdf_cedula }}" frameborder="0" width="100%" height="400px">
+                    </div>
+            @endif
+            </div>
+            <div class="modal-footer">
+
             </div>
         </div>
     </div>
+</div>
+
 
 @stop
 

@@ -132,6 +132,10 @@ class DatabaseSeeder extends Seeder
           CREAMOS 10 MENORES DE EDAD Y LES ASIGNAMOS
         =============================================*/
         factory(\App\Beneficiary::class, 10)->create();
+         /*=============================================
+          CREAMOS 10 INTEGRANTES DE GRUPO
+        =============================================*/
+        factory(\App\Team::class, 10)->create();
 
         /*=============================================
           CREAMOS 10 CURADORES

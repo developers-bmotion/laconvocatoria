@@ -33,4 +33,12 @@ class Team extends Model
 
         return $this->hasOne(Project::class);
     }
+
+    public function artist(){
+        return $this->hasOne(Artist::class,'id');
+    }
+
+    public function expeditionPlace(){
+        return $this->belongsTo(City::class, 'expedition_place');
+    }
 }

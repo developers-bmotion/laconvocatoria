@@ -27,6 +27,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'phone_1' => '312 312312312',
         'password' => bcrypt('secret'), // secret
         'remember_token' => str_random(10),
+        'pdf_cedula' => '/storage/pdfidentificacion/prueba.pdf',
         'picture' => \Faker\Provider\Image::image(storage_path() . '/app/public/users', 200, 200, 'people', false)
     ];
 });
