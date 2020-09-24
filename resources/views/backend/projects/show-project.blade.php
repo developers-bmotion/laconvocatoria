@@ -601,7 +601,7 @@
                             </div>
                         </div>
                         @if(\App\User::rating_proyect())
-                            <div id="show_assign_list_management" style="display: none">
+                            {{-- <div id="show_assign_list_management" style="display: none">
                                 <div class="m-portlet__head">
                                     <div class="m-portlet__head-caption">
                                         <div class="m-portlet__head-title">
@@ -620,7 +620,7 @@
                                                        id="table_assign_management">
                                                     <thead>
                                                     <tr>
-                                                        <th>Management</th>
+                                                        <th>Curador</th>
                                                         <th>{{ __('nombre') }}</th>
                                                         <th>{{ __('compañia') }}</th>
                                                         <th>{{ __('email') }}</th>
@@ -636,7 +636,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         @endif
                     </div>
                 </div>

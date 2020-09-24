@@ -48,11 +48,11 @@
         @endif
     </div>
     @endif
-    @if($project->status == 2)
+    {{-- @if($project->status == 2)
         <!-- Rating Project -->
         <div class="form-group">
             <h5 style="font-weight: bold">{{ __('calificacion') }}:</h5>
-        </div>
+        </div> --}}
         {{-- <div class="form-group">
             <ul id="list_rating" class="list-inline" style="font-size: 20px">
                 <li class="list-inline-item star" data-number="1"><i
@@ -67,14 +67,18 @@
                         class="fa fa-star fa-1x {{$currentRaing==5?"yellow-rating":""}}"></i></li>
             </ul>
         </div> --}}
-    @endif
+    {{-- @endif --}}
     <!-- VER A QUIEN SE ASIGNO EL PROYECTO-->
-    @if( ($project->status !== 1 && $asignado !== 0))
+    {{-- @if( ($project->status !== 1 && $asignado !== 0))
     @if($project->status != 4)
-        <div class="form-group">
-            <h5 style="font-weight: bold">{{ __('asignado_a') }}:{{ $project->status }}</h5>
+    <div class="col-md-12 mt-5">
+        <div class="row">
+
+
+        <div class="form-group col-md-3">
+            <h5 style="font-weight: bold">{{ __('asignado_a') }}: </h5>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <button type="button" id="mostrar_managements_asignados" class="btn btn-danger m-btn m-btn--icon">
         <span>
             <i class="la la-users"></i>
@@ -83,8 +87,10 @@
             </button>
 
         </div>
+    </div>
+</div>
      @endif
-    @endif
+    @endif --}}
 @endif
 
 
