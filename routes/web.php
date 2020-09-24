@@ -132,6 +132,10 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::get('/artists','ArtistsController@index')->name('index.artists');
     Route::get('/artists-all-table','ArtistsController@table_all_artists')->name('all.artists.table');
 
+    /*=============================================
+       NUEVAS RUTAS PARA EL REGISTRO
+    =============================================*/
+    Route::get('/form-register','ProfileController@index')->name('form.register');
 
     //RUTAS PARA EL PERFIL
     //Perfil Artista

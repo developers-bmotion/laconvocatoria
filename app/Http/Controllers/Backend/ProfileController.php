@@ -37,6 +37,25 @@ class ProfileController extends Controller
         return view('backend.profile.profile-artist', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
 
+    /*=============================================
+        NUEVA RUTA PARA LOS FORMULARIOS DE REGISTRO PARA ASPIRANTES
+    =============================================*/
+    public function index()
+    {
+        /* $countries = Country::all(); */
+        /* $locactions = Location::all(); */
+        $documenttype = DocumentType::all();
+        $departamentos = Country::all();
+        $persontypes = PersonType::all();
+        $artisttypes = ArtistType::all();
+        $leveltypes = Level::all();
+
+
+        /*   dd($departamentos); */
+        $artist = Artist::where('user_id', auth()->user()->id)->with('users')->first();
+        return view('backend.register.register-form', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
+    }
+
     public function get_municipios($id)
     {
 
