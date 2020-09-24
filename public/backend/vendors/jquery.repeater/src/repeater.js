@@ -1,3 +1,4 @@
+
 $.fn.repeaterVal = function () {
     var parse = function (raw) {
         var parsed = [];
@@ -257,6 +258,7 @@ $.fn.repeater = function (fig) {
         }());
 
         var addItem = function (data) {
+            console.log('metosdds');
             var $item = $itemTemplate.clone();
             appendItem($item, data);
             if(fig.repeaters) {
@@ -269,8 +271,9 @@ $.fn.repeater = function (fig) {
             $items().remove();
             foreach(rows, addItem);
         };
-
+        
         $filterNested($self.find('[data-repeater-create]'), fig.repeaters).click(function () {
+            console.log('ingreso add');
             addItem();
         });
 

@@ -22,7 +22,8 @@ class AddProjectController extends Controller
     public function index (){
         $categories = Category::all();
         $artist_id = Artist::select('id')->where('user_id',auth()->user()->id)->first();
-        $artist = Artist::select('nickname','biography','level_id','country_id')
+        //$artist = Artist::select('nickname','biography','level_id','country_id')
+        $artist = Artist::select('nickname','biography','level_id')
             ->where('user_id', auth()->user()->id)->first();
             $question=Survey::with('question','question.answer')->get();
             $numProject=DB::table('artist_projects')->select('id')->where('artist_id', '=', $artist_id->id)->get();
