@@ -3,7 +3,6 @@
 
 {{ __("El artista :artist ha enviado una nueva canción: ", ['artist' => $artist]) }}
 ## {{ __(":project ", ['artist' => $artist, 'project' => $project->title]) }}
-<img class="img-responsive" src="{{ url($project->project_picture) }}" alt="{{ $project->title }}">
 
 @component('mail::button', ['url' => route('show.backend.project', $project->slug)])
  {{ __('Ir a la canción') }}

@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="m-card-profile__details">
                                         <span
-                                            class="m-card-profile__name">{{ $artist->artists[0]->nickname }}</span>
+                                            class="m-card-profile__name">{{ $artist->artists[0]->users->name }} {{ $artist->artists[0]->users->last_name }}</span>
 
                                         <a href="" class="m-card-profile__email m-link"
                                            style="margin-left: -15px; width: 80%; word-wrap: break-word;">{{ $artist->artists[0]->users->email }}</a>
@@ -480,26 +480,12 @@
                         <div class="m-section">
                             <div class="row">
                                 <div class="col-xs-5 col-lg-3 ml-5">
-                                     <!-- prettier-ignore -->
-                                       <!-- jquery_jplayer_1 is the id here -->
-                                        <div id="jquery_jplayer_1" class="cp-jplayer"></div>
-                                        <!-- paste the lines below as it is, it will be required by the circle player -->
-                                        <div id="cp_container_1" class="cp-container">
-                                                    <div class="cp-buffer-holder">
-                                                        <div class="cp-buffer-1"></div>
-                                                        <div class="cp-buffer-2"></div>
-                                                    </div>
-                                                    <div class="cp-progress-holder">
-                                                        <div class="cp-progress-1"></div>
-                                                        <div class="cp-progress-2"></div>
-                                                    </div>
-                                                    <div class="cp-circle-control"></div>
-                                                    <ul class="cp-controls">
-                                                        <li><a class="cp-play" tabindex="1">play</a></li>
-                                                        <li><a class="cp-pause" style="display:none;" tabindex="1">pause</a></li>
-                                                    </ul>
-                                        </div>
+                                    {{-- reproductor --}}
 
+
+                                    <audio preload="auto" controls>
+                                        <source src="{{ $project->audio }}">
+                            </audio>
                                 </div>
                                 <div class="col-xs-4 col-lg-6">
                                     <div class="row mt-2">
@@ -701,18 +687,9 @@
         $(document).ready(function () {
 
             $('[data-toggle="tooltip"]').tooltip();
-            var myCirclePlayer = new CirclePlayer("#jquery_jplayer_1",
-              {
-
-                mp3:@json($project->audio),
-              }, {
-        cssSelectorAncestor: "#cp_container_1",
-        swfPath: "js",
-        wmode: "window",
-        supplied: "mp3",
-        keyEnabled: true
-      });
-      console.log('boject',myCirclePlayer);
+            $(function() {
+				$('audio').audioPlayer();
+			});
 
         });
 

@@ -5,132 +5,140 @@
             id="m_aside_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
     <div id="m_header_menu"
          class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark ">
-         @if(\App\User::navigation() !== "Subsanador")
-        <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
-            <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click"
-                m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle"
-                                                                 title="Non functional dummy link"><i
-                        class="m-menu__link-icon la la-desktop"></i><span
-                        class="m-menu__link-text">{{ __('ir_web') }}</span><i
-                        class="m-menu__hor-arrow la la-angle-down"></i><i
-                        class="m-menu__ver-arrow la la-angle-right"></i></a>
-                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span
-                        class="m-menu__arrow m-menu__arrow--adjust"></span>
-                    <ul class="m-menu__subnav">
-                        <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('home') }}"
-                                                                          class="m-menu__link "><i
-                                    class="m-menu__link-icon la la-home"></i><span
-                                    class="m-menu__link-text">{{ __('inicio') }}</span></a>
-                        </li>
-                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                href="{{ route('projects') }}" class="m-menu__link "><i
-                                    class="m-menu__link-icon la la-share-alt"></i><span
-                                    class="m-menu__link-title"> <span
-                                        class="m-menu__link-wrap">
+        @if(\App\User::navigation() !== "Subsanador")
+            <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
+               {{-- <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click"
+                    m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;"
+                                                                     class="m-menu__link m-menu__toggle"
+                                                                     title="Non functional dummy link"><i
+                            class="m-menu__link-icon la la-desktop"></i><span
+                            class="m-menu__link-text">{{ __('ir_web') }}</span><i
+                            class="m-menu__hor-arrow la la-angle-down"></i><i
+                            class="m-menu__ver-arrow la la-angle-right"></i></a>
+                    <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span
+                            class="m-menu__arrow m-menu__arrow--adjust"></span>
+                        <ul class="m-menu__subnav">
+                            <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('home') }}"
+                                                                              class="m-menu__link "><i
+                                        class="m-menu__link-icon la la-home"></i><span
+                                        class="m-menu__link-text">{{ __('inicio') }}</span></a>
+                            </li>
+                            <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                    href="{{ route('projects') }}" class="m-menu__link "><i
+                                        class="m-menu__link-icon la la-share-alt"></i><span
+                                        class="m-menu__link-title"> <span
+                                            class="m-menu__link-wrap">
 																<span
                                                                     class="m-menu__link-text">{{ __('proyectos') }}</span> <span
-                                            class="m-menu__link-badge"><span
-                                                class="m-badge m-badge--success">2</span></span> </span></span></a>
-                        </li>
-                        {{--<li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover"
-                            m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;"
-                                                                             class="m-menu__link m-menu__toggle"
-                                                                             title="Non functional dummy link"><i
-                                        class="m-menu__link-icon flaticon-business"></i><span
-                                        class="m-menu__link-text">Manage Orders</span><i
-                                        class="m-menu__hor-arrow la la-angle-right"></i><i
-                                        class="m-menu__ver-arrow la la-angle-right"></i></a>
-                            <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right"><span
-                                        class="m-menu__arrow "></span>
-                                <ul class="m-menu__subnav">
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Latest Orders</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Pending Orders</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Processed Orders</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Delivery Reports</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Payments</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Customers</span></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover"
-                            m-menu-link-redirect="1" aria-haspopup="true"><a href="#"
-                                                                             class="m-menu__link m-menu__toggle"><i
-                                        class="m-menu__link-icon flaticon-chat-1"></i><span class="m-menu__link-text">Customer
-															Feedbacks</span><i
-                                        class="m-menu__hor-arrow la la-angle-right"></i><i
-                                        class="m-menu__ver-arrow la la-angle-right"></i></a>
-                            <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right"><span
-                                        class="m-menu__arrow "></span>
-                                <ul class="m-menu__subnav">
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Customer Feedbacks</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Supplier Feedbacks</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Reviewed Feedbacks</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Resolved Feedbacks</span></a></li>
-                                    <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                                href="header/actions.html" class="m-menu__link "><span
-                                                    class="m-menu__link-text">Feedback Reports</span></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
-                                    href="header/actions.html" class="m-menu__link "><i
-                                        class="m-menu__link-icon flaticon-users"></i><span class="m-menu__link-text">Register Member</span></a>
-                        </li>--}}
-                    </ul>
-                </div>
-            </li>
-            @if(auth()->user()->roles[0]->rol == "Artist")
-            <li class="m-menu__item ">
-                <a href="{{ route('add.project') }}" class="m-menu__link"><i
-                        class="m-menu__link-icon la la-plus-circle"></i><span
-                        class="m-menu__link-text">{{ __('nuevo_proyecto') }}</span>
-                </a>
-            </li>
-            @endif
-        </ul>
+                                                class="m-menu__link-badge"><span
+                                                    class="m-badge m-badge--success">2</span></span> </span></span></a>
+                            </li>
+                            --}}{{--<li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover"
+                                m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;"
+                                                                                 class="m-menu__link m-menu__toggle"
+                                                                                 title="Non functional dummy link"><i
+                                            class="m-menu__link-icon flaticon-business"></i><span
+                                            class="m-menu__link-text">Manage Orders</span><i
+                                            class="m-menu__hor-arrow la la-angle-right"></i><i
+                                            class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right"><span
+                                            class="m-menu__arrow "></span>
+                                    <ul class="m-menu__subnav">
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Latest Orders</span></a></li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Pending Orders</span></a></li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Processed Orders</span></a></li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Delivery Reports</span></a></li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Payments</span></a></li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Customers</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="m-menu__item  m-menu__item--submenu" m-menu-submenu-toggle="hover"
+                                m-menu-link-redirect="1" aria-haspopup="true"><a href="#"
+                                                                                 class="m-menu__link m-menu__toggle"><i
+                                            class="m-menu__link-icon flaticon-chat-1"></i><span class="m-menu__link-text">Customer
+                                                                Feedbacks</span><i
+                                            class="m-menu__hor-arrow la la-angle-right"></i><i
+                                            class="m-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--right"><span
+                                            class="m-menu__arrow "></span>
+                                    <ul class="m-menu__subnav">
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Customer Feedbacks</span></a></li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Supplier Feedbacks</span></a></li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Reviewed Feedbacks</span></a></li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Resolved Feedbacks</span></a></li>
+                                        <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                                    href="header/actions.html" class="m-menu__link "><span
+                                                        class="m-menu__link-text">Feedback Reports</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="m-menu__item " m-menu-link-redirect="1" aria-haspopup="true"><a
+                                        href="header/actions.html" class="m-menu__link "><i
+                                            class="m-menu__link-icon flaticon-users"></i><span class="m-menu__link-text">Register Member</span></a>
+                            </li>--}}{{--
+                        </ul>
+                    </div>
+                </li>--}}
+                @if(auth()->user()->roles[0]->rol == "Artist")
+                    <li class="m-menu__item ">
+                        <a href="{{ route('add.project') }}" class="m-menu__link"><i
+                                class="m-menu__link-icon la la-music"></i><span
+                                class="m-menu__link-text">Subir tu canción</span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item ">
+                        <a href="{{ route('profile.artist') }}" class="m-menu__link"><i
+                                class="m-menu__link-icon la la-user"></i><span
+                                class="m-menu__link-text">Ir a tu perfil</span>
+                        </a>
+                    </li>
+                @endif
+            </ul>
         @endif
         @if(\App\User::navigation() === "Subsanador")
-        <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
-            <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click"
-                m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle"
-                                                                 title="Non functional dummy link"><i
-                        class="m-menu__link-icon la la-desktop"></i><span
-                        class="m-menu__link-text">{{ __('ir_web') }}</span><i
-                        class="m-menu__hor-arrow la la-angle-down"></i><i
-                        class="m-menu__ver-arrow la la-angle-right"></i></a>
-                <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span
-                        class="m-menu__arrow m-menu__arrow--adjust"></span>
-                    <ul class="m-menu__subnav">
-                        <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('home') }}/dashboard"
-                                                                          class="m-menu__link "><i
-                                    class="m-menu__link-icon la la-home"></i><span
-                                    class="m-menu__link-text">{{ __('inicio') }}</span></a>
-                        </li>
+            <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
+                <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click"
+                    m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;"
+                                                                     class="m-menu__link m-menu__toggle"
+                                                                     title="Non functional dummy link"><i
+                            class="m-menu__link-icon la la-desktop"></i><span
+                            class="m-menu__link-text">{{ __('ir_web') }}</span><i
+                            class="m-menu__hor-arrow la la-angle-down"></i><i
+                            class="m-menu__ver-arrow la la-angle-right"></i></a>
+                    <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span
+                            class="m-menu__arrow m-menu__arrow--adjust"></span>
+                        <ul class="m-menu__subnav">
+                            <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('home') }}/dashboard"
+                                                                              class="m-menu__link "><i
+                                        class="m-menu__link-icon la la-home"></i><span
+                                        class="m-menu__link-text">{{ __('inicio') }}</span></a>
+                            </li>
 
-                    </ul>
-                </div>
-            </li>
-        </ul>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
         @endif
     </div>
 
@@ -140,59 +148,62 @@
     <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general m-stack--fluid">
         <div class="m-stack__item m-topbar__nav-wrapper">
             <ul class="m-topbar__nav m-nav m-nav--inline">
-{{--
-                <li class="m-nav__item m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width m-dropdown--skin-light	m-list-search m-list-search--skin-light"
-                    m-dropdown-toggle="click" id="m_quicksearch"
-                    m-quicksearch-mode="dropdown" m-dropdown-persistent="1">
-                    <a href="#" class="m-nav__link m-dropdown__toggle">
-                        <span class="m-nav__link-icon"><i class="flaticon-search-1"></i></span>
-                    </a>
-                    <div class="m-dropdown__wrapper">
-                        <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
-                        <div class="m-dropdown__inner ">
-                            <div class="m-dropdown__header">
-                                <form class="m-list-search__form">
-                                    <div class="m-list-search__form-wrapper">
-																<span class="m-list-search__form-input-wrapper">
-																	<input id="m_quicksearch_input"
-                                                                           autocomplete="off"
-                                                                           type="text" name="q"
-                                                                           class="m-list-search__form-input"
-                                                                           value=""
-                                                                           placeholder="Search...">
-																</span>
-                                        <span class="m-list-search__form-icon-close" id="m_quicksearch_close">
-																	<i class="la la-remove"></i>
-																</span>
+                {{--
+                                <li class="m-nav__item m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width m-dropdown--skin-light	m-list-search m-list-search--skin-light"
+                                    m-dropdown-toggle="click" id="m_quicksearch"
+                                    m-quicksearch-mode="dropdown" m-dropdown-persistent="1">
+                                    <a href="#" class="m-nav__link m-dropdown__toggle">
+                                        <span class="m-nav__link-icon"><i class="flaticon-search-1"></i></span>
+                                    </a>
+                                    <div class="m-dropdown__wrapper">
+                                        <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
+                                        <div class="m-dropdown__inner ">
+                                            <div class="m-dropdown__header">
+                                                <form class="m-list-search__form">
+                                                    <div class="m-list-search__form-wrapper">
+                                                                                <span class="m-list-search__form-input-wrapper">
+                                                                                    <input id="m_quicksearch_input"
+                                                                                           autocomplete="off"
+                                                                                           type="text" name="q"
+                                                                                           class="m-list-search__form-input"
+                                                                                           value=""
+                                                                                           placeholder="Search...">
+                                                                                </span>
+                                                        <span class="m-list-search__form-icon-close" id="m_quicksearch_close">
+                                                                                    <i class="la la-remove"></i>
+                                                                                </span>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="m-dropdown__body">
+                                                <div class="m-dropdown__scrollable m-scrollable" data-scrollable="true"
+                                                     data-height="300" data-mobile-height="200">
+                                                    <div class="m-dropdown__content">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="m-dropdown__body">
-                                <div class="m-dropdown__scrollable m-scrollable" data-scrollable="true"
-                                     data-height="300" data-mobile-height="200">
-                                    <div class="m-dropdown__content">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
---}}
-                <li
+                                </li>
+                --}}
+               {{-- <li
                     class="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width"
                     m-dropdown-toggle="click"
                     m-dropdown-persistent="1"
                     id="notificationContainer"
                 >
-                    <notification-component notificationsjson="{{Auth::user()->unreadNotifications}}"></notification-component>
-                </li>
+                    <notification-component
+                        notificationsjson="{{Auth::user()->unreadNotifications}}"></notification-component>
+                </li>--}}
+{{--
                 <li class="m-nav__item m-topbar__quick-actions m-topbar__quick-actions--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push m-dropdown--mobile-full-width m-dropdown--skin-light"
                     m-dropdown-toggle="click">
                     <a href="#" class="m-nav__link m-dropdown__toggle">
                         <span class="m-nav__link-badge m-badge m-badge--dot m-badge--info m--hide"></span>
                         <span class="m-nav__link-icon"><i class="flaticon-share"></i></span>
                     </a>
-                    {{--<div class="m-dropdown__wrapper">
+                    --}}
+{{--<div class="m-dropdown__wrapper">
                         <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
                         <div class="m-dropdown__inner">
                             <div class="m-dropdown__header m--align-center"
@@ -229,8 +240,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>--}}
+                    </div>--}}{{--
+
                 </li>
+--}}
+{{--
                 <li class="m-nav__item m-topbar__languages m-dropdown m-dropdown--small m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-right m-dropdown--mobile-full-width"
                     m-dropdown-toggle="click">
                     <a href="#" class="m-nav__link m-dropdown__toggle">
@@ -272,6 +286,7 @@
                         </div>
                     </div>
                 </li>
+--}}
                 <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
                     m-dropdown-toggle="click">
                     <a href="#" class="m-nav__link m-dropdown__toggle">
@@ -324,7 +339,8 @@
                                         </li>
                                         <li class="m-nav__item">
                                             @if(auth()->user()->roles[0]->rol == "Admin")
-                                                <a href="{{ route('profile.admin',auth()->user()->slug) }}" class="m-nav__link">
+                                                <a href="{{ route('profile.admin',auth()->user()->slug) }}"
+                                                   class="m-nav__link">
                                                     @elseif(auth()->user()->roles[0]->rol == "Manage")
                                                         <a href="{{ route('profile.managament',auth()->user()->slug) }}"
                                                            class="m-nav__link">
@@ -335,14 +351,14 @@
                                                                     <i class="m-nav__link-icon flaticon-profile-1"></i>
                                                                     <span class="m-nav__link-title">
 																			<span class="m-nav__link-wrap">
-																				<span class="m-nav__link-text">My Profile</span>
+																				<span class="m-nav__link-text">Perfil</span>
 																				<span class="m-nav__link-badge"><span
                                                                                         class="m-badge m-badge--success">2</span></span>
 																			</span>
 																		</span>
                                                                 </a>
                                         </li>
-                                        {{--<li class="m-nav__item">
+                                        {{-- <li class="m-nav__item">
                                             <a href="header/profile.html" class="m-nav__link">
                                                 <i class="m-nav__link-icon flaticon-share"></i>
                                                 <span class="m-nav__link-text">Activity</span>
@@ -367,7 +383,7 @@
                                                 <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                                                 <span class="m-nav__link-text">Support</span>
                                             </a>
-                                        </li>--}}
+                                        </li> --}}
                                         <li class="m-nav__separator m-nav__separator--fit">
                                         </li>
                                         <li class="m-nav__item">
@@ -383,13 +399,14 @@
                         </div>
                     </div>
                 </li>
-                <li id="m_quick_sidebar_toggle" class="m-nav__item">
-                    <a href="#" class="m-nav__link m-dropdown__toggle">
-                        <span class="m-nav__link-icon"><i class="flaticon-grid-menu"></i></span>
-                    </a>
-                </li>
+{{--                <li id="m_quick_sidebar_toggle" class="m-nav__item">--}}
+{{--                    <a href="#" class="m-nav__link m-dropdown__toggle">--}}
+{{--                        <span class="m-nav__link-icon"><i class="flaticon-grid-menu"></i></span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             </ul>
         </div>
+    </div>
     </div>
 
     <!-- END: Topbar -->

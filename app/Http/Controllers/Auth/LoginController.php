@@ -47,33 +47,43 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function redirectTo(){
+    public function redirectTo()
+    {
         return redirect('/login');
     }
 
-    public function index(){
+    public function index()
+    {
         return redirect('/login');
     }
 
     public function authenticated(Request $request)
     {
 
-        $users = User::where('id',\Auth::user()->id)->with(['roles'])->first();
-        $rol = array_pluck($users->roles,'rol');
-        if (in_array('Admin',$rol) || in_array('Manage',$rol)|| in_array('Subsanador',$rol)){
+        $users = User::where('id', \Auth::user()->id)->with(['roles'])->first();
+        $rol = array_pluck($users->roles, 'rol');
+        if (in_array('Admin', $rol) || in_array('Manage', $rol) || in_array('Subsanador', $rol)) {
 
-            if ($request->input("json") === "true"){
+            if ($request->input("json") === "true") {
                 return "/dashboard";
             }
 
             return redirect('/dashboard');
-        }else{
+        } else {
 
-            if ($request->input("json") === "true"){
+            if ($request->input("json") === "true") {
+                dd('hola');
                 return "/dashboard/form-register";
             }
 
-            return redirect('/dashboard/form-register');
+            $artist = Artist::where('user_id', auth()->user()->id)->first();
+
+            if ($artist->documentType == null ) {
+                return redirect('/dashboard/form-register');
+            } else {
+                return redirect('/dashboard/profile');
+            }
+
         }
     }
 
@@ -94,6 +104,7 @@ class LoginController extends Controller
     {
         return Socialite::driver($driver)->redirect();
     }
+
     /*=============================================
     HANDLEPROVIDERCALLBACK ES LA FUNCION QUE RECIBE LOS DATOS QUE ENVIA LA RED SOCIAL
     =============================================*/
@@ -118,24 +129,24 @@ class LoginController extends Controller
             \DB::beginTransaction();
 
             try {   //si $check es igual a null, procedemos a registrar al usuario
-                    $user = User::create([
-                        'name' => $socialUser->name,
-                        'email' => $email,
-                        'picture' => $socialUser->avatar
-                    ]);
-                    //a este usuario le asignamos los roles, Artista y Patrocinador
-                    $user->roles()->attach(['2', '3']);
-                    //Almacenamos en la base de datos el proveedor de red social con el cual el usuario ha hecho login
-                    UserSocialAccount::create([
-                        'user_id' => $user->id,
-                        'provider' => $driver,
-                        'provider_uid' => $socialUser->id,
-                    ]);
-                    //Registro del artista
-                    Artist::create([
-                        'user_id' => $user->id,
-                    ]);
-            //Si algo del proceso sale mal, pasamos por el catch, con rollback() desacemos cualquier transaccion en la base de datos
+                $user = User::create([
+                    'name' => $socialUser->name,
+                    'email' => $email,
+                    'picture' => $socialUser->avatar
+                ]);
+                //a este usuario le asignamos los roles, Artista y Patrocinador
+                $user->roles()->attach(['2', '3']);
+                //Almacenamos en la base de datos el proveedor de red social con el cual el usuario ha hecho login
+                UserSocialAccount::create([
+                    'user_id' => $user->id,
+                    'provider' => $driver,
+                    'provider_uid' => $socialUser->id,
+                ]);
+                //Registro del artista
+                Artist::create([
+                    'user_id' => $user->id,
+                ]);
+                //Si algo del proceso sale mal, pasamos por el catch, con rollback() desacemos cualquier transaccion en la base de datos
             } catch (\Exception $exception) {
                 $success = $exception->getMessage();
                 \DB::rollBack();
@@ -145,9 +156,9 @@ class LoginController extends Controller
         //Si es el proceso ha salido bien, iniciamos sesion al sistema
         if ($success === true) {
 
-                \DB::commit();
-                auth()->loginUsingId($user->id);
-                return redirect(route('home'));
+            \DB::commit();
+            auth()->loginUsingId($user->id);
+            return redirect(route('home'));
         }
         //Si el proceso no fue culminado con exito, error al iniciar sesion
         session()->flash('message', ['danger', $success]);

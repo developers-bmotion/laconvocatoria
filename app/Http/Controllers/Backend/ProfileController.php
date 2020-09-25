@@ -33,7 +33,7 @@ class ProfileController extends Controller
 
 
         /*   dd($departamentos); */
-        $artist = Artist::where('user_id', auth()->user()->id)->with('users')->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->with('users','teams','artistType','personType','beneficiary.documentType','beneficiary.city','beneficiary.expeditionPlace','teams.expeditionPlace')->first();
         return view('backend.profile.profile-artist', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
 

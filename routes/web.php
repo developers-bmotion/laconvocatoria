@@ -159,12 +159,13 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::post('/update-password-artist','ProfileController@update_password')->name('update.password.artist');
     //Proyectos del Artista
     Route::get('/my-projects','MyProjectsController@index_artist')->name('myprojects.artist');
+    Route::get('/config-profile-artist','MyProjectsController@config_profile_artist')->name('config.profile.artist');
     //Apoyos hechos
     Route::get('/backings-made','BackingsMadeController@index_artist')->name('backings.made.artist');
 
     //RUTAS PARA AGREGAR PROYECTOS
     Route::get('/new-project','AddProjectController@index')->name('add.project');
-    Route::post('/add-project-imagen','AddProjectController@upload_image')->name('add.project.image');
+    Route::post('/add-project-audio','AddProjectController@upload_image')->name('add.project.audio');
     Route::post('/add-project','AddProjectController@store')->name('add.store.project');
     Route::get('/categories_by_id/{id_category}' , 'AddProjectController@categoryById');
 
