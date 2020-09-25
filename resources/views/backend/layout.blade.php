@@ -230,35 +230,19 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
                 <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
                         <span class="m-footer__copyright">
-                            2019 &copy; Crowdfunding by <a href="" class="m-link">Crowdfunding</a>
+                            <span class="font-weight-bold">{{ config('app.name') }} </span> &copy; 2020 Powered by <a href="https://bmotion.co" class="m-link">Bmotion SAS </a> Todos los derechos reservados
                         </span>
                 </div>
                 <div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
                     <ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
                         <li class="m-nav__item">
                             <a href="#" class="m-nav__link">
-                                <span class="m-nav__link-text">{{ __('nosotros') }}</span>
+                                <span class="m-nav__link-text">Términos y Condiciones</span>
                             </a>
                         </li>
                         <li class="m-nav__item">
                             <a href="#" class="m-nav__link">
-                                <span class="m-nav__link-text">{{ __('privacidad') }}</span>
-                            </a>
-                        </li>
-                        <li class="m-nav__item">
-                            <a href="#" class="m-nav__link">
-                                <span class="m-nav__link-text">{{ __('documentacion') }}</span>
-                            </a>
-                        </li>
-                        <li class="m-nav__item">
-                            <a href="#" class="m-nav__link">
-                                <span class="m-nav__link-text">{{ __('ayuda') }}</span>
-                            </a>
-                        </li>
-                        <li class="m-nav__item m-nav__item">
-                            <a href="#" class="m-nav__link" data-toggle="m-tooltip" title="{{ __('soporte') }}"
-                               data-placement="left">
-                                <i class="m-nav__link-icon flaticon-info m--icon-font-size-lg3"></i>
+                                <span class="m-nav__link-text">Política de Privacidad</span>
                             </a>
                         </li>
                     </ul>
