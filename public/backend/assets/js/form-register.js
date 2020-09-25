@@ -94,10 +94,15 @@ function showInfoGroup() {
 
 /*  funciones para agragar un nuevo integrante  */
 var maxMember = 12;
+var currentMembers = 0;
 
-$("#event-add-max-members").click( function() {
+$("#event-add-max-members").click( function() {    
+    let members = parseInt( $("#input-max-members").val() );   
+
+    if (currentMembers === members) return; // si el valor no cambia se retorna
+
+    currentMembers = members;
     $("#m_section_1_content").empty(); // vaciar la vista
-    let members = parseInt( $("#input-max-members").val() )
     
     if (members > maxMember) { // validar el numero de integrantes maximo 12
         $("#help-max-members").show();
@@ -120,7 +125,7 @@ function addViewMembers(members) {
                         </div>
                         <div class="m-accordion__item-body collapse" id="section_members_body_${members}" role="tabpanel" aria-labelledby="section_members_head_${members}" data-parent="#m_section_1_content">
                             <div class="m-accordion__item-content">
-                                ${ addViewFormMembers() }                             
+                                ${ addViewFormMembers(members) }                             
                             </div>                                                      
                         </div>                        
                     </div>`;
@@ -128,26 +133,26 @@ function addViewMembers(members) {
     $("#m_section_1_content").append(newItem);  
 }
 
-function addViewFormMembers() {
+function addViewFormMembers(member) {
     return `<div class="m-form__section m-form__section--first">
                 <div class="m-form__heading">
                     <h3 class="m-form__heading-title">Información personal</h3>
                 </div>
 
                 <!-- NOMBRES Y APELLIDOS -->
-                ${ addViewNameMembers() }                
+                ${ addViewNameMembers(member) }                
 
                 <!-- SEGUNDO APELLIDO Y TÉLEFONO -->
-                ${ addViewPhoneMembers() }
+                ${ addViewPhoneMembers(member) }
 
                 <!-- TIPO DE DOCUMENTO Y Nº IDENTIFICACIÓN -->
-                ${ addViewIdentificationMembers() }
+                ${ addViewIdentificationMembers(member) }
 
                 <!-- DEPARTAMENTO EXPED Y MUNICIPIO DE EXPEDI -->
-                ${ addViewLocationMembers() }
+                ${ addViewLocationMembers(member, true) }
 
                 <!-- CARGAR DOCUMENTO -->
-                ${ addViewUploadArchiveMember() }
+                ${ addViewUploadArchiveMember(member) }
 
                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
@@ -159,12 +164,12 @@ function addViewFormMembers() {
                         </h3>
                     </div>
 
-                    ${ addViewLocationMembers() }
+                    ${ addViewLocationMembers(member, false) }
 
                     <div class="form-group m-form__group row">
                         <div class="col-lg-6 m-form__group-sub">
                             <label class="form-control-label">Dirección de residencia *</label>
-                            <input type="text" name="adress" class="form-control m-input" placeholder="" value="">
+                            <input type="text" name="integrantes['address_member']" class="form-control m-input" placeholder="" value="">
                             <span class="m-form__help">Por favor ingrese dirección de residencia</span>
                         </div>
                     </div>
@@ -173,27 +178,27 @@ function addViewFormMembers() {
             </div>`;
 }
 
-function addViewNameMembers() {  /* NOMBRES Y APELLIDOS */
+function addViewNameMembers(member) {  /* NOMBRES Y APELLIDOS */
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Nombre *</label>
-                    <input type="text" name="name"class="form-control m-input" placeholder="" value="">
+                    <input type="text" name="integrantes['name_member']"class="form-control m-input" placeholder="" value="">
                     <span class="m-form__help">Por favor ingrese su nombre completo</span>
                 </div>
 
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Primer apellido *</label>
-                    <input type="text" name="lastname" class="form-control m-input" placeholder="" value="">
+                    <input type="text" name="integrantes['lastname_member']" class="form-control m-input" placeholder="" value="">
                     <span class="m-form__help">Por favor ingrese su primer apellido</span>
                 </div>
             </div>`;
 }
-// @json() para traer variables del blade a javascript
-function addViewPhoneMembers() { /* SEGUNDO APELLIDO Y TÉLEFONO */
+
+function addViewPhoneMembers(member) { /* SEGUNDO APELLIDO Y TÉLEFONO */
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Segundo apellido *</label>
-                    <input type="text" name="second_last_name" class="form-control m-input" placeholder="" value="">
+                    <input type="text" name="integrantes['second_lastname_member']" class="form-control m-input" placeholder="" value="">
                     <span class="m-form__help">Por favor ingrese su segundo apellido</span>
                 </div>
 
@@ -203,61 +208,64 @@ function addViewPhoneMembers() { /* SEGUNDO APELLIDO Y TÉLEFONO */
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="la la-phone"></i></span>
                         </div>
-                        <input type="text" name="phone_1" class="form-control m-input" placeholder="" value="">
+                        <input type="text" name="phone_member_${ member }" class="form-control m-input" placeholder="" value="">
                     </div>
                     <span class="m-form__help">Por favor ingrese su número de teléfono</span>
                 </div>
             </div>`;
 }
 
-function addViewIdentificationMembers() { /* TIPO DE DOCUMENTO Y Nº IDENTIFICACIÓN */
+function addViewIdentificationMembers(member) { /* TIPO DE DOCUMENTO Y Nº IDENTIFICACIÓN */
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Tipo de documento *</label>                        
-                    <select name="document_type" class="form-control m-input">
-                        <option value="">Select</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                    <select name="integrantes['document_type_member']" class="form-control m-input">
+                        ${ typeDocument.map( obj => { return `<option value="${ obj.id }">${ obj.document }</option>` } ).join(' ') }
                     </select>
                     <span class="m-form__help">Por favor seleccione una opción.</span>
                 </div>
 
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Nº de indentificación *</label>
-                    <input type="num" name="identificacion" class="form-control m-input" placeholder="" value="">                        
+                    <input type="num" name="integrantes['identification_member']" class="form-control m-input" placeholder="" value="">                        
                     <span class="m-form__help">Por favor ingrese el número de indentificación</span>
                 </div>
             </div> `;
 }
 
-function addViewLocationMembers() { /* DEPARTAMENTO EXPED Y MUNICIPIO DE EXPEDI */
+function addViewLocationMembers(member, tipo) { /* DEPARTAMENTO EXPED Y MUNICIPIO DE EXPEDI */
+    let tipoSelect = (tipo) ? 'expedición' : 'nacimiento';
+
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
-                    <label class="form-control-label">Departamento de expedición *</label>
-                    <select name="document_type" class="form-control m-input">
-                        <option value="">Select</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                    <label class="form-control-label">Departamento de ${ tipoSelect } *</label>
+                    <select onchange="eventOnChangeDepartamentos(this, ${ tipo }, ${ member })" id="select-control-departamentos-${ tipo }-${ member }" 
+                        name="integrantes['departamento_${ tipoSelect }_member']" class="form-control m-input">
+                        <option value="-1">Seleccione departamento</option>
+                        ${ departamentos.map( dep => { return `<option value="${ dep.id }">${ dep.descripcion }</option>`; } ).join(' ') }
                     </select>
                     <span class="m-form__help">Por favor seleccione una opción.</span>
                 </div>
 
                 <div class="col-lg-6 m-form__group-sub">
-                    <label class="form-control-label">Municipio de expedición *</label>
-                    <select name="document_type" class="form-control m-input">
-                        <option value="">Select</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
+                    <label class="form-control-label">Municipio de ${ tipoSelect } *</label>
+                    <select id="select-control-municipio-${ tipo }-${ member }" name="integrantes['municipio_${ tipoSelect }_member']" class="form-control m-input"></select>
                     <span class="m-form__help">Por favor seleccione una opción.</span>
                 </div>
             </div> `;
 }
 
-function addViewUploadArchiveMember() {
+/* funcion para cargar los municipio con el id del departamento */
+function eventOnChangeDepartamentos(element, tipo, member) {
+    // AJAX
+    $.get('/dashboard/get-municipios/' + $(element).val(), function(data) {
+        var html_select = '<option value="-1">Seleccione una opción</option>'
+        html_select += data.map( municipio => { return `<option value="${ municipio.id }">${ municipio.descripcion }</option>`; } ).join(' ');        
+        $( `#select-control-municipio-${ tipo }-${ member }` ).html(html_select);  
+    });
+}
+
+function addViewUploadArchiveMember(member) {
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
                     <label for="">Pdf Cédula</label>

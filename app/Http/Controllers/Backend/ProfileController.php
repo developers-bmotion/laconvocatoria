@@ -66,6 +66,7 @@ class ProfileController extends Controller
     public function profile_update_artist(Request $request, $id_artis)
     {
 
+        dd('llego');
         /*  $project_exist = Artist::where('user_id', auth()->user()->id)->with('projects')->first(); */
         //Actualizar en la tabla Artist
         //Validaciones
