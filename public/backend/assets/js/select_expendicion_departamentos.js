@@ -2,10 +2,8 @@ $(function() {
     /*=============================================
     SELECCIONAR DEPARTAMENTOS PAR TRAER CIUDADES
     =============================================*/
-    $('.expedi_departamentos').on('change', onSelectDepartamentosChange); //Departamentos para el representante
+    $('.expedi_departamentos').on('change', onSelectDepartamentosChange); //Departamentos para el representante    
     $('.expedi_departamentos_menor').on('change', onSelectDepartamentosMenorChange); //Departamentos para el menor edad
-
-
 
     $('.expid_municipios').on('change', onSelectMunicipiosChange);
 });
@@ -13,28 +11,25 @@ $(function() {
 /*=============================================
    TRAER TODAS LAS CIUDADES PARA EL REPRESENTANTE
 =============================================*/
-
 function onSelectDepartamentosChange() {
     var depart_id = $(this).val();
     // AJAX
     $.get('/dashboard/get-municipios/' + depart_id, function(data) {
-
-        var html_select = '<option value="">Seleccione una opción</option>'
-        for (var i = 0; i < data.length; i++)
+        var html_select = '<option value="-1">Seleccione una opción</option>'
+        for (var i = 0; i < data.length; i++) {
             html_select += '<option value="' + data[i].id + '">' + data[i].descripcion + '</option>'
+        }
         $('.expid_municipios').html(html_select);
     });
 
-    $.get('/dashboard/expedicion-departamento/' + depart_id, function(data) {
-
+    /* $.get('/dashboard/expedicion-departamento/' + depart_id, function(data) {
         $('.confirmTxtExpeDepartamentoAspirante').html(data.descripcion);
-    });
+    }); */
 }
 
 /*=============================================
    TRAER TODAS LAS CIUDADES PARA EL MENOR EDAD
 =============================================*/
-
 function onSelectDepartamentosMenorChange() {
     var depart_id = $(this).val();
     // AJAX
