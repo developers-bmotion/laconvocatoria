@@ -45,4 +45,11 @@ MyProjectsController extends Controller
 
         return view('backend.profile.my-projects',compact('artist','projects_revision','projects_approv_published','projects_rejected'));
     }
+
+
+    public function config_profile_artist(){
+        $artist = Artist::where('user_id',auth()->user()->id)->with('users','countries','projects')->first();
+
+        return view('backend.profile.config-artist-profile',compact('artist'));
+    }
 }

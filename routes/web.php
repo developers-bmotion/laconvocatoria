@@ -159,6 +159,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::post('/update-password-artist','ProfileController@update_password')->name('update.password.artist');
     //Proyectos del Artista
     Route::get('/my-projects','MyProjectsController@index_artist')->name('myprojects.artist');
+    Route::get('/config-profile-artist','MyProjectsController@config_profile_artist')->name('config.profile.artist');
     //Apoyos hechos
     Route::get('/backings-made','BackingsMadeController@index_artist')->name('backings.made.artist');
 

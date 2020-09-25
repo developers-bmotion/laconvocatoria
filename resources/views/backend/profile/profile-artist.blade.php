@@ -802,6 +802,9 @@
         </div>
     </div>
 </div>
+</div>
+</div>
+</div>
 @stop
 @section('dropzonePhotoArtist')
     <script>
