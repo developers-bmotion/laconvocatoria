@@ -423,6 +423,7 @@
                         <!--=====================================
                                        CONFIGURACIONES
                                         ======================================-->
+                     @if(count($artist->teams) !== 0)
                         <div class="tab-pane " id="m_user_profile_tab_3">
                             <div class="m-portlet__body">
                                 <div class="row">
@@ -648,7 +649,8 @@
 
                             </div>
                         </div>
-
+                        @endif
+                        @if(count($artist->beneficiary) !== 0)
                         <div class="tab-pane " id="m_user_profile_tab_4">
                             <div class="m-portlet__body ml-5">
                                 <div class="row">
@@ -703,25 +705,27 @@
                      </div>
 
 
-                                @if($artist->->township)
+
+
+                                @if($artist->township)
                                 <div class="col-md-4 mt-2">
                                 <label style="font-weight: bold">Vereda/Corregimiento:</label>
                                 <div class="m-scrollable" data-scrollable="true" style="">
-                                    <p>{{ $artist->artists[0]->beneficiary[0]->township}}</p>
+                                    <p>{{ $artist->beneficiary[0]->township}}</p>
                                 </div>
                                 </div>
                                 @endif
                                 <div class="col-md-4 mt-2">
                                 <label style="font-weight: bold">Teléfono:</label>
                                 <div class="m-scrollable" data-scrollable="true" style="">
-                                    <p>{{ $artist->artists[0]->beneficiary[0]->phone}}</p>
+                                    <p>{{ $artist->beneficiary[0]->phone}}</p>
                                 </div>
                                 </div>
                                 <div class="col-md-4 mt-2">
 
                                     <label style="font-weight: bold">{{ __('biografia') }}:</label>
                                     <div class="m-scrollable" data-scrollable="true" style="">
-                                        <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->biography}}</p>
+                                        <p style="text-align: justify">{{ $artist->beneficiary[0]->biography}}</p>
                                     </div>
                                 </div>
 
@@ -739,7 +743,35 @@
                         </div>
                             </div>
 
+                            <div class="modal fade" id="pdfidentificacionBeneficiario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">
+                                            Documento de {{ $artist->beneficiary[0]->name}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @if(!$artist->beneficiary[0]->pdf_documento)
+                                        <p>No se cargo el documento correctamente</p>
+                                    @else
+                                        <div>
+                                            <embed src="{{ $artist->beneficiary[0]->pdf_documento}}" frameborder="0" width="100%" height="400px">
+                                            </div>
+                                    @endif
+                                    </div>
+                                    <div class="modal-footer">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                 </div>
+                @endif
             </div>
         </div>
     </div>
