@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
-class MyProjectsController extends Controller
+class
+MyProjectsController extends Controller
 {
     public function index_artist(){
 
@@ -28,8 +29,7 @@ class MyProjectsController extends Controller
                 'countries',
                 'projects' => function ($q){
                     $q->select('*')
-                        ->where('status',Project::APPROVAL)
-                        ->OrWhere('status',Project::PUBLISHED);
+                        ->where('status',Project::APPROVAL);
                 }
             ])->latest()
             ->first();

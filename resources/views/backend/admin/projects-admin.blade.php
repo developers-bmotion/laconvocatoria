@@ -122,31 +122,33 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                     <span class="m-nav__section-text">{{ __('selecciona') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
-                                                <span class="changeType w-100 btn btn-outline-metal m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
+                                                <span style="background-color: #9c9ca5" class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
                                                 </li>
+                                                @if(\App\User::navigation() !== "Subsanador")
                                                 <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-brand m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
+                                                    <span class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
 
                                                 </li>
                                                 <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-success m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::APPROVAL}}">{{ __('aprovado') }}</span>
+                                                    <span class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::APPROVAL}}">{{ __('aprovado') }}</span>
+                                                </li>
+                                                @endif
+                                                <li class="m-nav__item text-center">
+                                                    <span style="color:white;" class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PENDING}}">{{ __('Pendiente') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-warning m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PENDING}}">{{ __('pendiente') }}</span>
+                                                    <span class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REJECTED}}">{{ __('rechazados') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REJECTED}}">{{ __('rechazados') }}</span>
+                                                    <span style="color:white" class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::ACEPTED}}">{{ __('Aceptado') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
-                                                    <span style="color:black" class="changeType w-100 btn btn-outline-secondary m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::ACEPTED}}">{{ __('aceptado') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-info m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('nueva revisión') }}</span>
+                                                    <span class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('Nueva revisión') }}</span>
                                                 </li>
                                                 <li class="m-nav__separator m-nav__separator--fit">
                                                 </li>
                                                  <li class="m-nav__item">
-                                                     <span class="changeType w-100 btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-block">{{ __('todos') }}</span>
+                                                     <span class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-block">{{ __('todos') }}</span>
                                                  </li>
                                             </ul>
                                         </div>
@@ -251,7 +253,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                     info = '<span class="m-badge  m-badge--info m-badge--wide">Nueva revisión</span>';
                                     break;
                                 case 7:
-                                    info = '<span class="m-badge  m-badge--secondary m-badge--wide">Aceptado</span>';
+                                    info = '<span class="m-badge  m-badge--success m-badge--wide">Aceptado</span>';
                                     break;
                             }
                             return '<div class="text-center">'+info+'</div>';

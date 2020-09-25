@@ -90,7 +90,7 @@ class ProjectsAdminController extends Controller
             ]);
         }
         $artistSendEmail = \Mail::to($artist->users->email)->send(new ArtistProjectPreAprov($project,$artist->users->name));
-        $statusProject = Project::where('id', $request->input('project'))->update(array('status' => 2));
+        $statusProject = Project::where('id', $request->input('project'))->update(array('status' => 7));
         return '{"status":200, "msg":"'.__('send_project_management').'"}';
     }
 
