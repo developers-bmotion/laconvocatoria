@@ -703,7 +703,7 @@
                      </div>
 
 
-                                @if($artist->->township)
+                                @if($artist->township)
                                 <div class="col-md-4 mt-2">
                                 <label style="font-weight: bold">Vereda/Corregimiento:</label>
                                 <div class="m-scrollable" data-scrollable="true" style="">
