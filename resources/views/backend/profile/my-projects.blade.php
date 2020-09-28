@@ -101,7 +101,13 @@
                                         @elseif($projects->status == 3)
                                             <span class="m-badge m-badge--success m-badge--wide pull-right">{{ __('aprobado') }}</span>
                                         @elseif($projects->status == 4)
-                                            <span class="m-badge m-badge--info m-badge--wide pull-right">{{ __('publicado') }}</span>
+                                            <span class="m-badge m-badge--warning m-badge--wide pull-right">{{ __('Pendiente') }}</span>
+                                        @elseif($projects->status == 5)
+                                            <span class="m-badge m-badge--danger m-badge--wide pull-right">{{ __('rechazado') }}</span>
+                                        @elseif($projects->status == 6)
+                                            <span class="m-badge m-badge--brand m-badge--wide pull-right">{{ __('Nuevo revisión') }}</span>
+                                        @elseif($projects->status == 7)
+                                            <span class="m-badge m-badge--success m-badge--wide pull-right">{{ __('Aceptado') }}</span>
                                         @else
                                             <span class="m-badge m-badge--danger m-badge--wide pull-right">{{ __('rechazado') }}</span>
                                         @endif
@@ -128,15 +134,15 @@
                                                         <span class="m-widget5__author">{{ str_limit($projects->short_description,200)}}</span>
                                                     </div>
                                                 </div>
-                                                <div class="m-widget5__stats2 pull-right" >
+                                                {{-- <div class="m-widget5__stats2 pull-right" >
                                                     <span class="m-widget5__number">$10000</span><br>
                                                     <span class="m-widget5__votes">{{ __('fondos_recaudados') }}</span>
-                                                </div>
-                                                <div class="m-widget5__stats1 pull-right" style="margin-right: 40px;">
+                                                </div> --}}
+                                                {{-- <div class="m-widget5__stats1 pull-right" style="margin-right: 40px;">
                                                     <span class="m-widget5__number" style="margin-right: 0px">${{ $projects->price }}</span><br>
                                                     <span class="m-widget5__sales">{{ __('meta') }}</span>
-                                                </div>
-                                                <div class="m-widget5__stats1">
+                                                </div> --}}
+                                                <div class="m-widget5__stats1" style="float: right">
                                                     <a href="{{ route('show.backend.project',$projects->slug) }}" class="btn btn-secondary m-btn m-btn--icon m-btn--pill">
                                                     <span><i class="la la-info-circle"></i>
                                                     <span>{{ __('mas_informacion') }}</span></span>
@@ -177,6 +183,10 @@
                                         @elseif($projects->status == 3)
                                             <span class="m-badge m-badge--success m-badge--wide pull-right">{{ __('aprobado') }}</span>
                                         @elseif($projects->status == 4)
+                                            <span class="m-badge m-badge--info m-badge--wide pull-right">{{ __('publicado') }}</span>
+                                        @elseif($projects->status == 5)
+                                            <span class="m-badge m-badge--info m-badge--wide pull-right">{{ __('publicado') }}</span>
+                                        @elseif($projects->status == 6)
                                             <span class="m-badge m-badge--info m-badge--wide pull-right">{{ __('publicado') }}</span>
                                         @else
                                             <span class="m-badge m-badge--danger m-badge--wide pull-right">{{ __('rechazado') }}</span>

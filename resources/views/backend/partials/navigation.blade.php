@@ -358,7 +358,7 @@
 																		</span>
                                                                 </a>
                                         </li>
-                                        {{--<li class="m-nav__item">
+                                        {{-- <li class="m-nav__item">
                                             <a href="header/profile.html" class="m-nav__link">
                                                 <i class="m-nav__link-icon flaticon-share"></i>
                                                 <span class="m-nav__link-text">Activity</span>
@@ -383,7 +383,7 @@
                                                 <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                                                 <span class="m-nav__link-text">Support</span>
                                             </a>
-                                        </li>--}}
+                                        </li> --}}
                                         <li class="m-nav__separator m-nav__separator--fit">
                                         </li>
                                         <li class="m-nav__item">
@@ -406,6 +406,7 @@
 {{--                </li>--}}
             </ul>
         </div>
+    </div>
     </div>
 
     <!-- END: Topbar -->

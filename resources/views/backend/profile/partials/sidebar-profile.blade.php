@@ -76,6 +76,15 @@
                     !important"' : '' !!}>{{ __('mis_proyectos') }}</span>
             </a>
         </li>
+        <li class="m-nav__item" {!! request()->is('dashboard/config-profile-artist') ? 'style="background-color:#f2f4f9"' : ''
+            !!}>
+            <a href="{{ route('config.profile.artist') }}" class="m-nav__link">
+                <i class="m-nav__link-icon flaticon-settings" {!! request()->is('dashboard/config-profile-artist') ?
+                    'style="color:#716aca !important"' : '' !!}></i>
+                <span class="m-nav__link-text" {!! request()->is('dashboard/config-profile-artist') ? 'style="color:#716aca
+                    !important"' : '' !!}>{{ __('Configuracion de perfil') }}</span>
+            </a>
+        </li>
         {{-- <li class="m-nav__item" {!! request()->is('dashboard/backings-made') ? 'style="background-color:#f2f4f9"' : ''
             !!}>
             <a href="{{ route('backings.made.artist') }}" class="m-nav__link">
