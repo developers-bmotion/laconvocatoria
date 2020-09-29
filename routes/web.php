@@ -145,6 +145,8 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::post('/front-photo-artist','ProfileController@front_photo')->name('front.photo.artist');
 
     Route::post('/pdf-cedula-aspirante','ProfileController@pdf_cedula_aspirante')->name('cedula.pdf.aspirante');
+    Route::post('/pdf-cedula-beneficiario','ProfileController@pdf_cedula_beneficiario')->name('cedula.pdf.beneficiario');
+    Route::post('/pdf-cedula-team','ProfileController@pdf_cedula_team')->name('cedula.pdf.team');
 
 
     Route::put('/update-profile-artist/{id_artis}','ProfileController@profile_update_artist')->name('update.profile.artist');

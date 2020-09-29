@@ -16,6 +16,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\PersonType;
+use App\Project;
+use App\Team;
 use App\typeCategories;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,7 +35,7 @@ class ProfileController extends Controller
 
 
         /*   dd($departamentos); */
-        $artist = Artist::where('user_id', auth()->user()->id)->with('users','teams','artistType','personType','beneficiary.documentType','beneficiary.city','beneficiary.expeditionPlace','teams.expeditionPlace')->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->with('city','users','teams','artistType','personType','beneficiary.documentType','beneficiary.city','beneficiary.expeditionPlace','teams.expeditionPlace')->first();
         return view('backend.profile.profile-artist', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
 
@@ -339,6 +341,73 @@ class ProfileController extends Controller
         $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfidentificacion');
         User::where('id', auth()->user()->id)->update([
             'pdf_cedula' => '/storage/' . $pdf_cedula_save
+        ]);
+
+        return $pdf_cedula;
+    }
+
+    public function pdf_cedula_beneficiario(Request $request)
+    {
+
+        // $user = User::where('id', auth()->user()->id)->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->first();
+        $beneficiario = Beneficiary::where('artist_id', $artist->id)->first();
+        // dd($beneficiario);
+        $pdf_cedula =  str_replace('storage', '', $beneficiario->pdf_documento);
+        //Elimnar pdf de cédula o tarjeta
+        Storage::delete($pdf_cedula);
+        //Agregar cedula o tarjeta de identidad
+        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfidentificacion');
+        Beneficiary::where('id', $beneficiario->id)->update([
+            'pdf_documento' => '/storage/' . $pdf_cedula_save
+        ]);
+
+        return $pdf_cedula;
+    }
+    public function update_audio(Request $request)
+    {
+
+
+        $image = $request->file('image')->store('audio');
+        /*$image = Storage::disk('s3')->put('audio', $request->file('image'));*/
+
+        /* $url_go_input = Storage::url($image);
+        $url = str_ireplace($request->root(),'',$url_go_input); */
+
+        return '/storage/' . $image;
+
+
+        // $user = User::where('id', auth()->user()->id)->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->first();
+        $project = Project::where('artist_id', $artist->id)->first();
+        // dd($beneficiario);
+        $audio =  str_replace('storage', '', $project->audio);
+        //Elimnar pdf de cédula o tarjeta
+        Storage::delete($audio);
+        //Agregar cedula o tarjeta de identidad
+        // $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfidentificacion');
+        $audio = $request->file('image')->store('audio');
+        Project::where('artist_id', $artist->id)->update([
+            'audio' => '/storage/' . $audio
+        ]);
+
+        return $audio;
+    }
+
+    public function pdf_cedula_team(Request $request)
+    {
+
+        // $user = User::where('id', auth()->user()->id)->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->first();
+        $team = Team::where('artist_id', $artist->id)->get();
+        //  dd($team);
+        $pdf_cedula =  str_replace('storage', '', $team->pdf_identificacion);
+        //Elimnar pdf de cédula o tarjeta
+        Storage::delete($pdf_cedula);
+        //Agregar cedula o tarjeta de identidad
+        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfidentificacion');
+        Team::where('id', $team->id)->update([
+            'pdf_identificacion' => '/storage/' . $pdf_cedula_save
         ]);
 
         return $pdf_cedula;

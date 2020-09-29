@@ -16,12 +16,14 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('projects');
         Storage::deleteDirectory('pdfidentificacion');
         Storage::deleteDirectory('users');
+        Storage::deleteDirectory('imagebeneficiary');
         Storage::deleteDirectory('projects_images');
         Storage::deleteDirectory('music');
 
         Storage::makeDirectory('projects');
         Storage::makeDirectory('pdfidentificacion');
         Storage::makeDirectory('users');
+        Storage::makeDirectory('imagebeneficiary');
         Storage::makeDirectory('projects_images');
         Storage::makeDirectory('music');
 
@@ -85,7 +87,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'Ver sus datos, editarlos y subir sus piezas para el concurso'
         ]);
         factory(\App\Role::class, 1)->create([
-            'rol' => 'Curador',
+            'rol' => 'Manage',
             'description' => 'Revisar las piezas musicales y calificarlas'
         ]);
         factory(\App\Role::class, 1)->create([
@@ -120,9 +122,9 @@ class DatabaseSeeder extends Seeder
         });
 
         /*=============================================
-            CREANDO 50 USUARIOS POR DEFECTO Y LE ESTAMOS ASIGNANDO UN ARTISTA
+            CREANDO 15 USUARIOS POR DEFECTO Y LE ESTAMOS ASIGNANDO UN ARTISTA
         =============================================*/
-        factory(\App\User::class, 50)->create()
+        factory(\App\User::class, 15)->create()
             ->each(function (\App\User $u) {
                 factory(\App\Artist::class, 1)->create(['user_id' => $u->id]);
                 $u->roles()->attach('2');
@@ -131,11 +133,11 @@ class DatabaseSeeder extends Seeder
         /*=============================================
           CREAMOS 10 MENORES DE EDAD Y LES ASIGNAMOS
         =============================================*/
-        factory(\App\Beneficiary::class, 10)->create();
+        factory(\App\Beneficiary::class, 3)->create();
          /*=============================================
           CREAMOS 10 INTEGRANTES DE GRUPO
         =============================================*/
-        factory(\App\Team::class, 10)->create();
+        factory(\App\Team::class, 3)->create();
 
         /*=============================================
           CREAMOS 10 CURADORES
@@ -152,10 +154,10 @@ class DatabaseSeeder extends Seeder
         /*=============================================
           CREAMOS 60 PROYECTOS
         =============================================*/
-        factory(\App\Project::class, 60)
+        factory(\App\Project::class, 15)
             ->create()
             ->each(function (\App\Project $p) {
-                $artist = mt_rand(1, 40);
+                $artist = mt_rand(1, 10);
                 $manage = mt_rand(1, 5);
                 $p->artists()->attach($artist);
                 $p->management()->attach($manage);

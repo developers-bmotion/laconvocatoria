@@ -42,6 +42,10 @@ class City extends Model
         return $this->hasMany(Team::class);
     }
 
+    public function artist(){
+        return $this->hasMany(Artist::class);
+    }
+
     public function departaments(){
         return $this->belongsTo(Country::class, 'iddepartamento');
     }
