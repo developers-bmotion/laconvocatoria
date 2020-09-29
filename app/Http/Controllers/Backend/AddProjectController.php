@@ -49,12 +49,12 @@ class AddProjectController extends Controller
     public function upload_image(Request $request)
     {
 
-       /* $image = $request->file('image')->store('audio', 's3');*/
-        $image = Storage::disk('s3')->put('audio', $request->file('image'));
+        $image = $request->file('image')->store('audio');
+        /*$image = Storage::disk('s3')->put('audio', $request->file('image'));*/
 
         /* $url_go_input = Storage::url($image);
         $url = str_ireplace($request->root(),'',$url_go_input); */
-        dd($image);
+
         return '/storage/' . $image;
     }
 

@@ -45,7 +45,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -60,19 +60,19 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\User
      */
     protected function create(Request $request)
     {
-         /* $data = $this->validator($request)->validate(); */
+        /* $data = $this->validator($request)->validate(); */
 
-         $this->validate($request,[
+        $this->validate($request, [
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        $user =  User::create([
+        $user = User::create([
 
             'email' => $request->get('email'),
             'picture' => '/backend/assets/app/media/img/users/perfil.jpg',
@@ -87,32 +87,39 @@ class RegisterController extends Controller
 
         auth()->loginUsingId($user->id);
         // return json_encode($data);
+        $artist = Artist::where('user_id', auth()->user()->id)->first();
 
-        return redirect('/dashboard/profile')->with('welcome_register', 'Bienvenido, has creado tu cuenta, continua con tu registro');
+        if ($artist->documentType == null) {
+            return redirect('/dashboard/form-register');
+        } else {
+            return redirect('/dashboard/profile')->with('welcome_register', 'Bienvenido, has creado tu cuenta, continua con tu registro');
+        }
     }
 
-   /*  protected function create(array $data)
-    {
-        $data = $this->validator($data)->validate();
-
-        $user =  User::create([
-
-            'email' => $data['email'],
-            'picture' => '/backend/assets/app/media/img/users/perfil.jpg',
-            'password' => Hash::make($data['password']),
-        ]);
-        $user->roles()->attach(['2']);
-
-        $artist = new Artist;
-        $artist->user_id = $user->id;
-        $artist->save();
 
 
-        auth()->loginUsingId($user->id);
-        // return json_encode($data);
+    /*  protected function create(array $data)
+     {
+         $data = $this->validator($data)->validate();
 
-        return redirect('/dashboard/profile')->with('welcome_register', 'Bienvenido, has creado tu cuenta, continua con tu registro.');
-    } */
+         $user =  User::create([
+
+             'email' => $data['email'],
+             'picture' => '/backend/assets/app/media/img/users/perfil.jpg',
+             'password' => Hash::make($data['password']),
+         ]);
+         $user->roles()->attach(['2']);
+
+         $artist = new Artist;
+         $artist->user_id = $user->id;
+         $artist->save();
+
+
+         auth()->loginUsingId($user->id);
+         // return json_encode($data);
+
+         return redirect('/dashboard/profile')->with('welcome_register', 'Bienvenido, has creado tu cuenta, continua con tu registro.');
+     } */
 
     /* protected function registered(Request $request, $user)
     {

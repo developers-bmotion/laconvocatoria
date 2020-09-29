@@ -16,7 +16,7 @@ class AdminPermisos
     public function handle($request, Closure $next)
     {
         if (auth()->user()->roles[0]->rol == "Admin"|| auth()->user()->roles[0]->rol == "Subsanador"){
-            return $next($request);
+            return $next ($request);
         }else{
             return back()->with('eliminar', __('no_permisos'));
         }

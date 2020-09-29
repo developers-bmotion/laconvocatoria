@@ -72,7 +72,7 @@ class LoginController extends Controller
         } else {
 
             if ($request->input("json") === "true") {
-                dd('hola');
+
                 return "/dashboard/form-register";
             }
 
@@ -81,6 +81,7 @@ class LoginController extends Controller
             if ($artist->documentType == null ) {
                 return redirect('/dashboard/form-register');
             } else {
+
                 return redirect('/dashboard/profile');
             }
 

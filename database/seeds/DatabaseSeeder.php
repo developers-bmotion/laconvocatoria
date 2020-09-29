@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'Ver sus datos, editarlos y subir sus piezas para el concurso'
         ]);
         factory(\App\Role::class, 1)->create([
-            'rol' => 'Curador',
+            'rol' => 'Manage',
             'description' => 'Revisar las piezas musicales y calificarlas'
         ]);
         factory(\App\Role::class, 1)->create([
