@@ -492,12 +492,50 @@
                     <div class="m-portlet__body">
                         <div class="m-section">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-11 player">
                                     <audio preload="auto" controls>
                                         <source src="{{ $project->audio }}">
 
                                     </audio>
+
                                 </div>
+                                {{-- @dd(\App\User::navigation()); --}}
+                                @if(\App\User::navigation() == "Artist")
+                                <div class="row drop_audio col-12" style="display: none">
+                                    <div class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-lg-12">
+                                                <label class="form-control-label" form="nombreProyecto"><span class="text-danger">*</span>
+                                                    Subir canción:</label>
+                                                <div class="m-dropzone dropzone m-dropzone--success" action=""
+                                                     id="m-dropzone-three">
+                                                    <div class="m-dropzone__msg dz-message needsclick">
+                                                        <h3 class="m-dropzone__msg-title">
+                                                            Agregue su canción en formato MP3</h3>
+                                                        <span
+                                                            class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                                    </div>
+                                                </div>
+                                                {!! $errors->first('subir_cancion','<div class="form-control-feedback">*:message
+                                                           </div>')!!}
+                                                <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3, que no exceda 4 minutos de duración.</span>
+                                                <input type="hidden" id="inputDBAudioAddProject"
+                                                       name="subir_cancion" value="">
+                                                <div id="erroresImagen" style="color: var(--danger)"
+                                                     class="form-control-feedback"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-1 pt-5">
+                                    <i class="flaticon-edit ml-3 update_audio" style="color:#716aca; cursor:pointer;"></i>
+                                   <button type="button" class="btn btn-primary cancel_audio" style="display:none">Cancelar</button>
+
+                                </div>
+
+
+                                @endif
                             </div>
                             <div class="row p-5">
                                 {{-- reproductor --}}
@@ -862,20 +900,63 @@
             }
         });
     </script>
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            console.log('llego');
-          var myCirclePlayer = new CirclePlayer("#jquery_jplayer_1",
-                  {
+    <script>
+        $('.update_audio').click(function(){
+            $(this).hide();
+            $('.cancel_audio').show();
 
-                    mp3: "/storage/projects/audio.mp3",
-                  }, {
-            cssSelectorAncestor: "#cp_container_1",
-            swfPath: "js",
-            wmode: "window",
-            supplied: "mp3",
-            keyEnabled: true
-          });
+            $('.drop_audio').show();
+            $('.player').hide();
+
+
         });
-    </script> --}}
+        $('.cancel_audio').click(function(){
+            $(this).hide();
+            $('.update_audio').show();
+            $('.drop_audio').hide();
+            $('.player').show();
+
+
+        });
+
+    </script>
+
+@endsection
+@section('js.add-project')
+
+    <script>
+        var dropzone = new Dropzone('.dropzone', {
+            url: '{{route('add.project.audio')}}',
+            acceptedFiles: 'audio/*',
+            maxFiles: 1,
+            paramName: 'image',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (file, response) {
+                $("#erroresImagen").text('');
+                $('#inputDBAudioAddProject').val(response);
+                $('#img_add_proyect').attr('src', response);
+            },
+            error: function (file, e, i, o, u) {
+                $("#erroresImagen").text('');
+                if (file.xhr.status === 413) {
+                    $("#erroresImagen").text('{{__("imagen_grande")}}');
+                    $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
+                    setTimeout(() => {
+                        dropzone.removeFile(file)
+                    }, 1000)
+                }
+            }
+        });
+        dropzone.on("addedfile", function (file) {
+            file.previewElement.addEventListener("click", function () {
+                dropzone.removeFile(file);
+            });
+        });
+        Dropzone.autoDiscover = false;
+
+
+    </script>
+
 @endsection
