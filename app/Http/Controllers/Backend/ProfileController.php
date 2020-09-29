@@ -65,8 +65,117 @@ class ProfileController extends Controller
 
     public function profile_update_artist(Request $request, $id_artis)
     {
+        $aspirante = (object) $request->aspirante;
+        
+        if ($request->lineaConvocatoria == '1') {
+            /* Este caso es para solistas */ // $date = new Carbon( $request->input('currentDate', Carbon::now()) );
+            
+            if ($request->actuaraComo == '1'){ 
+                /* solo se guarda el aspirante */
+                dd('aspirante');
 
-        dd('llego');
+            } else {
+                /* se debe guardar los datos del representante y el aspirante */
+                
+                $beneficiario = (object) $request->beneficiario;
+                dd('representante');
+
+            }
+        } else { 
+            /* Para este caso se debe guardar el representante y los integrantes del grupo */ // gettype($request->integrantes)
+            
+            foreach ($request->integrantes as $integrante) {
+                dd( $integrante['nameMember'] ); // aceder a los datos
+            }
+        }
+
+
+        
+        /*=============================================
+            AGREGAR ASPIRANTE 
+        =============================================*/
+        Artist::where('user_id', '=', $id_artis)->update([
+            'nickname' => $request->get('nickname'),
+            'biography' => ucfirst($request->get('biography')),
+            'level_id' => $request->get('level_id'),
+            'document_type' => $request->get('document_type'),
+            'identification' => $request->get('identificacion'),
+            'user_id' => auth()->user()->id,
+            'adress' => $request->get('adress'),
+            'cities_id' => $request->get('cities_id'),
+            'person_types_id' => $request->get('person_types_id'),
+            'artist_types_id' => $request->get('artist_type_id'),
+            'level_id' => $request->get('level_id'),
+            'expedition_place' => $request->get('expedition_place'),
+            /* 'birthdate' => Carbon::parse($request->get('birthdate')), */
+            'age' => $request->get('age'),
+        ]);
+
+        User::where('id', '=', $id_artis)->update([
+            'name' => $request->get('name'),
+            'last_name' => $request->get('lastname'),
+            'second_last_name' => $request->get('second_last_name'),
+            'phone_1' => $request->get('phone_1'),
+            /* 'phone_2' => $request->get('phone_2'), */
+        ]);
+
+        $artist = Artist::select('id')->where('user_id', $id_artis)->first();
+
+
+        /*=============================================
+            AGREGAR MENOR DE EDAD NIÑO
+            =============================================*/
+        $sitieneartist = null;
+        $sitieneartist = Beneficiary::where('artist_id', $artist)->first();
+
+        if ($sitieneartist) {
+            Beneficiary::create([
+
+                'document_type' => $request->get('document_type_menor'),
+                'identification' => $request->get('identificacion_menor'),
+                'name' => $request->get('name_menor'),
+                'last_name' => $request->get('last_name_menor'),
+                'second_last_name' => $request->get('second_last_name_menor'),
+                'phone' => $request->get('phone_1_menor'),
+                'adress' => $request->get('adress_menor'),
+                'cities_id' => $request->get('cities_id_menor'),
+                'expedition_place' => $request->get('expedition_place_menor'),
+                'birthday' => Carbon::parse($request->get('birthdate_menor')),
+                'artist_id' =>  $artist->id
+
+            ]);
+        } else {
+
+            Beneficiary::where('artist_id', '=', $artist->id)->update([
+
+                'document_type' => $request->get('document_type_menor'),
+                'identification' => $request->get('identificacion_menor'),
+                'name' => $request->get('name_menor'),
+                'last_name' => $request->get('last_name_menor'),
+                'second_last_name' => $request->get('second_last_name_menor'),
+                'phone' => $request->get('phone_1_menor'),
+                'adress' => $request->get('adress_menor'),
+                'cities_id' => $request->get('cities_id_menor'),
+                'expedition_place' => $request->get('expedition_place_menor'),
+                'birthday' => Carbon::parse($request->get('birthdate_menor')),
+                'artist_id' =>  $artist->id
+
+            ]);
+        }
+        /* alert()->success(__('perfil_actualizado'), __('muy_bien'))->autoClose(3000);
+        $count_project = count($project_exist->projects);
+        if ($count_project >= 1) {
+            return back();
+        } else {
+            return back()->with('profile_update', __('hora_crear_primer_project'));
+        } */
+    }
+
+
+    public function profile_update_artist22(Request $request, $id_artis)
+    {
+
+        dd($id_artis);
         /*  $project_exist = Artist::where('user_id', auth()->user()->id)->with('projects')->first(); */
         //Actualizar en la tabla Artist
         //Validaciones

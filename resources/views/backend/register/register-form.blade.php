@@ -45,7 +45,7 @@
         @endif
 
         <form method="post" action="{{ route('update.profile.artist',auth()->user()->id) }}"
-            class="m-form m-form--label-align-left- m-form--state-" id="m_form_new_register">
+            onsubmit="return validationForm()" class="m-form m-form--label-align-left- m-form--state-" id="m_form_new_register">
             @csrf {{method_field('PUT')}}
 
             <!--=====================================
@@ -81,7 +81,7 @@
                         ======================================-->
                         <div class="col-lg-6 m-form__group-sub">
                             <label class="form-control-label">Linea de la convocatoria:</label>
-                            <select id="select-linea-convocatoria" name="linea_convocatoria" class="form-control m-input m-input--square">
+                            <select id="select-linea-convocatoria" name="lineaConvocatoria" class="form-control m-input m-input--square">
                                 <option value="-1">Selecciona una opción</option>
                                     @foreach($artisttypes as $artisttype)
                                         <option value="{{$artisttype->id}}">{{ $artisttype->name }}</option>
@@ -94,7 +94,7 @@
                         ======================================-->
                         <div id="content-select-form-actuara-como" class="col-lg-6 m-form__group-sub" style="display: none">
                             <label class="form-control-label">Actuará como:</label>
-                            <select id="select-actuara-como" name="actuara_como" class="form-control m-input m-input--square">
+                            <select id="select-actuara-como" name="actuaraComo" class="form-control m-input m-input--square">
                                 <option value="-1">Selecciona una opción</option>
                                 @foreach($persontypes as $persontype)
                                     <option value="{{$persontype->id}}"> {{ $persontype->name }} </option>
@@ -142,7 +142,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('name')? 'has-danger':''}}">Nombre *</label>
-                                        <input type="text" name="aspirante['name']"class="form-control m-input" 
+                                        <input type="text" name="aspirante[name]"class="form-control m-input" 
                                             placeholder=""value="{{ old('name', $artist->users->name)}}">
                                         {!! $errors->first('name','<div class="form-control-feedback">*:message</div>')!!}
                                         <span class="m-form__help">Por favor ingrese su nombre completo</span>
@@ -150,7 +150,7 @@
 
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('lastname')? 'has-danger':''}}">Primer apellido *</label>
-                                        <input type="text" name="aspirante['lastname']" class="form-control m-input"
+                                        <input type="text" name="aspirante[lastname]" class="form-control m-input"
                                             placeholder="" value="{{ old('last_name', $artist->users->last_name ) }}">
                                         {!! $errors->first('last_name','<div class="form-control-feedback">*:message</div>')!!}
                                         <span class="m-form__help">Por favor ingrese su primer apellido</span>
@@ -163,7 +163,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('second_last_name')? 'has-danger':''}}">Segundo apellido *</label>
-                                        <input type="text" name="aspirante['second_last_name']" class="form-control m-input"
+                                        <input type="text" name="aspirante[secondLastname]" class="form-control m-input"
                                             placeholder="" value="{{ old('second_last_name', $artist->users->second_last_name) }}">
                                         {!! $errors->first('second_last_name','<div class="form-control-feedback">*:message</div>')!!}
                                         <span class="m-form__help">Por favor ingrese su segundo apellido</span>
@@ -175,7 +175,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="la la-phone"></i></span>
                                             </div>
-                                            <input type="text" name="aspirante['phone_1']" class="form-control m-input"
+                                            <input type="text" name="aspirante[phone]" class="form-control m-input"
                                                 placeholder="" value="{{ old('phone_1', $artist->users->phone_1) }}">
                                             {!! $errors->first('phone_1','<div class="form-control-feedback">*:message</div>')!!}
                                         </div>
@@ -189,7 +189,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('document_type')? 'has-danger':''}}">Tipo de documento *</label>                                        
-                                        <select name="aspirante['document_type']" class="form-control m-bootstrap-select m_selectpicker">
+                                        <select name="aspirante[documentType]" class="form-control m-bootstrap-select m_selectpicker">
                                             @foreach($documenttype as $document_type)
                                                 <option value="{{$document_type->id}}" {{ old('document_type',$artist->document_type) == $document_type->id ? 'selected':''}}>
                                                 {{ $document_type->document }}</option>
@@ -200,7 +200,7 @@
 
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('identificacion')? 'has-danger':''}}">Nº de indentificación *</label>
-                                        <input type="num" name="aspirante['identificacion']" class="form-control m-input"
+                                        <input type="num" name="aspirante[identificacion]" class="form-control m-input"
                                             placeholder="" value="{{ old('identificacion', $artist->identification) }}">
                                         {!! $errors->first('identificacion','<div class="form-control-feedback">*:message</div>')!!}                                        
                                         <span class="m-form__help">Por favor ingrese el número de indentificación</span>
@@ -213,7 +213,8 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Departamento de expedición *</label>
-                                        <select name="aspirante['departamento_expedida']" class="form-control m-select2 expedi_departamentos" id="m_select2_1">                 
+                                        <select onchange="onSelectDepartamentosChange(this, 'aspirante-expid-municipios')" id="m_select2_1"
+                                            name="aspirante[departamentoExpedida]" class="form-control m-select2" >    
                                             <option value="-1" >Seleccione departamento</option>
                                             @foreach($departamentos as $departamento)
                                                 <option value="{{$departamento->id}}">{{ $departamento->descripcion }}</option>
@@ -224,7 +225,7 @@
 
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Municipio de expedición *</label>
-                                        <select name="aspirante['municipio_expedida']" class="form-control m-select2 expid_municipios" id="m_select2_2"></select> 
+                                        <select name="aspirante[municipioExpedida]" class="form-control m-select2 aspirante-expid-municipios" id="m_select2_2"></select> 
                                     </div>
                                 </div> 
 
@@ -242,7 +243,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    
+                                    <div class="col-lg-6 m-form__group-sub">
+                                        <label class="form-control-label">Biografía</label>
+                                        <textarea class="form-control m-input" name="aspirante[biografia]" placeholder="Ingrese la bografía"></textarea>
+                                        <span class="m-form__help">Ingresa una breve descripción de tu historia como artista.</span>
+                                    </div>
+                                </div>                                
                             </div>
                            
                             <div class="m-separator m-separator--dashed m-separator--lg"></div>
@@ -261,7 +268,8 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Departamento de nacimiento *</label>
-                                        <select  id="m_select2_3" name="aspirante['departamento_nacimiento']" class="form-control m-select2 nacimiento_departamentos">  {{-- m_select2_1_4 --}}                                                 
+                                        <select onchange="onSelectDepartamentosChange(this, 'aspirante-nacimiento-municipios')"  id="m_select2_3" 
+                                            name="aspirante[departamentoNacimiento]" class="form-control m-select2">  
                                             <option>Seleccione departamento</option>
                                             @foreach($departamentos as $departamento)
                                                 <option value="{{$departamento->id}}">
@@ -273,19 +281,27 @@
 
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Municipio de nacimiento *</label>
-                                        <select name="aspirante['municipio_nacimiento']" class="form-control m-select2 nacimiento_municipios" id="m_select2_4"></select> {{-- m_select2_1_5 --}}
+                                        <select name="aspirante[municipioNacimiento]" class="form-control m-select2 aspirante-nacimiento-municipios" id="m_select2_4"></select> 
                                     </div>
                                 </div> 
 
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección de residencia *</label>
-                                        <input type="text" name="aspirante['address']" class="form-control m-input"
+                                        <input type="text" name="aspirante[address]" class="form-control m-input"
                                             placeholder="" value="{{ old('adress', $artist->adress) }}">
                                         {!! $errors->first('adress','<div class="form-control-feedback">*:message</div>')!!}
                                         <span class="m-form__help">Por favor ingrese dirección de residencia</span>
                                     </div>
-                                </div> 
+
+                                    <div class="col-lg-6 m-form__group-sub">
+                                        <label class="form-control-label {{$errors->has('vereda')? 'has-danger':''}}">Vereda/Corregimiento</label>
+                                        <input type="text" name="aspirante[vereda]" class="form-control m-input"
+                                            placeholder="" value="{{ old('vereda', $artist->users->last_name ) }}">
+                                        {!! $errors->first('vereda','<div class="form-control-feedback">*:message</div>')!!}
+                                        <span class="m-form__help">En caso de vivir en una vereda ó corregimiento, por favor ingrese el nombre</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -329,7 +345,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('name_menor')? 'has-danger':''}}">Nombre *</label>
-                                        <input type="text" name="beneficiario['name']" class="form-control m-input" 
+                                        <input type="text" name="beneficiario[name]" class="form-control m-input" 
                                             placeholder="" value="{{ old('name_menor', $artist->users->name_menor)}}">
                                         {!! $errors->first('name_menor','<div class="form-control-feedback">*:message</div>')!!}
                                         <span class="m-form__help">Por favor ingrese su nombre completo</span>
@@ -337,7 +353,7 @@
 
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('last_name_menor')? 'has-danger':''}}">Primer apellido *</label>
-                                        <input type="text" name="beneficiario['lastname']" class="form-control m-input"
+                                        <input type="text" name="beneficiario[lastname]" class="form-control m-input"
                                             placeholder="" value="{{ old('last_name_menor', $artist->users->last_name_menor ) }}">
                                         {!! $errors->first('last_name_menor','<div class="form-control-feedback">*:message</div>')!!}
                                         <span class="m-form__help">Por favor ingrese su primer apellido</span>
@@ -350,7 +366,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('second_last_name_menor')? 'has-danger':''}}">Segundo apellido *</label>
-                                        <input type="text" name="beneficiario['second_lastname']" class="form-control m-input"
+                                        <input type="text" name="beneficiario[secondLastname]" class="form-control m-input"
                                             placeholder="" value="{{ old('second_last_name', $artist->users->second_last_name_menor) }}">
                                         {!! $errors->first('second_last_name_menor','<div class="form-control-feedback">*:message</div>')!!}
                                         <span class="m-form__help">Por favor ingrese su segundo apellido</span>
@@ -362,7 +378,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="la la-phone"></i></span>
                                             </div>
-                                            <input type="text" name="beneficiario['phone']" class="form-control m-input"
+                                            <input type="text" name="beneficiario[phone]" class="form-control m-input"
                                                 placeholder="" value="{{ old('phone_1', $artist->users->phone_1_menor) }}">
                                             {!! $errors->first('phone_1_menor','<div class="form-control-feedback">*:message</div>')!!}
                                         </div>
@@ -376,14 +392,14 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('document_type_menor')? 'has-danger':''}}">Tipo de documento *</label>                                        
-                                        <select name="beneficiario['document_type']" class="form-control m-bootstrap-select m_selectpicker">
+                                        <select name="beneficiario[documentType]" class="form-control m-bootstrap-select m_selectpicker">
                                             <option value="2">Tarjeta de identidad</option>
                                         </select>
                                     </div>
 
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('identificacion_menor')? 'has-danger':''}}">Nº de indentificación *</label>
-                                        <input type="num" name="beneficiario['identificacion']" class="form-control m-input"
+                                        <input type="num" name="beneficiario[identificacion]" class="form-control m-input"
                                             placeholder="" value="{{ old('identificacion_menor', $artist->identification_menor) }}">
                                         {!! $errors->first('identificacion_menor','<div class="form-control-feedback">*:message</div>')!!}
                                         <span class="m-form__help">Por favor ingrese el número de indentificación</span>
@@ -396,7 +412,8 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Departamento de expedición *</label>
-                                        <select name="beneficiario['departamento_expedida']" class="form-control m-select2 expedi_departamentos_menor" id="m_select2_5"> {{-- m_select2_1_6 --}}
+                                        <select onchange="onSelectDepartamentosChange(this, 'beneficiario-expid-municipios')" id="m_select2_5"
+                                            name="beneficiario[departamentoExpedida]" class="form-control m-select2"> 
                                             <option>Seleccione departamento</option>
                                             @foreach($departamentos as $departamento)
                                                 <option value="{{$departamento->id}}">
@@ -405,10 +422,10 @@
                                             {!! $errors->first('departamento_expedida_menor','<div class="form-control-feedback"> *:message</div>')!!}
                                         </select>
                                     </div>
-
+                                    
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Municipio de expedición *</label>
-                                        <select name="beneficiario['municipio_expedida']" class="form-control m-select2 expid_municipios_menor" id="m_select2_6"></select> {{-- m_select2_1_7 --}}
+                                        <select name="beneficiario[municipioExpedida]" class="form-control m-select2 beneficiario-expid-municipios" id="m_select2_9"></select>
                                     </div>
                                 </div> 
 
@@ -429,8 +446,16 @@
 
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label for="example-text-input" class="form-control-label">Fecha de nacimiento</label>                                        
-                                        <input type="text" name="beneficiario['birthdate']" class="form-control" value="" 
+                                        <input type="text" name="beneficiario[birthdate]" class="form-control" value="" 
                                             id="datepicker_fecha_nacimiento" readonly placeholder="{{ __('fecha_nacimiento') }}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-form__group row">
+                                    <div class="col-lg-6 m-form__group-sub">
+                                        <label class="form-control-label">Biografía</label>
+                                        <textarea class="form-control m-input" name="beneficiario[biografia]" placeholder="Ingrese la bografía"></textarea>
+                                        <span class="m-form__help">Ingresa una breve descripción de tu historia como artista.</span>
                                     </div>
                                 </div>
                                 
@@ -450,7 +475,8 @@
                                    <div class="form-group m-form__group row">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label">Departamento de nacimiento *</label>
-                                            <select id="m_select2_7" name="beneficiario['departamento_nacimiento']" class="form-control m-select2 nacimiento_departamentos_menor"> {{-- m_select2_1_8 --}}
+                                            <select onchange="onSelectDepartamentosChange(this, 'beneficiario-nacimiento-municipios')" id="m_select2_7" 
+                                                name="beneficiario[departamentoNacimiento]" class="form-control m-select2"> 
                                                 <option>Seleccione departamento</option>
                                                 @foreach($departamentos as $departamento)
                                                     <option value="{{$departamento->id}}">{{ $departamento->descripcion }}</option>
@@ -461,17 +487,25 @@
 
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label">Municipio de nacimiento *</label>
-                                            <select name="beneficiario['municipio_nacimiento']" class="form-control m-select2 nacimiento_municipios_menor" id="m_select2_8"></select> 
+                                            <select name="beneficiario[municipioNacimiento]" class="form-control m-select2 beneficiario-nacimiento-municipios" id="m_select2_8"></select> 
                                         </div>
                                     </div> 
 
                                     <div class="form-group m-form__group row">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección de residencia *</label>
-                                            <input type="text" name="beneficiario['address']" class="form-control m-input"
+                                            <input type="text" name="beneficiario[address]" class="form-control m-input"
                                                 placeholder="" value="">
                                             {!! $errors->first('adress','<div class="form-control-feedback">*:message</div>')!!}
                                             <span class="m-form__help">Por favor ingrese dirección de residencia</span>
+                                        </div>
+
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label class="form-control-label {{$errors->has('vereda')? 'has-danger':''}}">Vereda/Corregimiento</label>
+                                            <input type="text" name="beneficiario[vereda]" class="form-control m-input"
+                                                placeholder="" value="{{ old('vereda', $artist->users->last_name ) }}">
+                                            {!! $errors->first('vereda','<div class="form-control-feedback">*:message</div>')!!}
+                                            <span class="m-form__help">En caso de vivir en una vereda ó corregimiento, por favor ingrese el nombre</span>
                                         </div>
                                     </div> 
                                 </div>
@@ -578,7 +612,7 @@
                                 <div class="col-xl-12">
                                     <div class="m-checkbox-inline">
                                         <label class="m-checkbox m-checkbox--solid m-checkbox--brand">
-                                            <input type="checkbox" name="accept" value="1">Haga clic aquí para indicar que ha leído y acepta el
+                                            <input type="checkbox" name="acceptTermsConditions" value="1">Haga clic aquí para indicar que ha leído y acepta el
                                             acuerdo de Términos y Condiciones.
                                             <span></span>
                                         </label>
