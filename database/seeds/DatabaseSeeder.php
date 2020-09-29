@@ -16,12 +16,14 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('projects');
         Storage::deleteDirectory('pdfidentificacion');
         Storage::deleteDirectory('users');
+        Storage::deleteDirectory('imagebeneficiary');
         Storage::deleteDirectory('projects_images');
         Storage::deleteDirectory('music');
 
         Storage::makeDirectory('projects');
         Storage::makeDirectory('pdfidentificacion');
         Storage::makeDirectory('users');
+        Storage::makeDirectory('imagebeneficiary');
         Storage::makeDirectory('projects_images');
         Storage::makeDirectory('music');
 

@@ -28,6 +28,8 @@ class CreateProjectsTable extends Migration
                 \App\Project::ACEPTED,
             ])->default(\App\Project::REVISION);
             $table->mediumText('audio')->nullable();
+            $table->mediumText('audio_secundary_one')->nullable();
+            $table->mediumText('audio_secundary_two')->nullable();
             $table->timestamp('end_time')->nullable();
             $table->string('slug'); //ES LA URL AMIGABLE
             $table->unsignedInteger('category_id');
