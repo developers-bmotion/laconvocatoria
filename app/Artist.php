@@ -72,6 +72,10 @@ class Artist extends Model
     public function countries(){
         return $this->belongsTo(Country::class,'cities_id');
     }
+
+    public function city(){
+        return $this->belongsTo(City::class, 'cities_id');
+    }
     public function users(){
         return $this->belongsTo(User::class,'user_id');
     }

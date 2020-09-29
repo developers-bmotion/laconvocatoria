@@ -149,7 +149,7 @@
                                         <div class="col-md-6 mt-2">
                                             <label style="font-weight: bold">Ciudad:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
-                                                {{-- <p>{{$country->descripcion}}</p> --}}
+                                                {{$artist->city->descripcion}}</p>
                                             </div>
 
                                         </div>
@@ -185,9 +185,31 @@
 
                                         <div class="col-md-6 mt-2">
                                             <label style="font-weight: bold">Documento de identificación:</label>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#verpdfidentificacion">
+                                            <button type="button" class="btn btn-primary btn_pdf_asp" data-toggle="modal" data-target="#verpdfidentificacion">
                                                 Ver documento de identidad
                                             </button>
+                                            <div class="row drop_pdf_asp" style="display: none">
+                                                <div class="col">
+                                                    <div class="form-group m-form__group ">
+                                                        <div class="m-dropzone dropzone m-dropzone--success"
+                                                             action="inc/api/dropzone/upload.php"
+                                                             id="m-dropzone-three">
+                                                            <div
+                                                                class="m-dropzone__msg dz-message needsclick">
+                                                                <h3 class="m-dropzone__msg-title">{{ __('Actualizar Documento de identidad') }}</h3>
+                                                                <span
+                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        <i class="flaticon-edit ml-3 update_pdf_asp" style="color:#716aca; cursor:pointer;"></i>
+                                        <button type="button" class="btn btn-primary cancel_pdf_asp" style="display:none">Cancelar</button>
+
+
+
                                         </div>
                                         <div class="col-md-6 mt-2">
 
@@ -600,11 +622,34 @@
                                                                      </div>
                                                                  </div>
 
-                                                                 <div class="col-md-4 mt-2">
+                                                                 <div class="col-md-6 mt-2">
                                                                      <label style="font-weight: bold">Documento de identificación:</label>
-                                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pdfidentificacion{{$loop->iteration}}">
-                                                                         Ver documento de identidad
-                                                                       </button>
+
+                                                                       <button  type="button" class="btn btn-primary btn_pdf_team{{ $loop->iteration }}" data-toggle="modal" data-target="#pdfidentificacion{{$loop->iteration}}">
+                                                                        Ver documento de identidad
+                                                                    </button>
+                                                                    <div class="row drop_pdf_team{{ $loop->iteration }}" style="display: none" >
+                                                                        <div class="col">
+                                                                            <div class="form-group m-form__group ">
+                                                                                <div class="m-dropzone dropzone-team{{ $loop->iteration }} m-dropzone--success"
+                                                                                     action="inc/api/dropzone/upload.php"
+                                                                                     id="m-dropzone-three">
+                                                                                    <div
+                                                                                        class="m-dropzone__msg dz-message needsclick">
+                                                                                        <h3 class="m-dropzone__msg-title">{{ __('Actualizar Documento de identidad') }}</h3>
+                                                                                        <span
+                                                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                <i  class="flaticon-edit ml-3 update_pdf_team{{ $loop->iteration }}" style="color:#716aca; cursor:pointer;"></i>
+                                                                <button  type="button" class="btn btn-primary cancel_pdf_team{{ $loop->iteration }}" style="display:none">Cancelar</button>
+
+
+
                                                                  </div>
                                                              </div>
                                                          </div>
@@ -729,11 +774,32 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 mt-2">
+                                <div class="col-md-5 mt-2">
                                     <label style="font-weight: bold">Documento de identificación:</label>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pdfidentificacionBeneficiario">
+
+                                      <button type="button" class="btn btn-primary btn_pdf_ben" data-toggle="modal" data-target="#pdfidentificacionBeneficiario">
                                         Ver documento de identidad
-                                      </button>
+                                    </button>
+                                    <div class="row drop_pdf_ben" style="display: none">
+                                        <div class="col">
+                                            <div class="form-group m-form__group ">
+                                                <div class="m-dropzone dropzone-ben m-dropzone--success"
+                                                     action="inc/api/dropzone/upload.php"
+                                                     id="m-dropzone-three">
+                                                    <div
+                                                        class="m-dropzone__msg dz-message needsclick">
+                                                        <h3 class="m-dropzone__msg-title">{{ __('Actualizar Documento de identidad') }}</h3>
+                                                        <span
+                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                <i class="flaticon-edit ml-3 update_pdf_ben" style="color:#716aca; cursor:pointer;"></i>
+                                <button type="button" class="btn btn-primary cancel_pdf_ben" style="display:none">Cancelar</button>
+
                                 </div>
 
 
@@ -749,6 +815,7 @@
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLongTitle">
                                             Documento de {{ $artist->beneficiary[0]->name}}</h5>
+
                                         <button type="button" class="close" data-dismiss="modal"
                                             aria-label="Close">
                                             <span aria-hidden="true">×</span>
@@ -851,12 +918,12 @@
         jQuery(document).ready(function () {
             BootstrapDatepicker.init();
         });
-
+        // actualizar pdf aspirante
         new Dropzone('.dropzone', {
-            url: '{{ route('profile.photo.artist') }}',
-            acceptedFiles: 'image/*',
+            url: '{{ route('cedula.pdf.aspirante') }}',
+            acceptedFiles: '.pdf',
             maxFiles: 1,
-            paramName: 'photo',
+            paramName: 'pdf_cedula_name',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -869,12 +936,12 @@
         });
 
         /* Dropzone.autoDiscover = false; */
-
-        new Dropzone('.front_dropzone', {
-            url: '{{ route('front.photo.artist') }}',
-            acceptedFiles: 'image/*',
+        // actualizar pdf beneficiario
+        new Dropzone('.dropzone-ben', {
+            url: '{{ route('cedula.pdf.beneficiario') }}',
+            acceptedFiles: '.pdf',
             maxFiles: 1,
-            paramName: 'front_photo',
+            paramName: 'pdf_cedula_name',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -885,6 +952,27 @@
             }
 
         });
+
+        $.each( @json($artist->teams), function( key, value ) {
+        // actualizar pdf team
+        new Dropzone('.dropzone-team'+(key+1), {
+            url: '{{ route('cedula.pdf.team') }}',
+            acceptedFiles: '.pdf',
+            maxFiles: 1,
+            paramName: 'pdf_cedula_name',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (file, response) {
+
+                $('#inputImagenesPostPlan').val(response);
+                location.reload();
+            }
+
+        });
+        });
+
+
 
         Dropzone.autoDiscover = false;
 
@@ -912,5 +1000,73 @@
             // separateDialCode: true,
             utilsScript: "/backend/build/js/utils.js",
         });
+    </script>
+    {{-- editar identificacion aspirante --}}
+
+    <script>
+        $('.update_pdf_asp').click(function(){
+            $(this).hide();
+            $('.cancel_pdf_asp').show();
+
+            $('.drop_pdf_asp').show();
+            $('.btn_pdf_asp').hide();
+
+
+        });
+        $('.cancel_pdf_asp').click(function(){
+            $(this).hide();
+            $('.update_pdf_asp').show();
+            $('.drop_pdf_asp').hide();
+            $('.btn_pdf_asp').show();
+
+
+        });
+
+    </script>
+    {{-- editar identificacion beneficiario --}}
+    <script>
+        $('.update_pdf_ben').click(function(){
+            $(this).hide();
+            $('.cancel_pdf_ben').show();
+
+            $('.drop_pdf_ben').show();
+            $('.btn_pdf_ben').hide();
+
+
+        });
+        $('.cancel_pdf_ben').click(function(){
+            $(this).hide();
+            $('.update_pdf_ben').show();
+            $('.drop_pdf_ben').hide();
+            $('.btn_pdf_ben').show();
+
+
+        });
+
+    </script>
+    <script>
+        $.each( @json($artist->teams), function( key, value ) {
+//   alert('update_pdf_team'+(key+1));
+
+        $('.update_pdf_team'+(key+1)).click(function(){
+            $(this).hide();
+            $('.cancel_pdf_team'+(key+1)).show();
+
+            $('.drop_pdf_team'+(key+1)).show();
+            $('.btn_pdf_team'+(key+1)).hide();
+
+
+        });
+        $('.cancel_pdf_team'+(key+1)).click(function(){
+            $(this).hide();
+            $('.update_pdf_team'+(key+1)).show();
+            $('.drop_pdf_team'+(key+1)).hide();
+            $('.btn_pdf_team'+(key+1)).show();
+
+
+        });
+
+    });
+
     </script>
 @endsection
