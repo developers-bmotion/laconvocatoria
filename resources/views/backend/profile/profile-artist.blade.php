@@ -196,7 +196,7 @@
                                                              id="m-dropzone-three">
                                                             <div
                                                                 class="m-dropzone__msg dz-message needsclick">
-                                                                <h3 class="m-dropzone__msg-title">{{ __('Actualizar Documento de identidad') }}</h3>
+                                                                <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
                                                                 <span
                                                                     class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                             </div>
@@ -636,7 +636,7 @@
                                                                                      id="m-dropzone-three">
                                                                                     <div
                                                                                         class="m-dropzone__msg dz-message needsclick">
-                                                                                        <h3 class="m-dropzone__msg-title">{{ __('Actualizar Documento de identidad') }}</h3>
+                                                                                        <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
                                                                                         <span
                                                                                             class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                                     </div>
@@ -788,9 +788,8 @@
                                                      id="m-dropzone-three">
                                                     <div
                                                         class="m-dropzone__msg dz-message needsclick">
-                                                        <h3 class="m-dropzone__msg-title">{{ __('Actualizar Documento de identidad') }}</h3>
-                                                        <span
-                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                        <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
+                                                        <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -930,7 +929,28 @@
             success: function (file, response) {
 
                 $('#inputImagenesPostPlan').val(response);
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+              toastr.info("El documento se actualizo correctamente", "Información");
+              setTimeout(function(){
                 location.reload();
+                  }, 3000);
             }
 
         });
@@ -948,7 +968,29 @@
             success: function (file, response) {
 
                 $('#inputImagenesPostPlan').val(response);
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+              toastr.info("El documento se actualizo correctamente", "Información");
+              setTimeout(function(){
                 location.reload();
+                  }, 3000);
+
             }
 
         });
@@ -961,12 +1003,35 @@
             maxFiles: 1,
             paramName: 'pdf_cedula_name',
             headers: {
+                'id':value.id,
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success: function (file, response) {
 
                 $('#inputImagenesPostPlan').val(response);
+                // location.reload();
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+              toastr.info("El documento se actualizo correctamente", "Información");
+              setTimeout(function(){
                 location.reload();
+                  }, 3000);
             }
 
         });

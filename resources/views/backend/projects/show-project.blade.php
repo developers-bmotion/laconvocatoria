@@ -495,7 +495,7 @@
                                 <div class="col-11 player">
                                     <audio preload="auto" controls>
                                         <source src="{{ $project->audio }}">
-
+                                        {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
                                     </audio>
 
                                 </div>
@@ -902,6 +902,7 @@
     </script>
     <script>
         $('.update_audio').click(function(){
+
             $(this).hide();
             $('.cancel_audio').show();
 
@@ -926,17 +927,43 @@
 
     <script>
         var dropzone = new Dropzone('.dropzone', {
-            url: '{{route('add.project.audio')}}',
+            url: '{{route('update.audio')}}',
             acceptedFiles: 'audio/*',
             maxFiles: 1,
-            paramName: 'image',
+            paramName: 'audio',
             headers: {
+                'idproject':@json($project->id),
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success: function (file, response) {
                 $("#erroresImagen").text('');
                 $('#inputDBAudioAddProject').val(response);
                 $('#img_add_proyect').attr('src', response);
+                $('.update_audio').show();
+                $('.drop_audio').hide();
+                $('.player').show();
+                $('.cancel_audio').hide();
+
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+              toastr.info("El audio se actualizo correctamente", "Información");
+              window.location.reload();
             },
             error: function (file, e, i, o, u) {
                 $("#erroresImagen").text('');
