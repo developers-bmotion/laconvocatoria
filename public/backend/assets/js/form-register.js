@@ -92,8 +92,20 @@ function showInfoGroup() {
     console.log('es to es key press');
 }); */
 
+/* evento onChange de los select que contienen los departamentos */
+function onSelectDepartamentosChange(element, component ) {
+    console.log('element: ', element);
+    console.log('component: ', component);
+    $.get('/dashboard/get-municipios/' + $(element).val(), function(data) {
+        var html_select = '<option value="-1">Seleccione una opción</option>'
+        html_select += data.map( municipio => { return `<option value="${ municipio.id }">${ municipio.descripcion }</option>`; } ).join(' ');        
+        $( `.${ component }` ).html(html_select);  
+    });
+}
+
+
 /*  funciones para agragar un nuevo integrante  */
-var maxMember = 12;
+//var maxMember = 12;
 var currentMembers = 0;
 
 $("#event-add-max-members").click( function() {    
@@ -104,12 +116,12 @@ $("#event-add-max-members").click( function() {
     currentMembers = members;
     $("#m_section_1_content").empty(); // vaciar la vista
     
-    if (members > maxMember) { // validar el numero de integrantes maximo 12
+    /* if (members > maxMember) { // validar el numero de integrantes maximo 12
         $("#help-max-members").show();
         return;
     } else {
         $("#help-max-members").hide();
-    }
+    } */
 
     for(let i = 0; i < members; i++){
         addViewMembers(i);
@@ -169,7 +181,7 @@ function addViewFormMembers(member) {
                     <div class="form-group m-form__group row">
                         <div class="col-lg-6 m-form__group-sub">
                             <label class="form-control-label">Dirección de residencia *</label>
-                            <input type="text" name="integrantes['address_member']" class="form-control m-input" placeholder="" value="">
+                            <input type="text" name="integrantes[${member}][addressMember]" class="form-control m-input" placeholder="" value="">
                             <span class="m-form__help">Por favor ingrese dirección de residencia</span>
                         </div>
                     </div>
@@ -182,13 +194,13 @@ function addViewNameMembers(member) {  /* NOMBRES Y APELLIDOS */
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Nombre *</label>
-                    <input type="text" name="integrantes['name_member']"class="form-control m-input" placeholder="" value="">
+                    <input type="text" name="integrantes[${member}][nameMember]"class="form-control m-input" placeholder="" value="">
                     <span class="m-form__help">Por favor ingrese su nombre completo</span>
                 </div>
 
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Primer apellido *</label>
-                    <input type="text" name="integrantes['lastname_member']" class="form-control m-input" placeholder="" value="">
+                    <input type="text" name="integrantes[${member}][lastnameMember]" class="form-control m-input" placeholder="" value="">
                     <span class="m-form__help">Por favor ingrese su primer apellido</span>
                 </div>
             </div>`;
@@ -198,7 +210,7 @@ function addViewPhoneMembers(member) { /* SEGUNDO APELLIDO Y TÉLEFONO */
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Segundo apellido *</label>
-                    <input type="text" name="integrantes['second_lastname_member']" class="form-control m-input" placeholder="" value="">
+                    <input type="text" name="integrantes[${member}][secondLastnameMember]" class="form-control m-input" placeholder="" value="">
                     <span class="m-form__help">Por favor ingrese su segundo apellido</span>
                 </div>
 
@@ -208,7 +220,7 @@ function addViewPhoneMembers(member) { /* SEGUNDO APELLIDO Y TÉLEFONO */
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="la la-phone"></i></span>
                         </div>
-                        <input type="text" name="phone_member_${ member }" class="form-control m-input" placeholder="" value="">
+                        <input type="text" name="integrantes[${member}][phoneMember]" class="form-control m-input" placeholder="" value="">
                     </div>
                     <span class="m-form__help">Por favor ingrese su número de teléfono</span>
                 </div>
@@ -219,7 +231,7 @@ function addViewIdentificationMembers(member) { /* TIPO DE DOCUMENTO Y Nº IDENT
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Tipo de documento *</label>                        
-                    <select name="integrantes['document_type_member']" class="form-control m-input">
+                    <select name="integrantes[${member}][documentTypeMember]" class="form-control m-input">
                         ${ typeDocument.map( obj => { return `<option value="${ obj.id }">${ obj.document }</option>` } ).join(' ') }
                     </select>
                     <span class="m-form__help">Por favor seleccione una opción.</span>
@@ -227,7 +239,7 @@ function addViewIdentificationMembers(member) { /* TIPO DE DOCUMENTO Y Nº IDENT
 
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Nº de indentificación *</label>
-                    <input type="num" name="integrantes['identification_member']" class="form-control m-input" placeholder="" value="">                        
+                    <input type="num" name="integrantes[${member}][identificationMember]" class="form-control m-input" placeholder="" value="">                        
                     <span class="m-form__help">Por favor ingrese el número de indentificación</span>
                 </div>
             </div> `;
@@ -240,7 +252,7 @@ function addViewLocationMembers(member, tipo) { /* DEPARTAMENTO EXPED Y MUNICIPI
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Departamento de ${ tipoSelect } *</label>
                     <select onchange="eventOnChangeDepartamentos(this, ${ tipo }, ${ member })" id="select-control-departamentos-${ tipo }-${ member }" 
-                        name="integrantes['departamento_${ tipoSelect }_member']" class="form-control m-input">
+                        name="integrantes[${member}][departamento_${ tipoSelect }_member]" class="form-control m-input">
                         <option value="-1">Seleccione departamento</option>
                         ${ departamentos.map( dep => { return `<option value="${ dep.id }">${ dep.descripcion }</option>`; } ).join(' ') }
                     </select>
@@ -249,7 +261,7 @@ function addViewLocationMembers(member, tipo) { /* DEPARTAMENTO EXPED Y MUNICIPI
 
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Municipio de ${ tipoSelect } *</label>
-                    <select id="select-control-municipio-${ tipo }-${ member }" name="integrantes['municipio_${ tipoSelect }_member']" class="form-control m-input"></select>
+                    <select id="select-control-municipio-${ tipo }-${ member }" name="integrantes[${member}][municipio_${ tipoSelect }_member]" class="form-control m-input"></select>
                     <span class="m-form__help">Por favor seleccione una opción.</span>
                 </div>
             </div> `;
@@ -276,6 +288,12 @@ function addViewUploadArchiveMember(member) {
                             <span class="m-dropzone__msg-desc">Arrastra, o has click aqui para subir</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="col-lg-6 m-form__group-sub">
+                    <label class="form-control-label">Rol artistico</label>
+                    <input type="num" name="integrantes[${member}][rolMember]" class="form-control m-input" placeholder="" value="">                        
+                    <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Bocalista, Pianosta, etc.)</span>
                 </div>
             </div>`;
 }
@@ -337,3 +355,34 @@ $("#add-new-member").click( function(){
 
     if (numberMember < maxMember) $("#limit-members").hide();  
 } */
+
+
+/* funcion para validar el formulario */
+function validationForm() {
+    // name="accept-terms-conditions"  $(this).is(':checked')
+
+
+
+    ($("input[name='acceptTermsConditions']").is(':checked')) ? console.log('checkeado') : console.log(' nooooo checkeado')
+
+    return false
+}
+
+/* var m = messages: {
+    required: "This field is required.",
+    remote: "Please fix this field.",
+    email: "Please enter a valid email address.",
+    url: "Please enter a valid URL.",
+    date: "Please enter a valid date.",
+    dateISO: "Please enter a valid date (ISO).",
+    number: "Please enter a valid number.",
+    digits: "Please enter only digits.",
+    equalTo: "Please enter the same value again.",
+    maxlength: $.validator.format( "Please enter no more than {0} characters." ),
+    minlength: $.validator.format( "Please enter at least {0} characters." ),
+    rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
+    range: $.validator.format( "Please enter a value between {0} and {1}." ),
+    max: $.validator.format( "Please enter a value less than or equal to {0}." ),
+    min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
+    step: $.validator.format( "Please enter a multiple of {0}." )
+}; */
