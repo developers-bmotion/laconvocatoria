@@ -161,6 +161,15 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                             </select>
                         </div>
 
+                        <div class="form-group m-form__group {{$errors->has('tipoCurador')? 'has-danger':''}}">
+                            <label for="exampleSelect1">Tipo de curador</label>
+                            <select class="form-control m-input m-input--air" id="tipoCurador" name="tipoCurador" required>
+                                <option value="0">Seleccione</option>
+                                <option value="1">Primer curador</option>
+                                <option value="2">Segundo curador</option>
+                            </select>
+                            <div style="display:none; color:#f66e84" class="form-control-feedback tipoErr">*Debe llenar el campo</div>
+                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -192,8 +201,15 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 });
             },500);
         };
-        @if (count($errors) > 0)
+        @if (count($errors) > 0 )
         $('#modal_add_management').modal('show');
+        if($('#tipoCurador').val() == 0){
+        $('.tipoErr').show();
+
+        }else{
+            $('.tipoErr').hide();
+        }
+
         startSelectTag();
         @endif
         $('#modalAddManager').click(function () {

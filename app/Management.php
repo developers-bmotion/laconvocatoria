@@ -38,7 +38,7 @@ use Illuminate\Database\Eloquent\Model;
 class Management extends Model
 {
     protected $table = 'managements';
-    protected $fillable = ['user_id','company','description','country_id','website_url'];
+    protected $fillable = ['user_id','company','description','country_id','website_url','tipoCurador'];
     public function projects(){
         return $this->belongsToMany(Project::class);
     }

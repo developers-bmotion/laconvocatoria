@@ -22,11 +22,15 @@ class ManagementsController extends Controller
     }
 
     public function store(Request $request){
+
+        // dd($request->get('tipoCurador'));
         $this->validate($request,[
             'name' => 'required',
             'last_name' => 'required',
             'email' => 'required|string|email|max:255|unique:users',
-        ]);
+            'tipoCurador' => 'required',
+            ]);
+            // dd($request);
         $password = trim(str_random(8));
         $pass = bcrypt($password);
         $add_user = User::create([
@@ -40,8 +44,9 @@ class ManagementsController extends Controller
         \Mail::to($add_user->email)->send(new NewManagerAdmin($add_user->email,$password));
         $add_management = Management::create([
             'user_id' => $add_user->id,
-            // 'country_id' => $request->get('country_id')
+            'tipoCurador' => $request->get('tipoCurador')
         ]);
+        // dd($add_management);
         $add_user->roles()->attach(['4']);
         $add_management->categories()->attach($request->get('insteres'));
 

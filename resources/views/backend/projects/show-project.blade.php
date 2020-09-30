@@ -445,6 +445,7 @@
                                         </div>
 
 
+
                                         @if($artist->artists[0]->township)
                                             <div class="col-md-4 mt-2">
                                                 <label style="font-weight: bold">Vereda/Corregimiento:</label>
@@ -474,6 +475,15 @@
                                                 Ver documento de identidad
                                             </button>
                                         </div>
+                                        @if ($artist->artists[0]->beneficiary[0]->picture)
+
+                                        <div class="col-md-4 mt-2">
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <img style="border-radius:8rem; width:7rem" src="{{$artist->artists[0]->beneficiary[0]->picture}}" >
+                                            </div>
+
+                                        </div>
+                                        @endif
 
 
                                     </div>
