@@ -224,13 +224,6 @@
                                         </div>
                                         <div class="col-md-6 mt-2">
 
-                                            <label style="font-weight: bold">{{ __('biografia') }}:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p style="text-align: justify">{{ $artist->biography }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mt-2">
-
                                             <label style="font-weight: bold">{{ __('Departamento de Expedición') }}:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
                                                 <p style="text-align: justify">{{ $artist->expeditionPlace->departaments->descripcion }}</p>
@@ -249,8 +242,6 @@
                                         </div>
                                         @endif
                                         <div class="col-md-6 mt-2">
-                                        </div>
-                                        <div class="col-md-6 mt-2">
 
                                             <label style="font-weight: bold">{{ __('Ciudad de Expedición') }}:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
@@ -258,10 +249,15 @@
                                             </div>
                                             {{-- @dd($artist); --}}
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mt-2">
 
-
-
-
+                                            <label style="font-weight: bold">{{ __('biografia') }}:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p style="text-align: justify">{{ $artist->biography }}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 {{-- <form method="post" action="{{ route('update.profile.artist',auth()->user()->id) }}"
