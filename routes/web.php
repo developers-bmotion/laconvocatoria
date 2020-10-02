@@ -169,6 +169,8 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     //RUTAS PARA AGREGAR PROYECTOS
     Route::get('/new-project','AddProjectController@index')->name('add.project');
     Route::post('/add-project-audio','AddProjectController@upload_image')->name('add.project.audio');
+    Route::post('/add-audio-one','AddProjectController@audio_one')->name('add.audio.one');
+    Route::post('/add-audio-two','AddProjectController@audio_two')->name('add.audio.two');
     Route::post('/add-project','AddProjectController@store')->name('add.store.project');
     Route::get('/categories_by_id/{id_category}' , 'AddProjectController@categoryById');
 

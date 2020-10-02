@@ -121,8 +121,9 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
 
                                 <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
                                     <div class="row p-3">
-                                        @forelse($managements as $management)
-                                        @if($management->tipoCurador == 2)
+                                        @forelse($managementstwo as $management)
+                                        {{-- @dd($management->tipoCurador) --}}
+
                                             <div class="col-lg-4">
                                                 <div class="m-portlet m-portlet--full-height  ">
                                                     <div class="m-portlet__body">
@@ -155,12 +156,11 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                     </div>
                                                 </div>
                                             </div>
-                                            @endif
                                         @empty
                                             <h4 class="text-center">{{ __('no_hay_registros') }}</h4>
                                         @endforelse
                                     </div>
-                                    {{-- {{ $managements->links() }} --}}
+                                    {{ $managementstwo->links() }}
                                 </div>
                             </div>
                         </div>

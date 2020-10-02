@@ -14,11 +14,13 @@ class ManagementsController extends Controller
 {
     public function index(){
 
-        $managements = Management::with('users')->paginate(6);
+        $managements = Management::where('tipoCurador', '=' , 1)->with('users')->paginate(6);
+        $managementstwo = Management::where('tipoCurador', '=' , 2)->with('users')->paginate(6);
+        // $managements = Management::with('users')->paginate(6);
         // $countries = Country::all();
         $categories = Category::all();
         // return view('backend.admin.management-admin',compact('managements','countries','categories'));
-        return view('backend.admin.management-admin',compact('managements','categories'));
+        return view('backend.admin.management-admin',compact('managements','managementstwo','categories'));
     }
 
     public function store(Request $request){
@@ -29,7 +31,7 @@ class ManagementsController extends Controller
             'last_name' => 'required',
             'email' => 'required|string|email|max:255|unique:users',
             'tipoCurador' => 'required',
-            ]);
+         ]);
             // dd($request);
         $password = trim(str_random(8));
         $pass = bcrypt($password);
