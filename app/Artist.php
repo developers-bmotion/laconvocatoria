@@ -108,6 +108,9 @@ class Artist extends Model
         return $this->hasMany(Team::class,'artist_id');
     }
 
+    public function expeditionPlace(){
+        return $this->belongsTo(City::class, 'expedition_place');
+    }
     /**
      * Consultas $
      */
