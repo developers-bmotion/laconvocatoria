@@ -35,7 +35,7 @@ class ProfileController extends Controller
 
 
         /*   dd($departamentos); */
-        $artist = Artist::where('user_id', auth()->user()->id)->with('city','users','teams','artistType','personType','beneficiary.documentType','beneficiary.city','beneficiary.expeditionPlace','teams.expeditionPlace')->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->with('city.departaments','users','teams','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','teams.expeditionPlace.departaments','expeditionPlace.departaments')->first();
         return view('backend.profile.profile-artist', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
 
@@ -68,33 +68,33 @@ class ProfileController extends Controller
     public function profile_update_artist(Request $request, $id_artis)
     {
         $aspirante = (object) $request->aspirante;
-        
+
         if ($request->lineaConvocatoria == '1') {
             /* Este caso es para solistas */ // $date = new Carbon( $request->input('currentDate', Carbon::now()) );
-            
-            if ($request->actuaraComo == '1'){ 
+
+            if ($request->actuaraComo == '1'){
                 /* solo se guarda el aspirante */
                 dd('aspirante');
 
             } else {
                 /* se debe guardar los datos del representante y el aspirante */
-                
+
                 $beneficiario = (object) $request->beneficiario;
                 dd('representante');
 
             }
-        } else { 
+        } else {
             /* Para este caso se debe guardar el representante y los integrantes del grupo */ // gettype($request->integrantes)
-            
+
             foreach ($request->integrantes as $integrante) {
                 dd( $integrante['nameMember'] ); // aceder a los datos
             }
         }
 
 
-        
+
         /*=============================================
-            AGREGAR ASPIRANTE 
+            AGREGAR ASPIRANTE
         =============================================*/
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $request->get('nickname'),

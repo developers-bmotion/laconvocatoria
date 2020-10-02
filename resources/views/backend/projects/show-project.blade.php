@@ -319,7 +319,15 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Ciudad:</label>
+                                        <label style="font-weight: bold">Departamento de nacimiento:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{$country->departaments->descripcion}}</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <label style="font-weight: bold">Ciudad de nacimiento:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             <p>{{$country->descripcion}}</p>
                                         </div>
@@ -360,6 +368,21 @@
                                             Ver documento de identidad
                                         </button>
                                     </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label style="font-weight: bold">Departamento de Expedición:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{$artist->artists[0]->expeditionPlace->departaments->descripcion}}</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label style="font-weight: bold">Ciudad de Expedición:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{$artist->artists[0]->expeditionPlace->descripcion}}</p>
+                                        </div>
+
+                                    </div>
+
                                     @if($artist->artists[0]->users->phone_2)
                                         <div class="col-md-6 mt-2">
                                             <label style="font-weight: bold">Otro teléfono:</label>
@@ -437,7 +460,14 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4 mt-2">
-                                            <label style="font-weight: bold">Ciudad:</label>
+                                            <label style="font-weight: bold">Departamento de nacimiento:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p>{{ $artist->artists[0]->beneficiary[0]->city->departaments->descripcion}}</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+                                            <label style="font-weight: bold">Ciudad de nacimiento:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
                                                 <p>{{ $artist->artists[0]->beneficiary[0]->city->descripcion}}</p>
                                             </div>
@@ -468,13 +498,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4 mt-2">
-                                            <label style="font-weight: bold">Documento de identificación:</label>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#pdfidentificacionBeneficiario">
-                                                Ver documento de identidad
-                                            </button>
-                                        </div>
                                         @if ($artist->artists[0]->beneficiary[0]->picture)
 
                                         <div class="col-md-4 mt-2">
@@ -484,6 +507,31 @@
 
                                         </div>
                                         @endif
+
+                                        <div class="col-md-4 mt-2">
+                                            <label style="font-weight: bold">Documento de identificación:</label>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#pdfidentificacionBeneficiario">
+                                                Ver documento de identidad
+                                            </button>
+                                        </div>
+
+                                        <div class="col-md-4 mt-2">
+
+                                            <label style="font-weight: bold">{{ __('Departamento de expedición') }}:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+
+                                            <label style="font-weight: bold">{{ __('Ciudad de expedición') }}:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->expeditionPlace->descripcion}}</p>
+                                            </div>
+                                        </div>
+
+
 
 
                                     </div>
@@ -604,14 +652,7 @@
                                                                 <p>{{  Carbon\Carbon::parse($team->birthday)->formatLocalized('%d de %B de %Y') }}</p>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4 mt-2">
-                                                            <label style="font-weight: bold">Lugar de
-                                                                expedición:</label>
-                                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                                <p>{{ $team->expeditionPlace->descripcion}}</p>
-                                                            </div>
 
-                                                        </div>
 
 
                                                         {{-- @if($artist->artists[0]->township)
@@ -650,6 +691,22 @@
                                                                     data-target="#pdfidentificacion{{$loop->iteration}}">
                                                                 Ver documento de identidad
                                                             </button>
+                                                        </div>
+                                                        <div class="col-md-4 mt-2">
+                                                            <label style="font-weight: bold">Departamento de
+                                                                expedición:</label>
+                                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                                <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-4 mt-2">
+                                                            <label style="font-weight: bold">Ciudad de
+                                                                expedición:</label>
+                                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                                <p>{{ $team->expeditionPlace->descripcion}}</p>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
