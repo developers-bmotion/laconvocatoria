@@ -55,6 +55,7 @@ class ProfileController extends Controller
 
         /*   dd($departamentos); */
         $artist = Artist::where('user_id', auth()->user()->id)->with('users')->first();
+        //dd($artist);
         return view('backend.register.register-form', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
 
@@ -68,13 +69,41 @@ class ProfileController extends Controller
     public function profile_update_artist(Request $request, $id_artis)
     {
         $aspirante = (object) $request->aspirante;
+
+        //dd($request->lineaConvocatoria);
         
         if ($request->lineaConvocatoria == '1') {
             /* Este caso es para solistas */ // $date = new Carbon( $request->input('currentDate', Carbon::now()) );
             
             if ($request->actuaraComo == '1'){ 
                 /* solo se guarda el aspirante */
-                dd('aspirante');
+                Artist::where('user_id', '=', $id_artis)->update([
+                    'nickname' => $aspirante->name,
+                    'biography' => $aspirante->biografia,
+                    'document_type' => $aspirante->documentType,
+                    'identification' => $aspirante->identificacion,
+                    'user_id' => auth()->user()->id,
+                    'adress' => $aspirante->address,
+                    'cities_id' => $aspirante->municipioNacimiento,
+                    'person_types_id' => $request->lineaConvocatoria,
+                    'artist_types_id' => $request->actuaraComo,
+                    //'level_id' => $request->get('level_id'),
+                    'expedition_place' => $aspirante->municipioExpedida,
+                    //'birthdate' => Carbon::parse($request->get('birthdate')),
+                    //'age' => $request->get('age')
+                    'township' => $aspirante->vereda,
+                ]);
+        
+                User::where('id', '=', $id_artis)->update([
+                    'name' => $aspirante->name,
+                    'last_name' => $aspirante->lastname,
+                    'second_last_name' => $aspirante->secondLastname,
+                    'phone_1' => $aspirante->phone,
+                    //'phone_2' => $request->get('phone_2'),
+                ]);
+
+                // Route::get('/profile','ProfileController@index_artist')->name('profile.artist');
+                return redirect()->route('profile.artist');
 
             } else {
                 /* se debe guardar los datos del representante y el aspirante */
@@ -96,7 +125,7 @@ class ProfileController extends Controller
         /*=============================================
             AGREGAR ASPIRANTE 
         =============================================*/
-        Artist::where('user_id', '=', $id_artis)->update([
+        /* Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $request->get('nickname'),
             'biography' => ucfirst($request->get('biography')),
             'level_id' => $request->get('level_id'),
@@ -109,25 +138,25 @@ class ProfileController extends Controller
             'artist_types_id' => $request->get('artist_type_id'),
             'level_id' => $request->get('level_id'),
             'expedition_place' => $request->get('expedition_place'),
-            /* 'birthdate' => Carbon::parse($request->get('birthdate')), */
+            'birthdate' => Carbon::parse($request->get('birthdate')),
             'age' => $request->get('age'),
-        ]);
+        ]); */
 
-        User::where('id', '=', $id_artis)->update([
+        /* User::where('id', '=', $id_artis)->update([
             'name' => $request->get('name'),
             'last_name' => $request->get('lastname'),
             'second_last_name' => $request->get('second_last_name'),
             'phone_1' => $request->get('phone_1'),
-            /* 'phone_2' => $request->get('phone_2'), */
-        ]);
+            'phone_2' => $request->get('phone_2'),
+        ]); */
 
-        $artist = Artist::select('id')->where('user_id', $id_artis)->first();
+        //$artist = Artist::select('id')->where('user_id', $id_artis)->first();
 
 
         /*=============================================
             AGREGAR MENOR DE EDAD NIÑO
             =============================================*/
-        $sitieneartist = null;
+        /* $sitieneartist = null;
         $sitieneartist = Beneficiary::where('artist_id', $artist)->first();
 
         if ($sitieneartist) {
@@ -163,7 +192,7 @@ class ProfileController extends Controller
                 'artist_id' =>  $artist->id
 
             ]);
-        }
+        } */
         /* alert()->success(__('perfil_actualizado'), __('muy_bien'))->autoClose(3000);
         $count_project = count($project_exist->projects);
         if ($count_project >= 1) {

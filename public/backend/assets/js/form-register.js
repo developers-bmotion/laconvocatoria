@@ -15,10 +15,7 @@ $('#select-linea-convocatoria').on('change', function() {
                 $("#select-actuara-como option[value='3']").hide(); 
                 $("#select-actuara-como").val("-1");    
             break;
-        case '2': $("#content-select-form-actuara-como").show();
-                /* $("#select-actuara-como option[value='1']").hide();
-                $("#select-actuara-como option[value='2']").hide();
-                $("#select-actuara-como option[value='3']").show(); */ 
+        case '2': $("#content-select-form-actuara-como").show();                
                 showInfoGroup()
                 $("#select-actuara-como").val("3");    
                 $("#select-actuara-como").prop('disabled', true);
@@ -35,7 +32,9 @@ function hideContentInfo() {
 }
 
 /* SELECT ACTUARÁ COMO PARA MOSTRAR CONTENIDO */
+var actuaraComo = 0;
 $('#select-actuara-como').on('change', function() {
+    actuaraComo = $(this).val();
     switch ( $(this).val() ) {
         case '-1': hideContentInfo()
             break;
@@ -51,12 +50,6 @@ $('#select-actuara-como').on('change', function() {
                 $('#content-informacion-grupo-musical').hide();
                 $('#btn-enviar-datos').show();
             break;
-        /* case '3': $('#title-info-aspirante').html('Información del representante para el grupo');
-                $('#content-informacion-aspirante').show();
-                $('#content-informacion-menor-edad').hide();
-                $('#content-informacion-grupo-musical').show();
-                $('#btn-enviar-datos').show(); 
-            break;*/
     }
 });
 
@@ -69,43 +62,33 @@ function showInfoGroup() {
     $('#btn-enviar-datos').show();
 }
 
-/* funcion para mostrar las vistas dependiendo de la opcion elegida: solista o grupo */
-/* function showContentInfo() {
-    console.log('lineaConvocatoria:: ', lineaConvocatoria);
-    if (lineaConvocatoria === '1') {
-        $('#content-informacion-aspirante').show();
-        $('#content-informacion-menor-edad').show();
-        $('#content-informacion-grupo-musical').hide();
-        return
-    } 
-
-    if (lineaConvocatoria === '2') {
-        $('#content-informacion-aspirante').show();
-        $('#content-informacion-menor-edad').hide();
-        $('#content-informacion-grupo-musical').show();
-    }     
-} */
-
-
-
-/* $("#input-max-members").keypress( function(){
-    console.log('es to es key press');
-}); */
 
 /* evento onChange de los select que contienen los departamentos */
 function onSelectDepartamentosChange(element, component ) {
-    console.log('element: ', element);
-    console.log('component: ', component);
     $.get('/dashboard/get-municipios/' + $(element).val(), function(data) {
         var html_select = '<option value="-1">Seleccione una opción</option>'
         html_select += data.map( municipio => { return `<option value="${ municipio.id }">${ municipio.descripcion }</option>`; } ).join(' ');        
         $( `.${ component }` ).html(html_select);  
     });
+    console.log('tagname: ', $(element).attr('name'));
+
+    let tags = $(element).attr('name');
+    let arrayTags = tags.split('[')
+    let nameTag = '[' + arrayTags[1];
+    validateFormSelect(arrayTags[0], nameTag); // realizar validacion
+}
+
+/* evento onChange de los select que contienen los municipios */
+function onSelectMunicipiosChange(element) {
+    let tags = $(element).attr('name');
+    let arrayTags = tags.split('[')
+    let nameTag = '[' + arrayTags[1];
+    console.log('name tag:  ', arrayTags, nameTag);
+    validateFormSelect(arrayTags[0], nameTag); // realizar validacion
 }
 
 
 /*  funciones para agragar un nuevo integrante  */
-//var maxMember = 12;
 var currentMembers = 0;
 
 $("#event-add-max-members").click( function() {    
@@ -116,13 +99,6 @@ $("#event-add-max-members").click( function() {
     currentMembers = members;
     $("#m_section_1_content").empty(); // vaciar la vista
     
-    /* if (members > maxMember) { // validar el numero de integrantes maximo 12
-        $("#help-max-members").show();
-        return;
-    } else {
-        $("#help-max-members").hide();
-    } */
-
     for(let i = 0; i < members; i++){
         addViewMembers(i);
     }
@@ -299,90 +275,232 @@ function addViewUploadArchiveMember(member) {
 }
 
 
+/* contenido para validar el formulario */
+var messages = {
+    required: "Este campo es requerido.",
+    email: "Por favor, ingrese una dirección de correo electrónico válida.",
+    url: "Por favor ingrese un URL válida.",
+    date: "Por favor ingrese una fecha valida.",
+    number: "Por favor ingrese un número valido.",
+    digits: "Por favor ingrese solo dígitos.",
+};
+const fieldsInputs = {
+    aspirante_name: false,
+    aspirante_lastname: false,
+    aspirante_secondLastname: false,
+    aspirante_phone: false,
+    aspirante_documentType: false,
+    aspirante_identificacion: false,
+    aspirante_departamentoExpedida: false,
+    aspirante_municipioExpedida: false,
+    aspirante_birthdate: false,
+    aspirante_biografia: false,
+    aspirante_departamentoNacimiento: false,
+    aspirante_municipioNacimiento: false,
+    aspirante_address: false,
+    aspirante_vereda: false,
+    beneficiario_name: false,
+    beneficiario_lastname: false,
+    beneficiario_secondLastname: false,
+    beneficiario_phone: false,
+    beneficiario_documentType: false,
+    beneficiario_identificacion: false,
+    beneficiario_departamentoExpedida: false,
+    beneficiario_municipioExpedida: false,
+    beneficiario_birthdate: false,
+    beneficiario_biografia: false,
+    beneficiario_departamentoNacimiento: false,
+    beneficiario_municipioNacimiento: false,
+    beneficiario_address: false,
+    beneficiario_vereda: false,
+}
 
+/* evento para realizar las validaciones del formulario */
+function validationForm() {
+    let validate = false;
 
+    /* validar inputs */
+    validateFormInputs('aspirante', 'name');
+    validateFormInputs('aspirante', 'lastname');
+    validateFormInputs('aspirante', 'secondLastname'); 
+    validateFormInputs('aspirante', 'phone'); 
+    validateFormInputs('aspirante', 'identificacion'); 
+    validateFormInputs('aspirante', 'address'); 
+    validateFormInputs('aspirante', 'birthdate'); 
 
-/*  funcion para agragar un nuevo integrante  */
-/* var listElementMembers = []; 
-var numberMember = 0;
+    /* validar selects  */
+    //validateFormSelect('aspirante', 'documentType'); 
+    validateFormSelect('aspirante', '[departamentoExpedida]'); 
+    validateFormSelect('aspirante', '[municipioExpedida]');
+    validateFormSelect('aspirante', '[departamentoNacimiento]');
+    validateFormSelect('aspirante', '[municipioNacimiento]');
 
-$("#add-new-member").click( function(){
-    numberMember++
-    // validar el numero de integrantes maximo 12
-    if (numberMember > (maxMember - 1)) {
-        $("#limit-members").show();
-        numberMember--;
-        return;
+    if (lineaConvocatoria === '1' &&  actuaraComo === '1') {
+        validate = validateAspirante();
+    } else if (lineaConvocatoria === '1' &&  actuaraComo === '2') {
+        console.log('validar con beneficiario');
+        /* validar inputs */
+        validateFormInputs('beneficiario', 'name');
+        validateFormInputs('beneficiario', 'lastname');
+        validateFormInputs('beneficiario', 'secondLastname'); 
+        validateFormInputs('beneficiario', 'phone'); 
+        validateFormInputs('beneficiario', 'identificacion'); 
+        validateFormInputs('beneficiario', 'address'); 
+        validateFormInputs('beneficiario', 'birthdate'); 
+
+        /* validar selects  */
+        //validateFormSelect('beneficiario', 'documentType');   
+        validateFormSelect('beneficiario', '[departamentoExpedida]'); 
+        validateFormSelect('beneficiario', '[municipioExpedida]');
+        validateFormSelect('beneficiario', '[departamentoNacimiento]');
+        validateFormSelect('beneficiario', '[municipioNacimiento]');
+
+        if (validateAspirante() && validateBeneficiario()) validate = true;
+    } else {
+        validate = validateAspirante();
+        // falata validar el grupo
     }
     
-    var newItem = `<div id="member-${numberMember}" class="m-accordion__item">
-                        <div class="m-accordion__item-head collapsed" role="tab" id="section_members_head_${numberMember}" data-toggle="collapse" href="#section_members_body_${numberMember}">
-                            <span class="m-accordion__item-title" style="width: 90%;">Datos de la Persona</span>
-                            <span class="m-accordion__item-mode"></span>
-                        </div>
-                        <div class="m-accordion__item-body collapse" id="section_members_body_${numberMember}" role="tabpanel" aria-labelledby="section_members_head_${numberMember}" data-parent="#m_section_1_content">
-                            <div class="m-accordion__item-content">
-                                <p>
-                                parte dos
-                                </p>                                                
-                            </div>                                                      
-                        </div>                        
-                    </div>`;
+    console.log('antes::: ', validate)    
+    if (validateTermsCondition() && validate) validate = true;
+    console.log('despues::: ', validate)
 
-    $("#m_section_1_content").append(newItem);    
-    listElementMembers.push($(`#member-${numberMember}`));
-}); */
+    //return validate;
+    return false;
+}
 
-/* metodo para eliminar miembros del grupo */
-/* function deleteMember(index) {
-    if (listElementMembers.length === 0) return
-
-    let elementDelete;
-    let pos = (index - 1)
-    let posDelete = -1; 
-
-    for (i = 0; i < listElementMembers.length; i++){
-        if (i === pos){
-            elementDelete = listElementMembers[i]
-            posDelete = i
-            break
-        }
+const validateAspirante = () => {
+    if (fieldsInputs.aspirante_name && fieldsInputs.aspirante_lastname && fieldsInputs.aspirante_secondLastname
+        && fieldsInputs.aspirante_phone && fieldsInputs.aspirante_identificacion && fieldsInputs.aspirante_address
+        && fieldsInputs.aspirante_departamentoExpedida && fieldsInputs.aspirante_municipioExpedida 
+        && fieldsInputs.aspirante_departamentoNacimiento && fieldsInputs.aspirante_municipioNacimiento
+        && fieldsInputs.aspirante_birthdate) {
+        return true;
     }
 
-    listElementMembers.splice(posDelete, 1)
-    elementDelete.remove();  
-    numberMember = numberMember - 1
+    return false;
+}
 
-    if (numberMember < maxMember) $("#limit-members").hide();  
-} */
-
-
-/* funcion para validar el formulario */
-function validationForm() {
-    // name="accept-terms-conditions"  $(this).is(':checked')
-
-
-
-    ($("input[name='acceptTermsConditions']").is(':checked')) ? console.log('checkeado') : console.log(' nooooo checkeado')
-
+const validateBeneficiario = () => {
+    if (fieldsInputs.beneficiario_name && fieldsInputs.beneficiario_lastname && fieldsInputs.beneficiario_secondLastname
+        && fieldsInputs.beneficiario_phone && fieldsInputs.beneficiario_identificacion && fieldsInputs.beneficiario_address 
+        && fieldsInputs.beneficiario_departamentoExpedida && fieldsInputs.beneficiario_municipioExpedida 
+        && fieldsInputs.beneficiario_departamentoNacimiento && fieldsInputs.beneficiario_municipioNacimiento) {
+        return true;
+    }
+    
     return false
 }
 
-/* var m = messages: {
-    required: "This field is required.",
-    remote: "Please fix this field.",
-    email: "Please enter a valid email address.",
-    url: "Please enter a valid URL.",
-    date: "Please enter a valid date.",
-    dateISO: "Please enter a valid date (ISO).",
-    number: "Please enter a valid number.",
-    digits: "Please enter only digits.",
-    equalTo: "Please enter the same value again.",
-    maxlength: $.validator.format( "Please enter no more than {0} characters." ),
-    minlength: $.validator.format( "Please enter at least {0} characters." ),
-    rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
-    range: $.validator.format( "Please enter a value between {0} and {1}." ),
-    max: $.validator.format( "Please enter a value less than or equal to {0}." ),
-    min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
-    step: $.validator.format( "Please enter a multiple of {0}." )
-}; */
+/* funcion que realiza las validaciones segun el campo input */
+const validateFormInputs = (tipo, targetName) => {  
+    switch (`${ tipo }[${ targetName }]`) {
+        case `${ tipo }[name]`:
+            validateFields('input', `${ tipo }[name]`, `${ tipo }_name`)
+            break;
+        case `${ tipo }[lastname]`: 
+            validateFields('input', `${ tipo }[lastname]`, `${ tipo }_lastname`)
+            break;
+        case `${ tipo }[secondLastname]`: 
+            validateFields('input', `${ tipo }[secondLastname]`, `${ tipo }_secondLastname`)
+            break;
+        case `${ tipo }[phone]`: 
+            validateFields('input', `${ tipo }[phone]`, `${ tipo }_phone`)
+            break;
+        case `${ tipo }[identificacion]`: 
+            validateFields('input', `${ tipo }[identificacion]`, `${ tipo }_identificacion`)
+            break;
+        case `${ tipo }[address]`: 
+            validateFields('input', `${ tipo }[address]`, `${ tipo }_address`)
+            break;        
+        case `${ tipo }[birthdate]`: 
+            validateFields('input', `${ tipo }[birthdate]`, `${ tipo }_birthdate`)
+            break;        
+    }
+}
+
+/* funcion que realiza las validaciones segun el campo select */
+const validateFormSelect = (type, targetName) => { 
+    switch (`${ type }${ targetName }`) {
+        /* case 'aspirante[documentType]':
+            validateFieldsSelect('aspirante[documentType]', 'aspirante_documentType')
+            break; */
+        case `${ type }[departamentoExpedida]`: 
+            validateFieldsSelect(`${ type }[departamentoExpedida]`, `${ type }_departamentoExpedida`)
+            break;        
+        case `${ type }[municipioExpedida]`: 
+            validateFieldsSelect(`${ type }[municipioExpedida]`, `${ type }_municipioExpedida`)
+            break;        
+        case `${ type }[departamentoNacimiento]`: 
+            validateFieldsSelect(`${ type }[departamentoNacimiento]`, `${ type }_departamentoNacimiento`)
+            break;        
+        case `${ type }[municipioNacimiento]`: 
+            validateFieldsSelect(`${ type }[municipioNacimiento]`, `${ type }_municipioNacimiento`)
+            break;       
+    }
+}
+
+/* funcion que realiza la accion de poner o quitar el error al campo input */
+const validateFields = (type, input, campo) => {
+    if ( $(`${ type }[name='${ input }']`).val() === '' ){  
+        $(`#content-${ campo }`).addClass('has-danger');
+        $(`#error-${ campo }`).show();
+        $(`#error-${ campo }`).html(messages.required);
+        fieldsInputs[campo] = false;
+    } else {
+        $(`#content-${ campo }`).removeClass('has-danger');
+        $(`#error-${ campo }`).hide();
+        fieldsInputs[campo] = true;
+    }
+}
+
+/* funcion que realiza la accion de poner o quitar el error al campo select */
+const validateFieldsSelect = (input, campo) => {
+    console.log('llega:: ', input, campo)
+    if ($(`select[name='${ input }']`).val() == null || $(`select[name='${ input }']`).val() === '-1' 
+        || $(`select[name='${ input }']`).val() === '' || $(`select[name='${ input }']`).val() === 'undefined'){  
+            console.log('llega:: if')
+        $(`#content-${ campo }`).addClass('has-danger');
+        $(`#error-${ campo }`).show();
+        $(`#error-${ campo }`).html(messages.required);
+        fieldsInputs[campo] = false;
+    } else {
+        console.log('llega:: else')
+        $(`#content-${ campo }`).removeClass('has-danger');
+        $(`#error-${ campo }`).hide();
+        fieldsInputs[campo] = true;
+    }
+}
+
+const validateTermsCondition = () => {
+    if ( $("input[name='acceptTermsConditions']").is(':checked') ) {
+        $('#content-acceptTermsConditions').removeClass('has-danger');
+        $('#error-acceptTermsConditions').hide();
+        return true;
+    } else {
+        $('#content-acceptTermsConditions').addClass('has-danger');
+        $('#error-acceptTermsConditions').show();
+        $('#error-acceptTermsConditions').html(messages.required);
+        return false;       
+    }
+}
+
+/* evento onkeyup de los inputs aspirante */
+$("input[name='aspirante[name]']").keyup( () => validateFormInputs('aspirante', 'name') );
+$("input[name='aspirante[lastname]']").keyup( () => validateFormInputs('aspirante', 'lastname') );
+$("input[name='aspirante[secondLastname]']").keyup( () => validateFormInputs('aspirante', 'secondLastname') );
+$("input[name='aspirante[phone]']").keyup( () => validateFormInputs('aspirante', 'phone') );
+$("input[name='aspirante[identificacion]']").keyup( () => validateFormInputs('aspirante', 'identificacion') );
+$("input[name='aspirante[address]']").keyup( () => validateFormInputs('aspirante', 'address') );
+$("input[name='aspirante[birthdate]']").change( () => validateFormInputs('aspirante', 'birthdate') );
+
+/* evento onkeyup de los inputs beneficiario */
+$("input[name='beneficiario[name]']").keyup( () => validateFormInputs('beneficiario', 'name') );
+$("input[name='beneficiario[lastname]']").keyup( () => validateFormInputs('beneficiario', 'lastname') );
+$("input[name='beneficiario[secondLastname]']").keyup( () => validateFormInputs('beneficiario', 'secondLastname') );
+$("input[name='beneficiario[phone]']").keyup( () => validateFormInputs('beneficiario', 'phone') );
+$("input[name='beneficiario[identificacion]']").keyup( () => validateFormInputs('beneficiario', 'identificacion') );
+$("input[name='beneficiario[address]']").keyup( () => validateFormInputs('beneficiario', 'address') );
+$("input[name='beneficiario[birthdate]']").change( () => validateFormInputs('beneficiario', 'birthdate') );
+
+$("input[name='acceptTermsConditions']").change( () => validateTermsCondition() );
