@@ -147,6 +147,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::post('/pdf-cedula-aspirante','ProfileController@pdf_cedula_aspirante')->name('cedula.pdf.aspirante');
     Route::post('/pdf-cedula-beneficiario','ProfileController@pdf_cedula_beneficiario')->name('cedula.pdf.beneficiario');
     Route::post('/pdf-cedula-team','ProfileController@pdf_cedula_team')->name('cedula.pdf.team');
+    Route::post('/update-audio','ProfileController@update_audio')->name('update.audio');
 
 
     Route::put('/update-profile-artist/{id_artis}','ProfileController@profile_update_artist')->name('update.profile.artist');
@@ -168,6 +169,8 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     //RUTAS PARA AGREGAR PROYECTOS
     Route::get('/new-project','AddProjectController@index')->name('add.project');
     Route::post('/add-project-audio','AddProjectController@upload_image')->name('add.project.audio');
+    Route::post('/add-audio-one','AddProjectController@audio_one')->name('add.audio.one');
+    Route::post('/add-audio-two','AddProjectController@audio_two')->name('add.audio.two');
     Route::post('/add-project','AddProjectController@store')->name('add.store.project');
     Route::get('/categories_by_id/{id_category}' , 'AddProjectController@categoryById');
 

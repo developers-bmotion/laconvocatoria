@@ -128,27 +128,13 @@
                             <span class="m-form__help">{{ __('categoria_de_proyecto') }}</span>
                         </div>
                         <!--=====================================
-                            BREVE RESEÑA
-                        ======================================-->
-                        <div class="col-lg-6 m-form__group-sub">
-                            <div class="form-group m-form__group row">
-                                <div class="col-lg-12">
-                                    <label class="form-control-label" form="nombreProyecto"><span class="text-danger">*</span>
-                                        Escriba aquí una breve reseña :</label>
-                                    <textarea class="form-control m-input"
-                                              id="exampleTextarea" rows="8" name="description" required>{{ old('description') }}</textarea>
-                                    <span class="m-form__help">(máximo 300 palabras) de su proyecto musical, incluyendo una corta descripción de su trayectoria.</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--=====================================
                            SUBIR MP3
                        ======================================-->
                         <div class="col-lg-6 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
                             <div class="form-group m-form__group row">
                                 <div class="col-lg-12">
                                     <label class="form-control-label" form="nombreProyecto"><span class="text-danger">*</span>
-                                        Subir canción:</label>
+                                        Subir canción <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, participará en el concurso)</span></label>
                                     <div class="m-dropzone dropzone m-dropzone--success" action=""
                                          id="m-dropzone-three">
                                         <div class="m-dropzone__msg dz-message needsclick">
@@ -160,11 +146,90 @@
                                     </div>
                                     {!! $errors->first('subir_cancion','<div class="form-control-feedback">*:message
                                                </div>')!!}
-                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3, que no exceda 4 minutos de duración.</span>
+                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
                                     <input type="hidden" id="inputDBAudioAddProject"
                                            name="subir_cancion" value="">
                                     <div id="erroresImagen" style="color: var(--danger)"
                                          class="form-control-feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-6 m-form__group-sub " style="margin-top: -8rem;">
+                            <div class="form-group m-form__group row">
+                                <div class="col-lg-12">
+                                    <label class="form-control-label" form="nombreProyecto">
+                                        Agregar canciones si lo desea (No obligatorio)<span class="text-danger"> (Tenga en cuenta que la canciónes que agregue aquÍ, no participarán en el concurso. Solo para mostrar tu talento)</span></label>
+                                    <button class="btn btn-primary btn-block add-song">Agregar canciones</button>
+                                </div>
+                            </div>
+                        </div>
+<div class="col-md-6"></div>
+
+                        <div style="display:none" class="add-song-drop col-lg-6 m-form__group-sub ">
+                            <div class="form-group m-form__group row">
+                                <div class="col-lg-12">
+                                    <label class="form-control-label" form="nombreProyecto">
+                                    Canción dos <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, No participará en el concurso)</span></label>
+                                    <div class="m-dropzone dropzone-one m-dropzone--success" action=""
+                                         id="m-dropzone-three">
+                                        <div class="m-dropzone__msg dz-message needsclick">
+                                            <h3 class="m-dropzone__msg-title">
+                                                Agregue su canción en formato MP3</h3>
+                                            <span
+                                                class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
+                                    <input type="hidden" id="inputDropOne"
+                                           name="audio_one" value="">
+                                    <div id="erroresImagen" style="color: var(--danger)"
+                                         class="form-control-feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:none" class="add-song-drop col-lg-6 m-form__group-sub ">
+                            <div class="form-group m-form__group row">
+                                <div class="col-lg-12">
+                                    <label class="form-control-label" form="nombreProyecto">
+                                    Canción tres <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, No participará en el concurso)</span></label>
+                                    <div class="m-dropzone dropzone-two m-dropzone--success" action=""
+                                         id="m-dropzone-three">
+                                        <div class="m-dropzone__msg dz-message needsclick">
+                                            <h3 class="m-dropzone__msg-title">
+                                                Agregue su canción en formato MP3</h3>
+                                            <span
+                                                class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
+                                    <input type="hidden" id="inputDropTwo"
+                                           name="audio_two" value="">
+                                    <div id="erroresImagen" style="color: var(--danger)"
+                                         class="form-control-feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button style="display: none" class="btn btn-primary btn-block cancel-song col-md-4 ml-3 mt-3">Cancelar</button>
+
+
+
+                    </div>
+                    <div class="row pt-4">
+                        <!--=====================================
+                            BREVE RESEÑA
+                        ======================================-->
+                        <div class="col-lg-12 m-form__group-sub">
+                            <div class="form-group m-form__group row">
+                                <div class="col-lg-12">
+                                    <label class="form-control-label" form="nombreProyecto"><span class="text-danger">*</span>
+                                        Escriba aquí una breve reseña :</label>
+                                    <textarea class="form-control m-input"
+                                              id="exampleTextarea" rows="8" name="description" required>{{ old('description') }}</textarea>
+                                    <span class="m-form__help">(máximo 300 palabras) de su proyecto musical, incluyendo una corta descripción de su trayectoria.</span>
                                 </div>
                             </div>
                         </div>
@@ -215,12 +280,80 @@
                 }
             }
         });
+
+        // dropzone one
+
+        var dropzone = new Dropzone('.dropzone-one', {
+            url: '{{route('add.audio.one')}}',
+            acceptedFiles: 'audio/*',
+            maxFiles: 1,
+            paramName: 'image',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (file, response) {
+                $("#erroresImagen").text('');
+                $('#inputDropOne').val(response);
+                $('#img_add_proyect').attr('src', response);
+            },
+            error: function (file, e, i, o, u) {
+                $("#erroresImagen").text('');
+                if (file.xhr.status === 413) {
+                    $("#erroresImagen").text('{{__("imagen_grande")}}');
+                    $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
+                    setTimeout(() => {
+                        dropzone.removeFile(file)
+                    }, 1000)
+                }
+            }
+        });
+
+        // dorp two
+        var dropzone = new Dropzone('.dropzone-two', {
+            url: '{{route('add.audio.two')}}',
+            acceptedFiles: 'audio/*',
+            maxFiles: 1,
+            paramName: 'image',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (file, response) {
+                $("#erroresImagen").text('');
+                $('#inputDropTwo').val(response);
+                $('#img_add_proyect').attr('src', response);
+            },
+            error: function (file, e, i, o, u) {
+                $("#erroresImagen").text('');
+                if (file.xhr.status === 413) {
+                    $("#erroresImagen").text('{{__("imagen_grande")}}');
+                    $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
+                    setTimeout(() => {
+                        dropzone.removeFile(file)
+                    }, 1000)
+                }
+            }
+        });
         dropzone.on("addedfile", function (file) {
             file.previewElement.addEventListener("click", function () {
                 dropzone.removeFile(file);
             });
         });
         Dropzone.autoDiscover = false;
+
+
+    </script>
+    <script>
+        $('.add-song').click(function(){
+            // $(this).hide();
+            $('.add-song-drop').show();
+            $('.cancel-song').show();
+
+        });
+        $('.cancel-song').click(function(){
+            $(this).hide();
+            $('.add-song-drop').hide();
+            $('.add-song').show();
+        });
 
 
     </script>

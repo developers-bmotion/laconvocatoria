@@ -118,7 +118,7 @@
                         @include('backend.profile.partials.actions-perfil')
                     </div>
                     <div class="tab-content">
-                        {{-- @dd($artist) --}}
+
 
                         <!--=====================================
                             ACTUALIZAR PERFIL DEL USUARIO
@@ -126,6 +126,7 @@
                             <div class="tab-pane active" id="m_user_profile_tab_1">
                                 <div class="biografia col-md-10 ml-5 mt-5">
                                     <div class="row">
+                                        {{-- @dd($artist); --}}
 
                                         <div class="col-md-6 mt-2">
                                             <label style="font-weight: bold">Identificación:</label>
@@ -140,14 +141,22 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 mt-2">
+                                            <label style="font-weight: bold">Departamento de nacimiento:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                {{$artist->city->departaments->descripcion}}</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6 mt-2">
                                             <label style="font-weight: bold">Fecha de nacimiento:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
                                                 <p>{{ Carbon\Carbon::parse($artist->byrthdate)->formatLocalized('%d de %B de %Y') }}
                                                 </p>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6 mt-2">
-                                            <label style="font-weight: bold">Ciudad:</label>
+                                            <label style="font-weight: bold">Ciudad de nacimiento:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
                                                 {{$artist->city->descripcion}}</p>
                                             </div>
@@ -155,6 +164,14 @@
                                         </div>
 
 
+
+
+                                        <div class="col-md-6 mt-2">
+                                            <label style="font-weight: bold">Teléfono:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p>{{ $artist->users->phone_1}}</p>
+                                            </div>
+                                        </div>
                                         @if($artist->township)
                                         <div class="col-md-6 mt-2">
                                             <label style="font-weight: bold">Vereda/Corregimiento:</label>
@@ -163,12 +180,6 @@
                                             </div>
                                         </div>
                                         @endif
-                                        <div class="col-md-6 mt-2">
-                                            <label style="font-weight: bold">Teléfono:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p>{{ $artist->users->phone_1}}</p>
-                                            </div>
-                                        </div>
                                         <div class="col-md-6 mt-2">
                                             <label style="font-weight: bold">Linea de convocatoria:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
@@ -213,11 +224,15 @@
                                         </div>
                                         <div class="col-md-6 mt-2">
 
-                                            <label style="font-weight: bold">{{ __('biografia') }}:</label>
+                                            <label style="font-weight: bold">{{ __('Departamento de Expedición') }}:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p style="text-align: justify">{{ $artist->biography }}</p>
+                                                <p style="text-align: justify">{{ $artist->expeditionPlace->departaments->descripcion }}</p>
                                             </div>
+                                            {{-- @dd($artist); --}}
                                         </div>
+
+
+
                                         @if($artist->users->phone_2)
                                         <div class="col-md-6 mt-2">
                                             <label style="font-weight: bold">Otro teléfono:</label>
@@ -226,10 +241,23 @@
                                             </div>
                                         </div>
                                         @endif
+                                        <div class="col-md-6 mt-2">
 
+                                            <label style="font-weight: bold">{{ __('Ciudad de Expedición') }}:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p style="text-align: justify">{{ $artist->expeditionPlace->descripcion }}</p>
+                                            </div>
+                                            {{-- @dd($artist); --}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mt-2">
 
-
-
+                                            <label style="font-weight: bold">{{ __('biografia') }}:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p style="text-align: justify">{{ $artist->biography }}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 {{-- <form method="post" action="{{ route('update.profile.artist',auth()->user()->id) }}"
@@ -585,13 +613,8 @@
                                                                      <p>{{  Carbon\Carbon::parse($team->birthday)->formatLocalized('%d de %B de %Y') }}</p>
                                                                  </div>
                                                              </div>
-                                                             <div class="col-md-4 mt-2">
-                                                                 <label style="font-weight: bold">Lugar de expedición:</label>
-                                                                 <div class="m-scrollable" data-scrollable="true" style="">
-                                                                   <p>{{ $team->expeditionPlace->descripcion}}</p>
-                                                                 </div>
 
-                                                      </div>
+
 
 
                                                                  {{-- @if($artist->artists[0]->township)
@@ -622,7 +645,7 @@
                                                                      </div>
                                                                  </div>
 
-                                                                 <div class="col-md-6 mt-2">
+                                                                 <div class="col-md-5 mt-2">
                                                                      <label style="font-weight: bold">Documento de identificación:</label>
 
                                                                        <button  type="button" class="btn btn-primary btn_pdf_team{{ $loop->iteration }}" data-toggle="modal" data-target="#pdfidentificacion{{$loop->iteration}}">
@@ -651,6 +674,20 @@
 
 
                                                                  </div>
+                                                                 <div class="col-md-4 mt-2">
+                                                                    <label style="font-weight: bold">Departamento de expedición:</label>
+                                                                    <div class="m-scrollable" data-scrollable="true" style="">
+                                                                      <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
+                                                                    </div>
+
+                                                               </div>
+                                                                 <div class="col-md-4 mt-3">
+                                                                     <label style="font-weight: bold">Ciudad de expedición:</label>
+                                                                     <div class="m-scrollable" data-scrollable="true" style="">
+                                                                       <p>{{ $team->expeditionPlace->descripcion}}</p>
+                                                                     </div>
+
+                                                                </div>
                                                              </div>
                                                          </div>
                                                          </div>
@@ -742,12 +779,20 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mt-2">
-                                <label style="font-weight: bold">Ciudad:</label>
+                                <label style="font-weight: bold">Departamento de nacimiento:</label>
+                                <div class="m-scrollable" data-scrollable="true" style="">
+                         <p>{{ $artist->beneficiary[0]->city->departaments->descripcion}}</p>
+                                </div>
+
+                     </div>
+                            <div class="col-md-4 mt-2">
+                                <label style="font-weight: bold">Ciudad de nacimiento:</label>
                                 <div class="m-scrollable" data-scrollable="true" style="">
                          <p>{{ $artist->beneficiary[0]->city->descripcion}}</p>
                                 </div>
 
                      </div>
+
 
 
 
@@ -773,6 +818,15 @@
                                         <p style="text-align: justify">{{ $artist->beneficiary[0]->biography}}</p>
                                     </div>
                                 </div>
+                                @if ($artist->beneficiary[0]->picture)
+
+                                        <div class="col-md-4 mt-2 pl-5">
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <img style="border-radius:8rem; width:7rem" src="{{$artist->beneficiary[0]->picture}}" >
+                                            </div>
+
+                                        </div>
+                                        @endif
 
                                 <div class="col-md-5 mt-2">
                                     <label style="font-weight: bold">Documento de identificación:</label>
@@ -789,8 +843,7 @@
                                                     <div
                                                         class="m-dropzone__msg dz-message needsclick">
                                                         <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
-                                                        <span
-                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                        <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -801,6 +854,24 @@
                                 <button type="button" class="btn btn-primary cancel_pdf_ben" style="display:none">Cancelar</button>
 
                                 </div>
+
+                                <div class="col-md-4 mt-2">
+
+                                    <label style="font-weight: bold">{{ __('Departamento de expedición') }}:</label>
+                                    <div class="m-scrollable" data-scrollable="true" style="">
+                                        <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mt-3">
+
+                                    <label style="font-weight: bold">{{ __('Ciudad de expedición') }}:</label>
+                                    <div class="m-scrollable" data-scrollable="true" style="">
+                                        <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->descripcion}}</p>
+                                    </div>
+                                </div>
+
+
+
 
 
 
@@ -930,7 +1001,28 @@
             success: function (file, response) {
 
                 $('#inputImagenesPostPlan').val(response);
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+              toastr.info("El documento se actualizo correctamente", "Información");
+              setTimeout(function(){
                 location.reload();
+                  }, 3000);
             }
 
         });
@@ -948,7 +1040,29 @@
             success: function (file, response) {
 
                 $('#inputImagenesPostPlan').val(response);
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+              toastr.info("El documento se actualizo correctamente", "Información");
+              setTimeout(function(){
                 location.reload();
+                  }, 3000);
+
             }
 
         });
@@ -961,12 +1075,35 @@
             maxFiles: 1,
             paramName: 'pdf_cedula_name',
             headers: {
+                'id':value.id,
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success: function (file, response) {
 
                 $('#inputImagenesPostPlan').val(response);
+                // location.reload();
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+              toastr.info("El documento se actualizo correctamente", "Información");
+              setTimeout(function(){
                 location.reload();
+                  }, 3000);
             }
 
         });

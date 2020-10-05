@@ -40,6 +40,8 @@
 CONTENIDO DEL MODULO PROYECTOS ADMIN
 ======================================-->
 @section('content')
+
+
     <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
@@ -59,45 +61,108 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                             <div class="form-group">
 
                             </div>
-                            <div class="row p-3">
-                                @forelse($managements as $management)
-                                    <div class="col-lg-4">
-                                        <div class="m-portlet m-portlet--full-height  ">
-                                            <div class="m-portlet__body">
-                                                <div class="m-card-profile">
-                                                    <div class="m-card-profile__title m--hide">
-                                                        Your Profile
-                                                    </div>
-                                                    <div class="m-card-profile__pic">
-                                                        <div class="m-card-profile__pic-wrapper">
-                                                            @if(Storage::disk('public')->exists('users/'.$management->users->picture))
-                                                                <img src="{{ $management->users->pathAttachment()}}"
-                                                                     alt=""/>
-                                                            @else
-                                                                <img src="{{ $management->users->picture }}" alt="">
-                                                            @endif
+
+                        </div>
+                        <div class="m-portlet__body">
+                            <ul class="nav nav-tabs  m-tabs-line" role="tablist">
+                                <li class="nav-item m-tabs__item">
+                                    <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_1_1" role="tab">Curador uno</a>
+                                </li>
+
+
+                                <li class="nav-item m-tabs__item">
+                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_1_3" role="tab">Curador dos</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                {{-- inicio tab curador 1 --}}
+                                <div class="tab-pane active" id="m_tabs_1_1" role="tabpanel">
+                                    <div class="row p-3">
+                                        @forelse($managements as $management)
+                                            <div class="col-lg-4">
+                                                <div class="m-portlet m-portlet--full-height  ">
+                                                    <div class="m-portlet__body">
+                                                        <div class="m-card-profile">
+                                                            <div class="m-card-profile__title m--hide">
+                                                                Your Profile
+                                                            </div>
+                                                            <div class="m-card-profile__pic">
+                                                                <div class="m-card-profile__pic-wrapper">
+                                                                    @if(Storage::disk('public')->exists('users/'.$management->users->picture))
+                                                                        <img src="{{ $management->users->pathAttachment()}}"
+                                                                             alt=""/>
+                                                                    @else
+                                                                        <img src="{{ $management->users->picture }}" alt="">
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="m-card-profile__details">
+                                                                <span class="m-card-profile__name">{{ $management->users->name }}</span>
+
+                                                                <a href="" class="m-card-profile__email m-link"
+                                                                   style="margin-left: -15px">{{ $management->users->email  }}</a>
+
+                                                            </div>
+                                                            <div class="m-card-profile__details" style=padding-top:20px;>
+                                                                <a href="{{ route('profile.managament',$management->users->slug)}}" class="btn btn-secondary m-btn m-btn--icon m-btn--pill">{{ __('mas_informacion') }}</a>
+                                                            </div>
+
                                                         </div>
                                                     </div>
-                                                    <div class="m-card-profile__details">
-                                                        <span class="m-card-profile__name">{{ $management->users->name }}</span>
-
-                                                        <a href="" class="m-card-profile__email m-link"
-                                                           style="margin-left: -15px">{{ $management->users->email  }}</a>
-
-                                                    </div>
-                                                    <div class="m-card-profile__details" style=padding-top:20px;>
-                                                        <a href="{{ route('profile.managament',$management->users->slug)}}" class="btn btn-secondary m-btn m-btn--icon m-btn--pill">{{ __('mas_informacion') }}</a>
-                                                    </div>
-
                                                 </div>
                                             </div>
-                                        </div>
+                                        @empty
+                                            <h4 class="text-center">{{ __('no_hay_registros') }}</h4>
+                                        @endforelse
                                     </div>
-                                @empty
-                                    <h4 class="text-center">{{ __('no_hay_registros') }}</h4>
-                                @endforelse
+                                    {{ $managements->links() }}
+                                </div>
+                                {{-- fin tab curador 1 --}}
+
+                                <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
+                                    <div class="row p-3">
+                                        @forelse($managementstwo as $management)
+                                        {{-- @dd($management->tipoCurador) --}}
+
+                                            <div class="col-lg-4">
+                                                <div class="m-portlet m-portlet--full-height  ">
+                                                    <div class="m-portlet__body">
+                                                        <div class="m-card-profile">
+                                                            <div class="m-card-profile__title m--hide">
+                                                                Your Profile
+                                                            </div>
+                                                            <div class="m-card-profile__pic">
+                                                                <div class="m-card-profile__pic-wrapper">
+                                                                    @if(Storage::disk('public')->exists('users/'.$management->users->picture))
+                                                                        <img src="{{ $management->users->pathAttachment()}}"
+                                                                             alt=""/>
+                                                                    @else
+                                                                        <img src="{{ $management->users->picture }}" alt="">
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="m-card-profile__details">
+                                                                <span class="m-card-profile__name">{{ $management->users->name }}</span>
+
+                                                                <a href="" class="m-card-profile__email m-link"
+                                                                   style="margin-left: -15px">{{ $management->users->email  }}</a>
+
+                                                            </div>
+                                                            <div class="m-card-profile__details" style=padding-top:20px;>
+                                                                <a href="{{ route('profile.managament',$management->users->slug)}}" class="btn btn-secondary m-btn m-btn--icon m-btn--pill">{{ __('mas_informacion') }}</a>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @empty
+                                            <h4 class="text-center">{{ __('no_hay_registros') }}</h4>
+                                        @endforelse
+                                    </div>
+                                    {{ $managementstwo->links() }}
+                                </div>
                             </div>
-                            {{ $managements->links() }}
                         </div>
                     </div>
                 </div>
@@ -161,6 +226,15 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                             </select>
                         </div>
 
+                        <div class="form-group m-form__group {{$errors->has('tipoCurador')? 'has-danger':''}}">
+                            <label for="exampleSelect1">Tipo de curador</label>
+                            <select class="form-control m-input m-input--air" id="tipoCurador" name="tipoCurador" required>
+                                <option value="0">Seleccione</option>
+                                <option value="1">Primer curador</option>
+                                <option value="2">Segundo curador</option>
+                            </select>
+                            <div style="display:none; color:#f66e84" class="form-control-feedback tipoErr">*Debe llenar el campo</div>
+                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -192,8 +266,15 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 });
             },500);
         };
-        @if (count($errors) > 0)
+        @if (count($errors) > 0 )
         $('#modal_add_management').modal('show');
+        if($('#tipoCurador').val() == 0){
+        $('.tipoErr').show();
+
+        }else{
+            $('.tipoErr').hide();
+        }
+
         startSelectTag();
         @endif
         $('#modalAddManager').click(function () {

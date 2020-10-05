@@ -57,6 +57,28 @@ class AddProjectController extends Controller
 
         return '/storage/' . $image;
     }
+    public function audio_one(Request $request)
+    {
+
+        $image = $request->file('image')->store('audio');
+        /*$image = Storage::disk('s3')->put('audio', $request->file('image'));*/
+
+        /* $url_go_input = Storage::url($image);
+        $url = str_ireplace($request->root(),'',$url_go_input); */
+
+        return '/storage/' . $image;
+    }
+    public function audio_two(Request $request)
+    {
+
+        $image = $request->file('image')->store('audio');
+        /*$image = Storage::disk('s3')->put('audio', $request->file('image'));*/
+
+        /* $url_go_input = Storage::url($image);
+        $url = str_ireplace($request->root(),'',$url_go_input); */
+
+        return '/storage/' . $image;
+    }
 
     public function store(Request $request)
     {
@@ -75,6 +97,8 @@ class AddProjectController extends Controller
             'author' => ucfirst($request->get('author')),
             'description' => ucfirst($request->get('description')),
             'audio' => $request->get('subir_cancion'),
+            'audio_secundary_one' => $request->get('audio_one'),
+            'audio_secundary_two' => $request->get('audio_two'),
             'category_id' => $request->get('tCategory_id'),
             'status' => $request->get('status'),
             'slug' => $slug . '-' . $ramdoNum
